@@ -11,6 +11,7 @@ from app.profiles.router import router as profiles_router
 from app.degrees.router import router as degrees_router
 from app.publications.router import router as publications_router
 from app.research_projects.router import router as research_projects_router
+from app.teaching_experience.router import router as teaching_experience_router
 
 app = FastAPI(
     title="Academic Platform API",
@@ -27,6 +28,7 @@ app.include_router(profiles_router)
 app.include_router(degrees_router)
 app.include_router(publications_router)
 app.include_router(research_projects_router)
+app.include_router(teaching_experience_router)
 
 @app.get("/")
 def root():
