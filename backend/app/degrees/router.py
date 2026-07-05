@@ -11,6 +11,7 @@ from app.profiles.service import get_profile_by_user_id
 from app.degrees.schemas import DegreeCreate, DegreeRead
 from app.degrees.service import (
     create_degree,
+    get_duplicate_degree,
     get_degrees_by_profile_id,
     get_degree_by_id,
     delete_degree
@@ -40,6 +41,21 @@ def create_my_degree(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Academic profile not found"
         )
+        
+    existing_degree = get_duplicate_degree(
+        db,
+        profile.id,
+        degree_data.degree_type,
+        degree_data.title,
+        degree_data.institution_name,
+        degree_data.end_year
+    )
+
+    if existing_degree:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Degree already exists"
+        )    
 
     return create_degree(
         db,
@@ -50,6 +66,8 @@ def create_my_degree(
 
 @router.get("/me", response_model=list[DegreeRead])
 def read_my_degrees(
+    skip: int = 0,
+    limit: int = 20,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
@@ -61,15 +79,17 @@ def read_my_degrees(
             detail="Academic profile not found"
         )
 
-    return get_degrees_by_profile_id(db, profile.id)
+    return get_degrees_by_profile_id(db, profile.id, skip, limit)
 
 
 @router.get("/profile/{profile_id}", response_model=list[DegreeRead])
 def read_degrees_by_profile(
     profile_id: int,
+    skip: int = 0,
+    limit: int = 20,
     db: Session = Depends(get_db)
 ):
-    return get_degrees_by_profile_id(db, profile_id)
+    return get_degrees_by_profile_id(db, profile_id, skip, limit)
 
 
 @router.delete("/{degree_id}", status_code=status.HTTP_204_NO_CONTENT)

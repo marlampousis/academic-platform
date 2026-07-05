@@ -20,6 +20,7 @@ from app.research_projects.service import (
     get_research_project_by_id,
     update_research_project,
     delete_research_project,
+    get_research_project_by_identifier
 )
 
 
@@ -47,6 +48,18 @@ def create_my_research_project(
             detail="Academic profile not found"
         )
 
+    if project_data.project_identifier:
+        existing_project = get_research_project_by_identifier(
+            db,
+            profile.id,
+            project_data.project_identifier
+        )
+
+        if existing_project:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Research project with this identifier already exists"
+            )
     return create_research_project(
         db,
         profile.id,
@@ -57,6 +70,8 @@ def create_my_research_project(
 @router.get("/me", response_model=list[ResearchProjectRead])
 def read_my_research_projects(
     current_user: User = Depends(get_current_user),
+    skip: int = 0,
+    limit: int = 20,
     db: Session = Depends(get_db)
 ):
     profile = get_profile_by_user_id(db, current_user.id)
@@ -67,15 +82,17 @@ def read_my_research_projects(
             detail="Academic profile not found"
         )
 
-    return get_research_projects_by_profile_id(db, profile.id)
+    return get_research_projects_by_profile_id(db, profile.id, skip, limit)
 
 
 @router.get("/profile/{profile_id}", response_model=list[ResearchProjectRead])
 def read_research_projects_by_profile(
     profile_id: int,
+    skip: int = 0,
+    limit: int = 20,
     db: Session = Depends(get_db)
 ):
-    return get_research_projects_by_profile_id(db, profile_id)
+    return get_research_projects_by_profile_id(db, profile_id, skip, limit)
 
 
 @router.get("/{project_id}", response_model=ResearchProjectRead)

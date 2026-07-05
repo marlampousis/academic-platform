@@ -16,11 +16,18 @@ def create_teaching_experience(db: Session, profile_id: int, teaching_data):
     return teaching
 
 
-def get_teaching_experience_by_profile_id(db: Session, profile_id: int):
+def get_teaching_experience_by_profile_id(
+    db: Session,
+    profile_id: int,
+    skip: int = 0,
+    limit: int = 20
+):
     return (
         db.query(TeachingExperience)
         .filter(TeachingExperience.profile_id == profile_id)
         .order_by(TeachingExperience.academic_year.desc().nullslast())
+        .offset(skip)
+        .limit(limit)
         .all()
     )
 

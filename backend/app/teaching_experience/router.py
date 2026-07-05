@@ -52,6 +52,8 @@ def create_my_teaching_experience(
 
 @router.get("/me", response_model=list[TeachingExperienceRead])
 def read_my_teaching_experience(
+    skip: int = 0,
+    limit: int = 20,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
@@ -63,15 +65,17 @@ def read_my_teaching_experience(
             detail="Academic profile not found"
         )
 
-    return get_teaching_experience_by_profile_id(db, profile.id)
+    return get_teaching_experience_by_profile_id(db, profile.id, skip, limit)
 
 
 @router.get("/profile/{profile_id}", response_model=list[TeachingExperienceRead])
 def read_teaching_experience_by_profile(
     profile_id: int,
+    skip: int = 0,
+    limit: int = 20,
     db: Session = Depends(get_db)
 ):
-    return get_teaching_experience_by_profile_id(db, profile_id)
+    return get_teaching_experience_by_profile_id(db, profile_id, skip, limit)
 
 
 @router.get("/{teaching_id}", response_model=TeachingExperienceRead)

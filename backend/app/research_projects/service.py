@@ -16,14 +16,34 @@ def create_research_project(db: Session, profile_id: int, project_data):
     return project
 
 
-def get_research_projects_by_profile_id(db: Session, profile_id: int):
+def get_research_projects_by_profile_id(
+    db: Session,
+    profile_id: int,
+    skip: int = 0,
+    limit: int = 20
+):
     return (
         db.query(ResearchProject)
         .filter(ResearchProject.profile_id == profile_id)
         .order_by(ResearchProject.start_date.desc().nullslast())
+        .offset(skip)
+        .limit(limit)
         .all()
     )
 
+def get_research_project_by_identifier(
+    db: Session,
+    profile_id: int,
+    project_identifier: str
+):
+    return (
+        db.query(ResearchProject)
+        .filter(
+            ResearchProject.profile_id == profile_id,
+            ResearchProject.project_identifier == project_identifier
+        )
+        .first()
+    )
 
 def get_research_project_by_id(db: Session, project_id: int):
     return (

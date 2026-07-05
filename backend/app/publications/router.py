@@ -20,6 +20,7 @@ from app.publications.service import (
     get_publication_by_id,
     update_publication,
     delete_publication,
+    get_publication_by_doi
 )
 
 
@@ -46,6 +47,19 @@ def create_my_publication(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Academic profile not found"
         )
+        
+    if publication_data.doi:
+        existing_publication = get_publication_by_doi(
+            db,
+            profile.id,
+            publication_data.doi
+        )
+
+        if existing_publication:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Publication with this DOI already exists"
+            )    
 
     return create_publication(
         db,
@@ -56,6 +70,8 @@ def create_my_publication(
 
 @router.get("/me", response_model=list[PublicationRead])
 def read_my_publications(
+    skip: int = 0,
+    limit: int = 20,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
@@ -67,15 +83,17 @@ def read_my_publications(
             detail="Academic profile not found"
         )
 
-    return get_publications_by_profile_id(db, profile.id)
+    return get_publications_by_profile_id(db, profile.id, skip, limit)
 
 
 @router.get("/profile/{profile_id}", response_model=list[PublicationRead])
 def read_publications_by_profile(
     profile_id: int,
+    skip: int = 0,
+    limit: int = 20,
     db: Session = Depends(get_db)
 ):
-    return get_publications_by_profile_id(db, profile_id)
+    return get_publications_by_profile_id(db, profile_id, skip, limit)
 
 
 @router.get("/{publication_id}", response_model=PublicationRead)
