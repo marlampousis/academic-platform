@@ -13,6 +13,10 @@ from app.publications.router import router as publications_router
 from app.research_projects.router import router as research_projects_router
 from app.teaching_experience.router import router as teaching_experience_router
 
+from app.openalex.router import router as openalex_router
+from app.metrics.router import router as metrics_router
+from app.summaries.router import router as summaries_router
+
 app = FastAPI(
     title="Academic Platform API",
     version="0.1.0"
@@ -29,6 +33,10 @@ app.include_router(degrees_router)
 app.include_router(publications_router)
 app.include_router(research_projects_router)
 app.include_router(teaching_experience_router)
+
+app.include_router(openalex_router)
+app.include_router(metrics_router)
+app.include_router(summaries_router)
 
 @app.get("/")
 def root():
