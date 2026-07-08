@@ -17,6 +17,8 @@ from app.openalex.router import router as openalex_router
 from app.metrics.router import router as metrics_router
 from app.summaries.router import router as summaries_router
 
+from app.orcid.router import router as orcid_router
+
 app = FastAPI(
     title="Academic Platform API",
     version="0.1.0"
@@ -37,6 +39,8 @@ app.include_router(teaching_experience_router)
 app.include_router(openalex_router)
 app.include_router(metrics_router)
 app.include_router(summaries_router)
+
+app.include_router(orcid_router)
 
 @app.get("/")
 def root():
