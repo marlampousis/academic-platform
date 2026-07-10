@@ -19,6 +19,9 @@ from app.summaries.router import router as summaries_router
 
 from app.orcid.router import router as orcid_router
 
+from app.documents.router import router as documents_router
+from app.cv_parser.router import router as cv_parser_router
+
 app = FastAPI(
     title="Academic Platform API",
     version="0.1.0"
@@ -41,6 +44,9 @@ app.include_router(metrics_router)
 app.include_router(summaries_router)
 
 app.include_router(orcid_router)
+
+app.include_router(documents_router)
+app.include_router(cv_parser_router)
 
 @app.get("/")
 def root():

@@ -39,6 +39,19 @@ def get_teaching_experience_by_id(db: Session, teaching_id: int):
         .first()
     )
 
+def get_duplicate_teaching_experience(
+    db: Session,
+    profile_id: int,
+    course_title: str
+):
+    return (
+        db.query(TeachingExperience)
+        .filter(
+            TeachingExperience.profile_id == profile_id,
+            TeachingExperience.course_title == course_title
+        )
+        .first()
+    )
 
 def update_teaching_experience(db: Session, teaching: TeachingExperience, teaching_data):
     update_data = teaching_data.model_dump(exclude_unset=True)

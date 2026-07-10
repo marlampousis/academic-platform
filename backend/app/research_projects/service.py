@@ -52,6 +52,19 @@ def get_research_project_by_id(db: Session, project_id: int):
         .first()
     )
 
+def get_research_project_by_title(
+    db: Session,
+    profile_id: int,
+    title: str
+):
+    return (
+        db.query(ResearchProject)
+        .filter(
+            ResearchProject.profile_id == profile_id,
+            ResearchProject.title == title
+        )
+        .first()
+    )
 
 def update_research_project(db: Session, project: ResearchProject, project_data):
     update_data = project_data.model_dump(exclude_unset=True)

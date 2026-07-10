@@ -14,6 +14,7 @@ from app.degrees.models import Degree
 from app.publications.models import Publication
 from app.research_projects.models import ResearchProject
 from app.teaching_experience.models import TeachingExperience
+from app.documents.models import Document
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
