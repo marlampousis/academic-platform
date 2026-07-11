@@ -22,6 +22,10 @@ from app.orcid.router import router as orcid_router
 from app.documents.router import router as documents_router
 from app.cv_parser.router import router as cv_parser_router
 
+from app.academic_positions.router import (
+    router as academic_positions_router,
+)
+
 app = FastAPI(
     title="Academic Platform API",
     version="0.1.0"
@@ -47,6 +51,8 @@ app.include_router(orcid_router)
 
 app.include_router(documents_router)
 app.include_router(cv_parser_router)
+
+app.include_router(academic_positions_router)
 
 @app.get("/")
 def root():
