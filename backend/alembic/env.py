@@ -20,6 +20,7 @@ from app.academic_ranks.models import AcademicRank
 from app.employment_types.models import EmploymentType
 from app.position_statuses.models import PositionStatus
 from app.document_types.models import DocumentType
+from app.position_required_documents.models import PositionRequiredDocument
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

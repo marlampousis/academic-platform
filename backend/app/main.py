@@ -28,6 +28,7 @@ from app.academic_ranks.router import router as academic_ranks_router
 from app.employment_types.router import router as employment_types_router
 from app.position_statuses.router import router as position_statuses_router
 from app.document_types.router import router as document_types_router
+from app.position_required_documents.router import router as position_required_documents_router
 
 app = FastAPI(
     title="Academic Platform API",
@@ -61,6 +62,8 @@ app.include_router(academic_ranks_router)
 app.include_router(employment_types_router)
 app.include_router(position_statuses_router)
 app.include_router(document_types_router)
+
+app.include_router(position_required_documents_router)
 
 @app.get("/")
 def root():
