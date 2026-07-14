@@ -1,3 +1,5 @@
+from sqlalchemy.orm import Session
+
 from app.core.database import SessionLocal
 from app.institutions.models import Institution
 
@@ -30,39 +32,58 @@ GREEK_UNIVERSITIES = [
 ]
 
 
-def seed_institutions():
+def seed_institutions(db: Session) -> dict:
+    created = 0
+    skipped = 0
+
+    for institution_name in GREEK_UNIVERSITIES:
+        existing_institution = (
+            db.query(Institution)
+            .filter(Institution.name_el == institution_name)
+            .first()
+        )
+
+        if existing_institution:
+            skipped += 1
+            continue
+
+        institution = Institution(
+            name_el=institution_name,
+            name_en=None,
+        )
+
+        db.add(institution)
+        created += 1
+
+    try:
+        db.commit()
+    except Exception:
+        db.rollback()
+        raise
+
+    return {
+        "created": created,
+        "skipped": skipped,
+    }
+
+
+def run_institutions_seeder() -> None:
     db = SessionLocal()
 
     try:
-        for name in GREEK_UNIVERSITIES:
-            existing = (
-                db.query(Institution)
-                .filter(Institution.name_el == name)
-                .first()
-            )
+        result = seed_institutions(db)
 
-            if existing:
-                continue
+        print("Institutions seeder completed.")
+        print(f"Created: {result['created']}")
+        print(f"Skipped: {result['skipped']}")
 
-            institution = Institution(
-                name_el=name,
-                institution_type="UNIVERSITY",
-                country="Greece",
-                is_active=True
-            )
-
-            db.add(institution)
-
-        db.commit()
-        print("Greek universities seeded successfully.")
-
-    except Exception as e:
-        db.rollback()
-        print(f"Error while seeding institutions: {e}")
+    except Exception as exc:
+        print(f"Institutions seeder failed: {exc}")
+        raise
 
     finally:
         db.close()
 
 
 if __name__ == "__main__":
-    seed_institutions()
+    run_institutions_seeder()

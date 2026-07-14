@@ -22,6 +22,10 @@ from app.academic_positions.service import (
 from app.institutions.models import Institution
 from app.departments.models import Department
 
+from app.academic_ranks.models import AcademicRank
+from app.employment_types.models import EmploymentType
+from app.position_statuses.models import PositionStatus
+
 router = APIRouter(
     prefix="/positions",
     tags=["Academic Positions"],
@@ -67,6 +71,58 @@ def create_new_position(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Department does not belong to the selected institution",
         )
+    
+    academic_rank = (
+        db.query(AcademicRank)
+        .filter(AcademicRank.id == position_data.academic_rank_id)
+        .first()
+    )
+
+    if not academic_rank:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Academic rank not found",
+        )
+
+    employment_type = (
+        db.query(EmploymentType)
+        .filter(EmploymentType.id == position_data.employment_type_id)
+        .first()
+    )
+
+    if not employment_type:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Employment type not found",
+        )
+
+    position_status = (
+        db.query(PositionStatus)
+        .filter(PositionStatus.id == position_data.position_status_id)
+        .first()
+    )
+
+    if not position_status:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Position status not found",
+        )
+    
+    if (
+        position_data.application_start_date
+        and position_data.application_start_date
+        > position_data.application_deadline
+    ):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Application start date must be before the deadline",
+        )
+
+    if position_data.positions_available < 1:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Positions available must be at least 1",
+        )        
 
     return create_position(
         db=db,

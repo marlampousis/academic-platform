@@ -11,7 +11,7 @@ class DocumentRead(BaseModel):
     file_name: str
     file_path: str
     file_type: str
-    document_type: str
+    document_type_id: int
     upload_status: str
 
     created_at: datetime

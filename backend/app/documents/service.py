@@ -10,7 +10,7 @@ def create_document(
     file_name: str,
     file_path: str,
     file_type: str,
-    document_type: str = "CV"
+    document_type_id: int
 ):
     document = Document(
         user_id=user_id,
@@ -18,7 +18,7 @@ def create_document(
         file_name=file_name,
         file_path=file_path,
         file_type=file_type,
-        document_type=document_type,
+        document_type_id=document_type_id,
         upload_status="UPLOADED"
     )
 

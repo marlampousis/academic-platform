@@ -40,15 +40,20 @@ class AcademicPosition(Base):
 
     title = Column(String(255), nullable=False)
 
-    academic_rank = Column(String(100), nullable=False)
+    academic_rank_id = Column(
+        Integer,
+        ForeignKey("academic_ranks.id"),
+        nullable=False,
+    )
 
     field_of_study = Column(String(255), nullable=False)
 
     description = Column(Text, nullable=False)
 
-    employment_type = Column(
-        String(100),
-        nullable=False
+    employment_type_id = Column(
+        Integer,
+        ForeignKey("employment_types.id"),
+        nullable=False,
     )
     
     application_start_date = Column(
@@ -67,10 +72,10 @@ class AcademicPosition(Base):
         nullable=False
     )
 
-    status = Column(
-        String(50),
-        default="OPEN",
-        nullable=False
+    position_status_id = Column(
+        Integer,
+        ForeignKey("position_statuses.id"),
+        nullable=False,
     )
 
     created_at = Column(
@@ -91,3 +96,7 @@ class AcademicPosition(Base):
     department = relationship("Department")
 
     creator = relationship("User")
+    
+    academic_rank = relationship("AcademicRank")
+    employment_type = relationship("EmploymentType")
+    position_status = relationship("PositionStatus")

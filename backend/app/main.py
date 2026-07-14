@@ -22,9 +22,12 @@ from app.orcid.router import router as orcid_router
 from app.documents.router import router as documents_router
 from app.cv_parser.router import router as cv_parser_router
 
-from app.academic_positions.router import (
-    router as academic_positions_router,
-)
+from app.academic_positions.router import router as academic_positions_router
+
+from app.academic_ranks.router import router as academic_ranks_router
+from app.employment_types.router import router as employment_types_router
+from app.position_statuses.router import router as position_statuses_router
+from app.document_types.router import router as document_types_router
 
 app = FastAPI(
     title="Academic Platform API",
@@ -53,6 +56,11 @@ app.include_router(documents_router)
 app.include_router(cv_parser_router)
 
 app.include_router(academic_positions_router)
+
+app.include_router(academic_ranks_router)
+app.include_router(employment_types_router)
+app.include_router(position_statuses_router)
+app.include_router(document_types_router)
 
 @app.get("/")
 def root():

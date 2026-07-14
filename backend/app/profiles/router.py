@@ -19,6 +19,8 @@ from app.profiles.service import (
     update_profile
 )
 
+from app.academic_ranks.models import AcademicRank
+
 router = APIRouter(
     prefix="/profiles",
     tags=["Academic Profiles"]
@@ -46,6 +48,20 @@ def create_my_profile(
             detail="Profile already exists"
         )
 
+    if profile_data.academic_rank_id is not None:
+        academic_rank = (
+            db.query(AcademicRank)
+            .filter(
+                AcademicRank.id == profile_data.academic_rank_id
+            )
+            .first()
+        )
+
+        if not academic_rank:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="Academic rank not found",
+            )
     return create_profile(
         db,
         current_user.id,

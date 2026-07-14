@@ -19,6 +19,8 @@ from app.documents.service import (
 )
 from app.documents.utils.text_extraction import extract_text_from_document
 
+from app.document_types.models import DocumentType
+
 router = APIRouter(
     prefix="/documents",
     tags=["Documents"]
@@ -59,6 +61,18 @@ def upload_document(
         shutil.copyfileobj(file.file, buffer)
 
     profile = get_profile_by_user_id(db, current_user.id)
+    
+    cv_document_type = (
+        db.query(DocumentType)
+        .filter(DocumentType.code == "CV")
+        .first()
+    )
+
+    if not cv_document_type:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="CV document type is not configured",
+        )
 
     document = create_document(
         db=db,
@@ -67,7 +81,7 @@ def upload_document(
         file_name=file.filename,
         file_path=file_path,
         file_type=file.content_type,
-        document_type="CV"
+        document_type_id=cv_document_type.id,
     )
 
     return document

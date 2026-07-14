@@ -18,7 +18,7 @@ class Document(Base):
     file_path = Column(String(500), nullable=False)
     file_type = Column(String(50), nullable=False)
 
-    document_type = Column(String(100), nullable=False, default="CV")
+    document_type_id = Column(Integer, ForeignKey("document_types.id"), nullable=False,)
     upload_status = Column(String(50), nullable=False, default="UPLOADED")
 
     extracted_text = Column(Text, nullable=True)
@@ -27,3 +27,4 @@ class Document(Base):
 
     user = relationship("User")
     profile = relationship("AcademicProfile")
+    document_type = relationship("DocumentType")

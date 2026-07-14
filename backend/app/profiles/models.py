@@ -13,7 +13,7 @@ class AcademicProfile(Base):
     institution_id = Column(Integer, ForeignKey("institutions.id"), nullable=True)
     department_id = Column(Integer, ForeignKey("departments.id"), nullable=True)
 
-    academic_rank = Column(String(100), nullable=True)
+    academic_rank_id = Column(Integer,ForeignKey("academic_ranks.id"), nullable=True,)
     specialization = Column(String(255), nullable=True)
     research_areas = Column(Text, nullable=True)
     orcid_id = Column(String(50), nullable=True)
@@ -22,3 +22,4 @@ class AcademicProfile(Base):
     user = relationship("User")
     institution = relationship("Institution")
     department = relationship("Department")
+    academic_rank = relationship("AcademicRank")
