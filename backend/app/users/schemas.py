@@ -1,12 +1,11 @@
 from pydantic import BaseModel, EmailStr, Field
-
+from app.roles.schemas import RoleRead
 
 class UserCreate(BaseModel):
     first_name: str
     last_name: str
     email: EmailStr
     password: str = Field(min_length=8, max_length=72)
-    role: str
 
 
 class UserRead(BaseModel):
@@ -14,7 +13,8 @@ class UserRead(BaseModel):
     first_name: str
     last_name: str
     email: EmailStr
-    role: str
+    role_id: int
+    role: RoleRead
 
     class Config:
         from_attributes = True

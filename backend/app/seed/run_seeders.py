@@ -6,6 +6,7 @@ from app.seed.seed_academic_ranks import seed_academic_ranks
 from app.seed.seed_employment_types import seed_employment_types
 from app.seed.seed_position_statuses import seed_position_statuses
 from app.seed.seed_document_types import seed_document_types
+from app.seed.seed_roles import seed_roles
 
 
 def print_result(name: str, result: dict) -> None:
@@ -67,6 +68,12 @@ def run_all_seeders() -> None:
         print_result(
             "Document Types Seeder",
             document_types_result,
+        )
+        
+        roles_result = seed_roles(db)
+        print_result(
+            "Roles Seeder",
+            roles_result
         )
 
         print("\nAll seeders completed successfully.")
