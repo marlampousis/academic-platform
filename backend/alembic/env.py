@@ -24,6 +24,7 @@ from app.position_required_documents.models import PositionRequiredDocument
 from app.applications.models import Application
 from app.application_documents.models import ApplicationDocument
 from app.roles.models import Role
+from app.application_status_history.models import ApplicationStatusHistory
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

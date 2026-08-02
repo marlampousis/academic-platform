@@ -33,6 +33,7 @@ from app.applications.router import router as applications_router
 from app.application_documents.router import router as application_documents_router
 from app.roles.router import router as roles_router
 from app.application_reviews.router import router as application_reviews_router
+from app.application_status_history.router import router as application_status_history_router
 
 app = FastAPI(
     title="Academic Platform API",
@@ -72,6 +73,7 @@ app.include_router(applications_router)
 app.include_router(application_documents_router)
 app.include_router(roles_router)
 app.include_router(application_reviews_router)
+app.include_router(application_status_history_router)
 
 @app.get("/")
 def root():

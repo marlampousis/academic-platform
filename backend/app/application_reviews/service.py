@@ -4,6 +4,7 @@ from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.applications.models import Application
+from app.application_status_history.service import create_status_history_entry
 
 
 ALLOWED_STATUS_TRANSITIONS = {
@@ -97,20 +98,40 @@ def update_application_review_status(
     db: Session,
     application: Application,
     new_status: str,
+    changed_by: int,
+    comment: str | None = None,
 ) -> Application:
     normalized_status = (
         new_status.strip().upper()
     )
 
+    current_status = (
+        application.status.strip().upper()
+    )
+
     validate_status_transition(
-        current_status=application.status,
+        current_status=current_status,
         new_status=normalized_status,
+    )
+
+    create_status_history_entry(
+        db=db,
+        application_id=application.id,
+        previous_status=current_status,
+        new_status=normalized_status,
+        changed_by=changed_by,
+        comment=comment,
     )
 
     application.status = normalized_status
     application.updated_at = datetime.utcnow()
 
-    db.commit()
-    db.refresh(application)
+    try:
+        db.commit()
+        db.refresh(application)
+
+    except Exception:
+        db.rollback()
+        raise
 
     return application

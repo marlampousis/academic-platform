@@ -24,3 +24,7 @@ class User(Base):
         "Role",
         back_populates="users",
     )
+    application_status_changes = relationship(
+        "ApplicationStatusHistory",
+        back_populates="changed_by_user",
+    )

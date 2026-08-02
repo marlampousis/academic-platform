@@ -94,4 +94,6 @@ def change_application_status(
         db=db,
         application=application,
         new_status=status_data.status,
+        changed_by=current_admin.id,
+        comment=status_data.comment,
     )

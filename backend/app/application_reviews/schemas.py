@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 
 
 ReviewStatus = Literal[
@@ -13,6 +13,11 @@ ReviewStatus = Literal[
 
 class ApplicationStatusUpdate(BaseModel):
     status: ReviewStatus
+    
+    comment: str | None = Field(
+        default=None,
+        max_length=1000,
+    )
 
 
 class ApplicationReviewRead(BaseModel):

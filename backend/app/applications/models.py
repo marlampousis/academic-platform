@@ -96,3 +96,9 @@ class Application(Base):
     position = relationship("AcademicPosition")
     user = relationship("User")
     profile = relationship("AcademicProfile")
+    status_history = relationship(
+        "ApplicationStatusHistory",
+        back_populates="application",
+        cascade="all, delete-orphan",
+        order_by="ApplicationStatusHistory.created_at",
+    )
