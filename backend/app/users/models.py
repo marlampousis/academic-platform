@@ -28,3 +28,8 @@ class User(Base):
         "ApplicationStatusHistory",
         back_populates="changed_by_user",
     )
+    
+    committee_memberships = relationship(
+        "CommitteeMember",
+        back_populates="user",
+    )

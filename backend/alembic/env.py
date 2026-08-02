@@ -25,6 +25,8 @@ from app.applications.models import Application
 from app.application_documents.models import ApplicationDocument
 from app.roles.models import Role
 from app.application_status_history.models import ApplicationStatusHistory
+from app.evaluation_committees.models import EvaluationCommittee
+from app.committee_members.models import CommitteeMember
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
