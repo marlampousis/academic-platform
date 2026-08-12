@@ -43,3 +43,8 @@ class User(Base):
         "EvaluationCriterion",
         back_populates="creator",
     )
+    
+    evaluation_scores = relationship(
+        "EvaluationScore",
+        back_populates="reviewer",
+    )

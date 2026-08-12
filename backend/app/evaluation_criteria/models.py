@@ -132,3 +132,8 @@ class EvaluationCriterion(Base):
         "User",
         back_populates="created_evaluation_criteria",
     )
+    
+    evaluation_scores = relationship(
+        "EvaluationScore",
+        back_populates="criterion",
+    )
