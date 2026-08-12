@@ -37,6 +37,8 @@ from app.application_status_history.router import router as application_status_h
 
 from app.evaluation_committees.router import router as evaluation_committees_router
 from app.committee_members.router import router as committee_members_router
+from app.committee_applications.router import router as committee_applications_router
+from app.evaluation_criteria.router import router as evaluation_criteria_router
 
 app = FastAPI(
     title="Academic Platform API",
@@ -80,6 +82,8 @@ app.include_router(application_status_history_router)
 
 app.include_router(evaluation_committees_router)
 app.include_router(committee_members_router)
+app.include_router(committee_applications_router)
+app.include_router(evaluation_criteria_router)
 
 @app.get("/")
 def root():

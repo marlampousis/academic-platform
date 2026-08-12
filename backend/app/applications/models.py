@@ -102,3 +102,10 @@ class Application(Base):
         cascade="all, delete-orphan",
         order_by="ApplicationStatusHistory.created_at",
     )
+    
+    committee_assignment = relationship(
+        "CommitteeApplication",
+        back_populates="application",
+        uselist=False,
+        cascade="all, delete-orphan",
+    )

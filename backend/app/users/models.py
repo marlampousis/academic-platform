@@ -33,3 +33,13 @@ class User(Base):
         "CommitteeMember",
         back_populates="user",
     )
+    
+    assigned_committee_applications = relationship(
+        "CommitteeApplication",
+        back_populates="assigner",
+    )
+    
+    created_evaluation_criteria = relationship(
+        "EvaluationCriterion",
+        back_populates="creator",
+    )

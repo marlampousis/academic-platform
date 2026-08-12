@@ -102,3 +102,16 @@ class EvaluationCommittee(Base):
         back_populates="committee",
         cascade="all, delete-orphan",
     )
+    
+    assigned_applications = relationship(
+        "CommitteeApplication",
+        back_populates="committee",
+        cascade="all, delete-orphan",
+    )
+    
+    criteria = relationship(
+        "EvaluationCriterion",
+        back_populates="committee",
+        cascade="all, delete-orphan",
+        order_by="EvaluationCriterion.display_order",
+    )
