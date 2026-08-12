@@ -48,3 +48,8 @@ class User(Base):
         "EvaluationScore",
         back_populates="reviewer",
     )
+    
+    evaluation_reports = relationship(
+        "EvaluationReport",
+        back_populates="reviewer",
+    )

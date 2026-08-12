@@ -119,3 +119,9 @@ class CommitteeApplication(Base):
         back_populates="committee_application",
         cascade="all, delete-orphan",
     )
+    
+    evaluation_reports = relationship(
+        "EvaluationReport",
+        back_populates="committee_application",
+        cascade="all, delete-orphan",
+    )
