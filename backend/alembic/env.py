@@ -31,6 +31,7 @@ from app.committee_applications.models import CommitteeApplication
 from app.evaluation_criteria.models import EvaluationCriterion
 from app.evaluation_scores.models import EvaluationScore
 from app.evaluation_reports.models import EvaluationReport
+from app.evaluation_results.models import EvaluationResult
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

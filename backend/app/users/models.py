@@ -53,3 +53,8 @@ class User(Base):
         "EvaluationReport",
         back_populates="reviewer",
     )
+    
+    evaluation_decisions = relationship(
+        "EvaluationResult",
+        back_populates="decision_maker",
+    )
