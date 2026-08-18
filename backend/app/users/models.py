@@ -58,3 +58,9 @@ class User(Base):
         "EvaluationResult",
         back_populates="decision_maker",
     )
+    
+    notifications = relationship(
+        "Notification",
+        back_populates="user",
+        cascade="all, delete-orphan",
+    )
