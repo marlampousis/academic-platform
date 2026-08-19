@@ -18,6 +18,9 @@ from app.auth.permissions import require_roles
 from app.core.database import get_db
 from app.users.models import User
 
+from app.notifications.service import (
+    notify_application_status_changed,
+)
 
 router = APIRouter(
     prefix="/admin",
@@ -90,10 +93,19 @@ def change_application_status(
         application_id=application_id,
     )
 
-    return update_application_review_status(
+    updated_application = update_application_review_status(
         db=db,
         application=application,
         new_status=status_data.status,
         changed_by=current_admin.id,
         comment=status_data.comment,
     )
+
+    notify_application_status_changed(
+        db=db,
+        user_id=updated_application.user_id,
+        application_id=updated_application.id,
+        new_status=updated_application.status,
+    )
+
+    return updated_application

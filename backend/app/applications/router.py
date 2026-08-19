@@ -36,6 +36,10 @@ from app.applications.service import (
     validate_application,
 )
 
+from app.notifications.service import (
+    notify_application_submitted,
+    notify_missing_documents,
+)
 
 router = APIRouter(
     prefix="/applications",
@@ -205,6 +209,13 @@ def submit_current_application(
     )
 
     if not validation_result["can_submit"]:
+        if validation_result.get("missing_required_documents"):
+            notify_missing_documents(
+                db=db,
+                user_id=application.user_id,
+                application_id=application.id,
+            )
+            
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail={
@@ -215,10 +226,18 @@ def submit_current_application(
             },
         )
 
-    return submit_application(
+    submitted_application = submit_application(
         db,
         application,
-    )    
+    )
+
+    notify_application_submitted(
+        db=db,
+        user_id=application.user_id,
+        application_id=application.id,
+    )
+    
+    return submitted_application    
     
 @router.get(
     "/{application_id}",
