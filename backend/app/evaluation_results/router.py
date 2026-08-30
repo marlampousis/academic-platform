@@ -26,6 +26,11 @@ from app.evaluation_results.service import (
 )
 from app.users.models import User
 
+from app.applications.service import get_application_by_id
+from app.notifications.service import (
+    notify_evaluation_completed,
+    notify_final_decision
+)
 
 router = APIRouter(
     prefix="/evaluation-committees",
@@ -69,6 +74,13 @@ def generate_ranking(
                 "No applications with submitted "
                 "evaluation reports are available"
             ),
+        )
+
+    for assignment, result in ranked_results:
+        notify_evaluation_completed(
+            db=db,
+            user_id=current_admin.id,
+            application_id=assignment.application_id,
         )
 
     return [
@@ -200,10 +212,25 @@ def update_final_decision(
             ),
         )
 
-    return set_final_decision(
+    updated_result = set_final_decision(
         db=db,
         result=result,
         decision=decision_data.decision,
         final_comment=decision_data.final_comment,
         decided_by=current_admin.id,
-    )        
+    )
+
+    application = get_application_by_id(
+        db,
+        assignment.application_id,
+    )
+
+    if application:
+        notify_final_decision(
+            db=db,
+            user_id=application.user_id,
+            application_id=application.id,
+            decision=updated_result.decision,
+        )
+
+    return updated_result        

@@ -29,6 +29,14 @@ from app.evaluation_committees.service import (
 )
 from app.users.models import User
 
+from app.committee_members.service import (
+    get_committee_members,
+)
+
+from app.notifications.service import (
+    notify_application_assigned,
+    notify_evaluation_started,
+)
 
 router = APIRouter(
     prefix="/evaluation-committees",
@@ -120,12 +128,27 @@ def assign_application_to_committee(
             ),
         )
 
-    return create_committee_application(
+    assignment = create_committee_application(
         db=db,
         committee_id=committee_id,
         assignment_data=assignment_data,
         assigned_by=current_admin.id,
     )
+
+    members = get_committee_members(
+        db=db,
+        committee_id=committee_id,
+    )
+
+    for member in members:
+        if member.is_active:
+            notify_application_assigned(
+                db=db,
+                user_id=member.user_id,
+                application_id=application.id,
+            )
+
+    return assignment
 
 
 @router.get(
@@ -258,11 +281,31 @@ def edit_committee_application(
             detail="Committee application not found",
         )
 
-    return update_committee_application(
+    previous_status = assignment.status
+    
+    updated_assignment = update_committee_application(
         db=db,
         assignment=assignment,
         assignment_data=assignment_data,
     )
+    
+    if (
+        previous_status != "IN_EVALUATION"
+        and updated_assignment.status == "IN_EVALUATION"
+    ):
+        application = get_application_by_id(
+            db,
+            updated_assignment.application_id,
+        )
+
+        if application:
+            notify_evaluation_started(
+                db=db,
+                user_id=application.user_id,
+                application_id=application.id,
+            )
+    
+    return updated_assignment
 
 
 @router.delete(

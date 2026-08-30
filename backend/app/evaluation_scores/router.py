@@ -252,6 +252,7 @@ def read_all_evaluation_scores(
         require_roles(
             "SUPER_ADMIN",
             "INSTITUTION_ADMIN",
+            "REVIEWER"
         )
     ),
 ):
