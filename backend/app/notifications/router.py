@@ -22,6 +22,12 @@ from app.notifications.service import (
 )
 from app.users.models import User
 
+from app.notifications.deadline_service import (
+    process_deadline_reminders,
+)
+
+from app.auth.permissions import require_roles
+from app.users.models import User
 
 router = APIRouter(
     prefix="/notifications",
@@ -126,3 +132,27 @@ def mark_all_my_notifications_as_read(
         "message": "Notifications marked as read",
         "updated_count": updated_count,
     }
+    
+@router.post(
+    "/deadline-reminders/run",
+    status_code=status.HTTP_200_OK,
+)
+def run_deadline_reminders(
+    db: Session = Depends(get_db),
+    current_admin: User = Depends(
+        require_roles(
+            "SUPER_ADMIN",
+            "INSTITUTION_ADMIN",
+        )
+    ),
+):
+    created_notifications = (
+        process_deadline_reminders(db)
+    )
+
+    return {
+        "message": "Deadline reminders processed",
+        "created_count": len(
+            created_notifications
+        ),
+    }    

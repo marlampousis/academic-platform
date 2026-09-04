@@ -48,6 +48,13 @@ class Notification(Base):
         Text,
         nullable=False,
     )
+    
+    dedup_key = Column(
+        String(255),
+        nullable=True,
+        unique=True,
+        index=True,
+    )
 
     is_read = Column(
         Boolean,

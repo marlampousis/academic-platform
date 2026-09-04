@@ -11,12 +11,14 @@ def create_notification(
     notification_type: NotificationType,
     title: str,
     message: str,
+    dedup_key: str | None = None,
 ) -> Notification:
     notification = Notification(
         user_id=user_id,
         type=notification_type.value,
         title=title,
         message=message,
+        dedup_key=dedup_key,
         is_read=False,
     )
 
@@ -248,6 +250,7 @@ def notify_deadline_reminder(
     user_id: int,
     position_id: int,
     days_remaining: int,
+    dedup_key: str,
 ) -> Notification:
     return create_notification(
         db=db,
@@ -259,4 +262,5 @@ def notify_deadline_reminder(
             f"#{position_id} is in "
             f"{days_remaining} day(s)."
         ),
+        dedup_key=dedup_key,
     )                
