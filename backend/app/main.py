@@ -45,6 +45,8 @@ from app.evaluation_results.router import router as evaluation_results_router
 
 from app.notifications.router import router as notifications_router
 
+from app.email.router import router as email_router
+
 app = FastAPI(
     title="Academic Platform API",
     version="0.1.0"
@@ -94,6 +96,8 @@ app.include_router(evaluation_reports_router)
 app.include_router(evaluation_results_router)
 
 app.include_router(notifications_router)
+
+app.include_router(email_router)
 
 @app.get("/")
 def root():

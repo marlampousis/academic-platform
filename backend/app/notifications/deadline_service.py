@@ -9,6 +9,9 @@ from app.notifications.service import (
     notify_deadline_reminder,
 )
 
+from app.email.service import send_email
+from app.email.templates import deadline_reminder_email
+from app.users.models import User
 
 REMINDER_DAYS = {7, 3, 1}
 #REMINDER_DAYS = {7, 6, 5, 4, 3, 2, 1}
@@ -71,6 +74,24 @@ def process_deadline_reminders(
             days_remaining=days_remaining,
             dedup_key=dedup_key,
         )
+        
+        candidate = (
+            db.query(User)
+            .filter(User.id == application.user_id)
+            .first()
+        )
+
+        if candidate and candidate.email:
+            subject, body = deadline_reminder_email(
+                position.id,
+                days_remaining,
+            )
+
+            send_email(
+                recipient=candidate.email,
+                subject=subject,
+                body=body,
+            )
 
         created_notifications.append(
             notification

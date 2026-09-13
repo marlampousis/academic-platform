@@ -32,6 +32,10 @@ from app.notifications.service import (
     notify_final_decision
 )
 
+from app.email.service import send_email
+from app.email.templates import evaluation_completed_email
+from app.email.templates import final_decision_email
+
 router = APIRouter(
     prefix="/evaluation-committees",
     tags=["Evaluation Results"],
@@ -82,6 +86,17 @@ def generate_ranking(
             user_id=current_admin.id,
             application_id=assignment.application_id,
         )
+
+        if current_admin.email:
+            subject, body = evaluation_completed_email(
+                assignment.application_id
+            )
+
+            send_email(
+                recipient=current_admin.email,
+                subject=subject,
+                body=body,
+            )
 
     return [
         RankingItemRead(
@@ -232,5 +247,17 @@ def update_final_decision(
             application_id=application.id,
             decision=updated_result.decision,
         )
+        
+        if application.user.email:
+            subject, body = final_decision_email(
+                application.id,
+                updated_result.decision,
+            )
+
+            send_email(
+                recipient=application.user.email,
+                subject=subject,
+                body=body,
+            )
 
     return updated_result        

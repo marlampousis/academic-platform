@@ -41,6 +41,13 @@ from app.notifications.service import (
     notify_missing_documents,
 )
 
+from app.email.service import send_email
+from app.email.templates import (
+    application_submitted_email,
+    application_status_changed_email,
+    missing_documents_email,
+)
+
 router = APIRouter(
     prefix="/applications",
     tags=["Applications"],
@@ -216,6 +223,16 @@ def submit_current_application(
                 application_id=application.id,
             )
             
+            subject, body = missing_documents_email(
+                application.id
+            )
+
+            send_email(
+                recipient=current_user.email,
+                subject=subject,
+                body=body,
+            )
+            
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail={
@@ -235,6 +252,16 @@ def submit_current_application(
         db=db,
         user_id=application.user_id,
         application_id=application.id,
+    )
+    
+    subject, body = application_submitted_email(
+        application.id
+    )
+
+    send_email(
+        recipient=current_user.email,
+        subject=subject,
+        body=body,
     )
     
     return submitted_application    

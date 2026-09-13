@@ -38,6 +38,12 @@ from app.notifications.service import (
     notify_evaluation_started,
 )
 
+from app.email.service import send_email
+from app.email.templates import application_assigned_email
+from app.users.models import User
+
+from app.email.templates import evaluation_started_email
+
 router = APIRouter(
     prefix="/evaluation-committees",
     tags=["Committee Applications"],
@@ -147,6 +153,23 @@ def assign_application_to_committee(
                 user_id=member.user_id,
                 application_id=application.id,
             )
+            
+            reviewer = (
+                db.query(User)
+                .filter(User.id == member.user_id)
+                .first()
+            )
+            
+            if reviewer and reviewer.email:
+                subject, body = application_assigned_email(
+                    application.id
+                )
+
+                send_email(
+                    recipient=reviewer.email,
+                    subject=subject,
+                    body=body,
+                )    
 
     return assignment
 
@@ -304,6 +327,23 @@ def edit_committee_application(
                 user_id=application.user_id,
                 application_id=application.id,
             )
+            
+            candidate = (
+                db.query(User)
+                .filter(User.id == application.user_id)
+                .first()
+            )
+
+            if candidate and candidate.email:
+                subject, body = evaluation_started_email(
+                    application.id
+                )
+
+                send_email(
+                    recipient=candidate.email,
+                    subject=subject,
+                    body=body,
+                )
     
     return updated_assignment
 

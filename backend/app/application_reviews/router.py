@@ -22,6 +22,9 @@ from app.notifications.service import (
     notify_application_status_changed,
 )
 
+from app.email.service import send_email
+from app.email.templates import application_status_changed_email
+
 router = APIRouter(
     prefix="/admin",
     tags=["Application Reviews"],
@@ -106,6 +109,24 @@ def change_application_status(
         user_id=updated_application.user_id,
         application_id=updated_application.id,
         new_status=updated_application.status,
+    )
+    
+    candidate = (
+        db.query(User)
+        .filter(User.id == updated_application.user_id)
+        .first()
+    )
+
+    if candidate and candidate.email:
+        subject, body = application_status_changed_email(
+        updated_application.id,
+        updated_application.status,
+    )
+
+    send_email(
+        recipient=candidate.email,
+        subject=subject,
+        body=body,
     )
 
     return updated_application
