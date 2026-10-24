@@ -716,28 +716,32 @@ def execute_run(
     )
 
     expected_data = resolve_expected_data(
-        expected_file=run_specification[
-            "expected_file"
-        ],
-        case_id=run_specification[
-            "case_id"
-        ],
+        expected_file=run_specification["expected_file"],
+        case_id=run_specification["case_id"],
     )
 
-    automatic_metrics = (
-        evaluate_automatic_metrics(
-            run_specification=
-                run_specification,
+    if response.error:
+        # No completed answer is available for quality evaluation.
+        parsing_result = {
+            "parsed_response": None,
+            "json_validity": None,
+            "parse_error": None,
+        }
+        automatic_metrics = {}
+
+    else:
+        parsing_result = parse_model_response(
+            test_id=run_specification["test_id"],
             raw_response=response.text,
-            parsed_response=parsing_result[
-                "parsed_response"
-            ],
-            json_validity=parsing_result[
-                "json_validity"
-            ],
+        )
+
+        automatic_metrics = evaluate_automatic_metrics(
+            run_specification=run_specification,
+            raw_response=response.text,
+            parsed_response=parsing_result["parsed_response"],
+            json_validity=parsing_result["json_validity"],
             expected_data=expected_data,
         )
-    )
 
     return {
         "test_id": run_specification["test_id"],
