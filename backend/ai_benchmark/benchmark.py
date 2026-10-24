@@ -1,6 +1,8 @@
 import json
 from pathlib import Path
 from typing import Any
+import hashlib
+import re
 
 from providers.base import BaseModelProvider, ModelResponse
 from providers.mock import MockProvider
@@ -1188,6 +1190,22 @@ def validate_result_record(
                 f"Invalid safety verdict: {metric}={verdict}"
             )
 
+def model_directory_name(model_name: str) -> str:
+    """Create a portable folder name for a model identifier."""
+
+    readable_name = re.sub(
+        r"[^A-Za-z0-9_-]+",
+        "_",
+        model_name,
+    ).strip("_-")
+
+    readable_name = readable_name[:40] or "unnamed"
+
+    identifier_hash = hashlib.sha256(
+        model_name.encode("utf-8")
+    ).hexdigest()[:16]
+
+    return f"model-{readable_name}-{identifier_hash}"
 
 def save_result_record(
     record: dict[str, Any],
@@ -1208,7 +1226,7 @@ def save_result_record(
         RESULTS_DIR
         / record["test_id"]
         / record["provider"]
-        / record["model"]
+        / model_directory_name(record["model"])
     )
 
     destination.mkdir(parents=True, exist_ok=True)
