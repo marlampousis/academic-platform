@@ -1334,9 +1334,9 @@ def parse_arguments() -> argparse.Namespace:
 
     parser.add_argument(
         "--provider",
-        choices=["mock"],
+        choices=["mock", "ollama"],
         default="mock",
-        help="Provider to execute. Currently only mock is implemented.",
+        help="Provider to execute: mock or local Ollama.",
     )
 
     parser.add_argument(
