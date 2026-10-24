@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "required_fields": [
     "run_id",
     "timestamp",
@@ -11,7 +11,9 @@
     "input",
     "output",
     "execution",
-    "evaluation"
+    "evaluation",
+    "batch_id",
+    "requested_generation_options"
   ],
   "field_definitions": {
     "run_id": {
@@ -77,7 +79,9 @@
       "type": "object",
       "required_fields": [
         "raw_response",
-        "parsed_response"
+        "parsed_response",
+        "json_validity",
+        "parse_error"
       ],
       "fields": {
         "raw_response": {
@@ -87,6 +91,18 @@
           "type": [
             "object",
             "array",
+            "string",
+            "null"
+          ]
+        },
+        "json_validity": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "parse_error": {
+          "type": [
             "string",
             "null"
           ]
@@ -132,6 +148,37 @@
         },
         "safety_metrics": {
           "type": "object"
+        }
+      }
+    },
+    "batch_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Shared identifier for one benchmark execution."
+    },
+    "requested_generation_options": {
+      "type": "object",
+      "required_fields": [
+        "temperature",
+        "max_output_tokens",
+        "response_format"
+      ],
+      "fields": {
+        "temperature": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "max_output_tokens": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "response_format": {
+          "type": "string",
+          "allowed_values": [
+            "text",
+            "json"
+          ]
         }
       }
     }

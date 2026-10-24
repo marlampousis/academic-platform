@@ -3,6 +3,7 @@ from pathlib import Path
 from typing import Any
 import hashlib
 import re
+from dataclasses import asdict
 
 from providers.base import BaseModelProvider, ModelResponse, GenerationOptions
 from providers.mock import MockProvider
@@ -691,6 +692,8 @@ def execute_run(
         ),
     )
 
+    started_at = datetime.now(timezone.utc).isoformat()
+
     try:
         response: ModelResponse = provider.generate(
             run_specification["rendered_prompt"],
@@ -718,11 +721,6 @@ def execute_run(
         provider.model_name,
         response.latency_ms,
         response.error,
-    )
-
-    parsing_result = parse_model_response(
-        test_id=run_specification["test_id"],
-        raw_response=response.text,
     )
 
     expected_data = resolve_expected_data(
@@ -754,6 +752,8 @@ def execute_run(
         )
 
     return {
+        "timestamp": started_at,
+        "requested_generation_options": asdict(options),
         "test_id": run_specification["test_id"],
         "case_id": run_specification["case_id"],
         "run_number": run_specification["run_number"],
@@ -967,14 +967,17 @@ def print_benchmark_summary(
 def build_result_record(
     run_specification: dict[str, Any],
     result: dict[str, Any],
+    batch_id: str,
 ) -> dict[str, Any]:
     """Build a complete result record for one run."""
 
     return {
         "run_id": str(uuid4()),
-        "timestamp": datetime.now(
-            timezone.utc
-        ).isoformat(),
+        "batch_id": batch_id,
+        "timestamp": result["timestamp"],
+        "requested_generation_options": result[
+            "requested_generation_options"
+        ],
         "provider": result["provider"],
         "model": result["model"],
         "test_id": result["test_id"],
@@ -998,6 +1001,8 @@ def build_result_record(
         "output": {
             "raw_response": result["raw_response"],
             "parsed_response": result["parsed_response"],
+            "json_validity": result["json_validity"],
+            "parse_error": result["parse_error"],
         },
         "execution": {
             "latency_ms": result["latency_ms"],
@@ -1027,6 +1032,37 @@ def validate_result_record(
     """Validate result structure and evaluation values."""
 
     definitions = result_schema["field_definitions"]
+
+    batch_id = record.get("batch_id")
+    if not isinstance(batch_id, str):
+        raise ValueError("batch_id must be a UUID string")
+
+    try:
+        __import__("uuid").UUID(batch_id)
+    except ValueError as exc:
+        raise ValueError("Invalid batch_id UUID") from exc
+
+    requested_options = record.get("requested_generation_options")
+    if not isinstance(requested_options, dict):
+        raise ValueError("Invalid requested_generation_options")
+
+    option_keys = {
+        "temperature",
+        "max_output_tokens",
+        "response_format",
+    }
+    if set(requested_options) != option_keys:
+        raise ValueError("Generation option keys mismatch")
+
+    validated_options = GenerationOptions(**requested_options)
+
+    expected_format = (
+        "json"
+        if expects_json_response(run_specification["test_id"])
+        else "text"
+    )
+    if validated_options.response_format != expected_format:
+        raise ValueError("Response format does not match the test")
 
     def check_object(
         obj: Any,
@@ -1112,6 +1148,29 @@ def validate_result_record(
         raise ValueError("Invalid dataset_files")
 
     output = record["output"]
+
+    json_validity = output.get("json_validity")
+    parse_error = output.get("parse_error")
+
+    if json_validity is not None and type(json_validity) is not bool:
+        raise ValueError("Invalid json_validity")
+
+    if parse_error is not None and not isinstance(parse_error, str):
+        raise ValueError("Invalid parse_error")
+
+    if record["execution"]["error"]:
+        if json_validity is not None or parse_error is not None:
+            raise ValueError("Failed requests must not have parsing verdicts")
+    elif expects_json_response(record["test_id"]):
+        if type(json_validity) is not bool:
+            raise ValueError("JSON tasks require a parsing verdict")
+        if json_validity and parse_error is not None:
+            raise ValueError("Valid JSON must not have a parse error")
+        if not json_validity and not parse_error:
+            raise ValueError("Invalid JSON requires a parse error")
+    elif json_validity is not None or parse_error is not None:
+        raise ValueError("Text tasks must not have JSON parsing verdicts")
+
     if not isinstance(output["raw_response"], str):
         raise ValueError("Invalid raw_response")
 
@@ -1323,6 +1382,8 @@ def main() -> None:
     print("Testing provider interface...")
 
     provider = MockProvider()
+    batch_id = str(uuid4())
+    print(f"Batch ID: {batch_id}")
 
     saved_count = 0
     provider_error_count = 0
@@ -1339,6 +1400,7 @@ def main() -> None:
         record = build_result_record(
             run_specification=run,
             result=result,
+            batch_id=batch_id,
         )
 
         output_path = save_result_record(
