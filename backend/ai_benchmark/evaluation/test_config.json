@@ -1,0 +1,299 @@
+{
+  "config_version": "1.0",
+  "runs_per_test_case": 3,
+  "common_metrics": [
+    "factual_accuracy",
+    "instruction_following",
+    "groundedness",
+    "completeness",
+    "hallucination",
+    "latency_ms",
+    "error"
+  ],
+  "tests": {
+    "test_01_extraction": {
+      "cases": [
+        "candidate_a",
+        "candidate_b",
+        "candidate_c"
+      ],
+      "automatic_metrics": [
+        "json_validity",
+        "schema_compliance",
+        "field_accuracy",
+        "list_precision",
+        "list_recall",
+        "list_f1",
+        "degree_field_accuracy"
+      ],
+      "qualitative_metrics": [],
+      "safety_metrics": [
+        "hallucination"
+      ]
+    },
+    "test_02_summary": {
+      "cases": [
+        "candidate_a",
+        "candidate_b",
+        "candidate_c"
+      ],
+      "automatic_metrics": [
+        "word_count",
+        "word_count_compliance",
+        "required_facts_coverage"
+      ],
+      "qualitative_metrics": [
+        "factual_accuracy",
+        "instruction_following",
+        "groundedness",
+        "completeness"
+      ],
+      "safety_metrics": [
+        "hallucination",
+        "forbidden_decision"
+      ]
+    },
+    "test_03_alignment": {
+      "cases": [
+        "candidate_a",
+        "candidate_b",
+        "candidate_c"
+      ],
+      "automatic_metrics": [
+        "alignment_area_precision",
+        "alignment_area_recall",
+        "alignment_area_f1",
+        "missing_evidence_accuracy"
+      ],
+      "qualitative_metrics": [
+        "factual_accuracy",
+        "instruction_following",
+        "groundedness",
+        "completeness"
+      ],
+      "safety_metrics": [
+        "hallucination",
+        "forbidden_score",
+        "forbidden_ranking",
+        "forbidden_decision"
+      ]
+    },
+    "test_04_explainable_alignment": {
+      "cases": [
+        "candidate_a",
+        "candidate_b",
+        "candidate_c"
+      ],
+      "automatic_metrics": [
+        "json_validity",
+        "schema_compliance",
+        "alignment_area_precision",
+        "alignment_area_recall",
+        "alignment_area_f1",
+        "missing_evidence_accuracy"
+      ],
+      "qualitative_metrics": [
+        "factual_accuracy",
+        "instruction_following",
+        "groundedness",
+        "completeness"
+      ],
+      "safety_metrics": [
+        "hallucination",
+        "forbidden_score",
+        "forbidden_ranking",
+        "forbidden_decision"
+      ]
+    },
+    "test_05_grounded_qa": {
+      "cases": [
+        "candidate_a"
+      ],
+      "automatic_metrics": [
+        "course_precision",
+        "course_recall",
+        "course_f1",
+        "course_detail_accuracy"
+      ],
+      "qualitative_metrics": [
+        "factual_accuracy",
+        "instruction_following",
+        "groundedness",
+        "completeness"
+      ],
+      "safety_metrics": [
+        "hallucination",
+        "forbidden_decision"
+      ]
+    },
+    "test_06_missing_thesis": {
+      "cases": [
+        "candidate_a"
+      ],
+      "automatic_metrics": [
+        "exact_match",
+        "semantic_abstention"
+      ],
+      "qualitative_metrics": [
+        "instruction_following",
+        "groundedness"
+      ],
+      "safety_metrics": [
+        "hallucination",
+        "unsupported_inference",
+        "external_knowledge_used"
+      ]
+    },
+    "test_07_missing_hindex": {
+      "cases": [
+        "candidate_a"
+      ],
+      "automatic_metrics": [
+        "exact_match",
+        "semantic_abstention"
+      ],
+      "qualitative_metrics": [
+        "instruction_following",
+        "groundedness"
+      ],
+      "safety_metrics": [
+        "hallucination",
+        "unsupported_inference",
+        "invalid_metric_calculation",
+        "external_knowledge_used"
+      ]
+    },
+    "test_08_evidence_retrieval": {
+      "cases": [
+        "candidate_a"
+      ],
+      "automatic_metrics": [
+        "json_validity",
+        "schema_compliance",
+        "publication_precision",
+        "publication_year_accuracy",
+        "position_area_accuracy",
+        "maximum_item_compliance"
+      ],
+      "qualitative_metrics": [
+        "factual_accuracy",
+        "instruction_following",
+        "groundedness",
+        "completeness"
+      ],
+      "safety_metrics": [
+        "hallucination",
+        "forbidden_score",
+        "forbidden_ranking",
+        "forbidden_decision"
+      ]
+    },
+    "test_09_potential_gaps": {
+      "cases": [
+        "candidate_a",
+        "candidate_b",
+        "candidate_c"
+      ],
+      "automatic_metrics": [
+        "json_validity",
+        "schema_compliance",
+        "gap_precision",
+        "gap_recall",
+        "gap_f1"
+      ],
+      "qualitative_metrics": [
+        "factual_accuracy",
+        "instruction_following",
+        "groundedness",
+        "completeness",
+        "correct_missing_evidence_framing"
+      ],
+      "safety_metrics": [
+        "hallucination",
+        "unsupported_candidate_claim",
+        "invented_position_requirement",
+        "forbidden_score",
+        "forbidden_ranking",
+        "forbidden_decision"
+      ]
+    },
+    "test_10_greek_qa": {
+      "cases": [
+        "candidate_a_gr"
+      ],
+      "automatic_metrics": [
+        "word_count",
+        "word_count_compliance",
+        "research_area_coverage",
+        "evidence_validity",
+        "maximum_item_compliance",
+        "greek_response"
+      ],
+      "qualitative_metrics": [
+        "factual_accuracy",
+        "instruction_following",
+        "groundedness",
+        "completeness",
+        "greek_language_quality",
+        "academic_terminology"
+      ],
+      "safety_metrics": [
+        "hallucination",
+        "forbidden_decision"
+      ]
+    },
+    "test_11_greek_json": {
+      "cases": [
+        "candidate_a_gr"
+      ],
+      "automatic_metrics": [
+        "json_validity",
+        "schema_compliance",
+        "exact_keys",
+        "highest_degree_selection",
+        "publication_precision",
+        "publication_recall",
+        "publication_f1",
+        "teaching_precision",
+        "teaching_recall",
+        "teaching_f1",
+        "research_project_accuracy",
+        "greek_value_consistency"
+      ],
+      "qualitative_metrics": [
+        "factual_accuracy",
+        "instruction_following",
+        "groundedness",
+        "completeness"
+      ],
+      "safety_metrics": [
+        "hallucination",
+        "forbidden_decision"
+      ]
+    },
+    "test_12_adversarial_grounding": {
+      "cases": [
+        "candidate_a"
+      ],
+      "automatic_metrics": [
+        "json_validity",
+        "schema_compliance",
+        "claim_count",
+        "claim_classification_accuracy",
+        "supported_unsupported_distinction",
+        "unsupported_contradicted_distinction",
+        "evidence_accuracy"
+      ],
+      "qualitative_metrics": [
+        "factual_accuracy",
+        "instruction_following",
+        "groundedness",
+        "completeness"
+      ],
+      "safety_metrics": [
+        "hallucination",
+        "forbidden_decision"
+      ]
+    }
+  }
+}

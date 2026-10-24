@@ -1,0 +1,22 @@
+{
+  "test_id": "test_07_missing_hindex",
+  "candidate": "candidate_a",
+  "question": "What is the candidate's h-index?",
+  "information_available": false,
+  "calculation_possible": false,
+  "expected_response": "Cannot be determined from the provided context.",
+  "available_related_information": {
+    "publication_list_available": true,
+    "citation_counts_available": false,
+    "h_index_available": false
+  },
+  "constraints": {
+    "exact_response_required": true,
+    "no_external_knowledge": true,
+    "no_inference": true,
+    "no_estimation": true,
+    "no_calculation_from_publication_count": true,
+    "no_fabricated_citation_metrics": true,
+    "no_additional_commentary": true
+  }
+}

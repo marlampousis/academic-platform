@@ -1,0 +1,19 @@
+You are given structured information about an academic candidate.
+
+Write a concise academic profile summary of the candidate based only on the provided context.
+
+Requirements:
+1. The summary must be between 100 and 150 words.
+2. Use a professional academic tone.
+3. Include the candidate's main specialization and research areas.
+4. Summarize the candidate's educational background.
+5. Mention the candidate's most relevant research experience, including publications and research projects.
+6. Mention the candidate's university-level teaching experience.
+7. Use only information explicitly available in the provided context.
+8. Do not infer, assume, or invent missing information.
+9. Do not include citation metrics, h-index, awards, thesis titles, or other information unless explicitly provided.
+10. Do not evaluate, rank, recommend, or make a hiring decision about the candidate.
+11. Return only the academic profile summary, without headings, bullet points, or additional commentary.
+
+CANDIDATE CONTEXT:
+{{candidate}}

@@ -1,0 +1,125 @@
+{
+  "candidate": {
+    "name": "Sophia Bennett",
+    "specialization": "Επιστήμη Δεδομένων",
+    "research_areas": [
+      "Ανάλυση Δεδομένων",
+      "Στατιστική Μάθηση",
+      "Επεξεργασία Φυσικής Γλώσσας"
+    ],
+    "biography": "Επιστήμονας δεδομένων με εξειδίκευση στη στατιστική μάθηση, την ανάλυση δεδομένων και την επεξεργασία φυσικής γλώσσας, με ερευνητική εμπειρία σε υπολογιστικές μεθόδους και εμπειρία διδασκαλίας σε πανεπιστημιακό επίπεδο.",
+    "degrees": [
+      {
+        "degree_type": "Διδακτορικό",
+        "title": "Διδακτορικό στην Υπολογιστική Στατιστική",
+        "field_of_study": "Υπολογιστική Στατιστική",
+        "institution_name": "University of Warwick",
+        "country": "Ηνωμένο Βασίλειο",
+        "start_year": 2016,
+        "end_year": 2020
+      },
+      {
+        "degree_type": "Μεταπτυχιακό",
+        "title": "Μεταπτυχιακό στην Επιστήμη Δεδομένων",
+        "field_of_study": "Επιστήμη Δεδομένων",
+        "institution_name": "University of Glasgow",
+        "country": "Ηνωμένο Βασίλειο",
+        "start_year": 2014,
+        "end_year": 2016
+      },
+      {
+        "degree_type": "Πτυχίο",
+        "title": "Πτυχίο στα Μαθηματικά",
+        "field_of_study": "Μαθηματικά",
+        "institution_name": "University of Manchester",
+        "country": "Ηνωμένο Βασίλειο",
+        "start_year": 2010,
+        "end_year": 2014
+      }
+    ],
+    "publications": [
+      {
+        "title": "Επεξεργασία Φυσικής Γλώσσας για Επιστημονικά Έγγραφα",
+        "publication_year": 2023,
+        "publication_type": "conference_paper",
+        "conference_name": "International Conference on Data Science",
+        "abstract": "Ανάλυση τεχνικών επεξεργασίας φυσικής γλώσσας για την εξαγωγή και οργάνωση πληροφοριών από επιστημονικά έγγραφα."
+      },
+      {
+        "title": "Προγνωστική Ανάλυση για Εφαρμογές Υγειονομικής Περίθαλψης",
+        "publication_year": 2022,
+        "publication_type": "journal_article",
+        "journal_name": "Journal of Health Data Analytics",
+        "abstract": "Διερεύνηση μεθόδων προγνωστικής ανάλυσης δεδομένων για την υποστήριξη εφαρμογών και διαδικασιών λήψης αποφάσεων στην υγειονομική περίθαλψη."
+      },
+      {
+        "title": "Στατιστική Μάθηση για Δεδομένα Υψηλής Διάστασης",
+        "publication_year": 2021,
+        "publication_type": "journal_article",
+        "journal_name": "Journal of Computational Statistics",
+        "abstract": "Μελέτη τεχνικών στατιστικής μάθησης για τη μοντελοποίηση και ανάλυση δεδομένων υψηλής διάστασης."
+      },
+      {
+        "title": "Μπεϋζιανές Μέθοδοι για Ταξινόμηση Δεδομένων",
+        "publication_year": 2020,
+        "publication_type": "journal_article",
+        "journal_name": "Computational Statistics and Data Analysis",
+        "abstract": "Μελέτη μπεϋζιανών στατιστικών μεθόδων για προβλήματα ταξινόμησης σε σύνθετα σύνολα δεδομένων."
+      }
+    ],
+    "research_projects": [
+      {
+        "title": "Ανάλυση Δεδομένων για την Υποστήριξη Αποφάσεων στην Υγειονομική Περίθαλψη",
+        "acronym": "DATA-HEALTH",
+        "funding_program": "Ερευνητικό Πρόγραμμα",
+        "funding_organization": "European Research Consortium",
+        "role": "Ερευνητής",
+        "status": "ΟΛΟΚΛΗΡΩΜΕΝΟ",
+        "start_date": "2020-01-01",
+        "end_date": "2023-12-31",
+        "keywords": [
+          "Επιστήμη Δεδομένων",
+          "Προγνωστική Ανάλυση",
+          "Στατιστική Μάθηση",
+          "Υγειονομική Περίθαλψη"
+        ],
+        "description": "Ερευνητικό έργο που διερευνά μεθόδους ανάλυσης δεδομένων και στατιστικής μάθησης για την υποστήριξη αποφάσεων στην υγειονομική περίθαλψη."
+      }
+    ],
+    "teaching_experience": [
+      {
+        "course_title": "Επιστήμη Δεδομένων",
+        "institution_name": "University of Warwick",
+        "department_name": "Department of Statistics",
+        "academic_year": "2024-2025",
+        "semester": "Χειμερινό",
+        "course_level": "Μεταπτυχιακό",
+        "teaching_role": "Διδάσκων",
+        "hours_per_week": 4,
+        "description": "Διδασκαλία ανάλυσης δεδομένων, προγνωστικής μοντελοποίησης και υπολογιστικών μεθόδων για την επιστήμη δεδομένων."
+      },
+      {
+        "course_title": "Εφαρμοσμένη Μηχανική Μάθηση",
+        "institution_name": "University of Warwick",
+        "department_name": "Department of Statistics",
+        "academic_year": "2024-2025",
+        "semester": "Εαρινό",
+        "course_level": "Μεταπτυχιακό",
+        "teaching_role": "Διδάσκων",
+        "hours_per_week": 3,
+        "description": "Διδασκαλία εφαρμοσμένων μεθόδων μηχανικής μάθησης για ταξινόμηση, παλινδρόμηση και προγνωστική ανάλυση."
+      },
+      {
+        "course_title": "Στατιστική για την Επιστήμη Υπολογιστών",
+        "institution_name": "University of Warwick",
+        "department_name": "Department of Statistics",
+        "academic_year": "2023-2024",
+        "semester": "Εαρινό",
+        "course_level": "Προπτυχιακό",
+        "teaching_role": "Διδάσκων",
+        "hours_per_week": 3,
+        "description": "Διδασκαλία πιθανοτήτων, στατιστικής συμπερασματολογίας και στατιστικών μεθόδων για εφαρμογές της επιστήμης υπολογιστών."
+      }
+    ]
+  }
+}

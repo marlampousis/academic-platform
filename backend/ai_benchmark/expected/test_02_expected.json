@@ -1,0 +1,168 @@
+{
+  "test_id": "test_02_summary",
+  "cases": [
+    {
+      "candidate": "candidate_a",
+      "required_facts": {
+        "name": "Alex Morgan",
+        "specialization": "Artificial Intelligence",
+        "research_areas": [
+          "Machine Learning",
+          "Deep Learning",
+          "Computer Vision"
+        ],
+        "degrees": [
+          "PhD in Computer Science",
+          "MSc in Artificial Intelligence",
+          "BSc in Computer Science"
+        ],
+        "research_evidence": {
+          "publication_titles": [
+            "Machine Learning Methods for Clinical Decision Support",
+            "Explainable Artificial Intelligence in Healthcare",
+            "Deep Neural Networks for Medical Image Classification",
+            "Transfer Learning for Visual Recognition",
+            "Efficient CNN Architectures for Image Analysis"
+          ],
+          "research_project_titles": [
+            "Artificial Intelligence for Medical Imaging"
+          ]
+        },
+        "teaching_courses": [
+          "Machine Learning",
+          "Computer Vision",
+          "Introduction to Artificial Intelligence"
+        ]
+      },
+      "constraints": {
+        "min_words": 100,
+        "max_words": 150,
+        "professional_academic_tone": true,
+        "must_mention_specialization": true,
+        "must_mention_research_areas": true,
+        "must_summarize_education": true,
+        "must_mention_research_experience": true,
+        "must_mention_research_project": true,
+        "must_mention_teaching_experience": true,
+        "must_not_make_recruitment_decision": true
+      },
+      "forbidden_claim_categories": [
+        "h_index",
+        "citation_metrics",
+        "phd_thesis_title",
+        "awards",
+        "unprovided_employment_history",
+        "unprovided_qualifications",
+        "recruitment_recommendation"
+      ]
+    },
+    {
+      "candidate": "candidate_b",
+      "required_facts": {
+        "name": "Sophia Bennett",
+        "specialization": "Data Science",
+        "research_areas": [
+          "Data Analytics",
+          "Statistical Learning",
+          "Natural Language Processing"
+        ],
+        "degrees": [
+          "PhD in Computational Statistics",
+          "MSc in Data Science",
+          "BSc in Mathematics"
+        ],
+        "research_evidence": {
+          "publication_titles": [
+            "Natural Language Processing for Scientific Documents",
+            "Predictive Analytics for Healthcare Applications",
+            "Statistical Learning for High-Dimensional Data",
+            "Bayesian Methods for Data Classification"
+          ],
+          "research_project_titles": [
+            "Data Analytics for Healthcare Decision Support"
+          ]
+        },
+        "teaching_courses": [
+          "Data Science",
+          "Applied Machine Learning",
+          "Statistics for Computer Science"
+        ]
+      },
+      "constraints": {
+        "min_words": 100,
+        "max_words": 150,
+        "professional_academic_tone": true,
+        "must_mention_specialization": true,
+        "must_mention_research_areas": true,
+        "must_summarize_education": true,
+        "must_mention_research_experience": true,
+        "must_mention_research_project": true,
+        "must_mention_teaching_experience": true,
+        "must_not_make_recruitment_decision": true
+      },
+      "forbidden_claim_categories": [
+        "h_index",
+        "citation_metrics",
+        "phd_thesis_title",
+        "awards",
+        "unprovided_employment_history",
+        "unprovided_qualifications",
+        "recruitment_recommendation"
+      ]
+    },
+    {
+      "candidate": "candidate_c",
+      "required_facts": {
+        "name": "Daniel Carter",
+        "specialization": "Renewable Energy Systems",
+        "research_areas": [
+          "Renewable Energy",
+          "Power Systems",
+          "Smart Grids"
+        ],
+        "degrees": [
+          "PhD in Electrical Engineering",
+          "MSc in Sustainable Energy Systems",
+          "BEng in Electrical Engineering"
+        ],
+        "research_evidence": {
+          "publication_titles": [
+            "Optimization of Renewable Energy Integration in Power Grids",
+            "Energy Storage Systems for Smart Grid Applications",
+            "Modeling of Photovoltaic Energy Systems",
+            "Demand Response Strategies in Modern Power Networks"
+          ],
+          "research_project_titles": [
+            "Smart Energy Management for Renewable Power Networks"
+          ]
+        },
+        "teaching_courses": [
+          "Electrical Power Systems",
+          "Renewable Energy Systems",
+          "Smart Grid Technologies"
+        ]
+      },
+      "constraints": {
+        "min_words": 100,
+        "max_words": 150,
+        "professional_academic_tone": true,
+        "must_mention_specialization": true,
+        "must_mention_research_areas": true,
+        "must_summarize_education": true,
+        "must_mention_research_experience": true,
+        "must_mention_research_project": true,
+        "must_mention_teaching_experience": true,
+        "must_not_make_recruitment_decision": true
+      },
+      "forbidden_claim_categories": [
+        "h_index",
+        "citation_metrics",
+        "phd_thesis_title",
+        "awards",
+        "unprovided_employment_history",
+        "unprovided_qualifications",
+        "recruitment_recommendation"
+      ]
+    }
+  ]
+}

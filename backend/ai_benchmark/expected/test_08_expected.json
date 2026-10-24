@@ -1,0 +1,82 @@
+{
+  "test_id": "test_08_evidence_retrieval",
+  "candidate": "candidate_a",
+  "position": "position_a",
+  "expected_schema": {
+    "required_top_level_fields": [
+      "relevant_publications"
+    ],
+    "publication_required_fields": [
+      "title",
+      "publication_year",
+      "relevant_position_areas",
+      "evidence"
+    ],
+    "relevant_position_areas_type": "array",
+    "additional_fields_allowed": false
+  },
+  "max_publications": 3,
+  "valid_publications": [
+    {
+      "title": "Machine Learning Methods for Clinical Decision Support",
+      "publication_year": 2024,
+      "acceptable_position_areas": [
+        "Artificial Intelligence",
+        "Machine Learning",
+        "related intelligent computational methods"
+      ]
+    },
+    {
+      "title": "Explainable Artificial Intelligence in Healthcare",
+      "publication_year": 2023,
+      "acceptable_position_areas": [
+        "Artificial Intelligence",
+        "Explainable Artificial Intelligence",
+        "related intelligent computational methods"
+      ]
+    },
+    {
+      "title": "Deep Neural Networks for Medical Image Classification",
+      "publication_year": 2022,
+      "acceptable_position_areas": [
+        "Artificial Intelligence",
+        "Deep Learning",
+        "Computer Vision",
+        "related intelligent computational methods"
+      ]
+    },
+    {
+      "title": "Transfer Learning for Visual Recognition",
+      "publication_year": 2021,
+      "acceptable_position_areas": [
+        "Machine Learning",
+        "Deep Learning",
+        "Computer Vision",
+        "related intelligent computational methods"
+      ]
+    },
+    {
+      "title": "Efficient CNN Architectures for Image Analysis",
+      "publication_year": 2020,
+      "acceptable_position_areas": [
+        "Deep Learning",
+        "Computer Vision",
+        "related intelligent computational methods"
+      ]
+    }
+  ],
+  "constraints": {
+    "minimum_publications": 1,
+    "maximum_publications": 3,
+    "publication_must_exist_in_candidate_context": true,
+    "publication_year_must_match_context": true,
+    "relevance_must_be_supported_by_title_or_abstract": true,
+    "position_area_must_be_supported_by_position_context": true,
+    "no_external_publications": true,
+    "no_invented_publication_details": true,
+    "no_numeric_match_score": true,
+    "no_candidate_ranking": true,
+    "no_recruitment_recommendation": true,
+    "no_selection_decision": true
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "candidate": {
+    "name": "Daniel Carter",
+    "specialization": "Συστήματα Ανανεώσιμων Πηγών Ενέργειας",
+    "research_areas": [
+      "Ανανεώσιμες Πηγές Ενέργειας",
+      "Συστήματα Ηλεκτρικής Ισχύος",
+      "Έξυπνα Δίκτυα"
+    ],
+    "biography": "Ηλεκτρολόγος μηχανικός με εξειδίκευση στα συστήματα ανανεώσιμων πηγών ενέργειας, τα συστήματα ηλεκτρικής ισχύος και τα έξυπνα δίκτυα, με ερευνητική εμπειρία σε τεχνολογίες βιώσιμης ενέργειας και εμπειρία διδασκαλίας σε πανεπιστημιακό επίπεδο.",
+    "degrees": [
+      {
+        "degree_type": "Διδακτορικό",
+        "title": "Διδακτορικό στην Ηλεκτρολογική Μηχανική",
+        "field_of_study": "Ηλεκτρολογική Μηχανική",
+        "institution_name": "University of Bristol",
+        "country": "Ηνωμένο Βασίλειο",
+        "start_year": 2015,
+        "end_year": 2019
+      },
+      {
+        "degree_type": "Μεταπτυχιακό",
+        "title": "Μεταπτυχιακό στα Συστήματα Βιώσιμης Ενέργειας",
+        "field_of_study": "Συστήματα Βιώσιμης Ενέργειας",
+        "institution_name": "University of Southampton",
+        "country": "Ηνωμένο Βασίλειο",
+        "start_year": 2013,
+        "end_year": 2015
+      },
+      {
+        "degree_type": "Πτυχίο",
+        "title": "Πτυχίο στην Ηλεκτρολογική Μηχανική",
+        "field_of_study": "Ηλεκτρολογική Μηχανική",
+        "institution_name": "University of Leeds",
+        "country": "Ηνωμένο Βασίλειο",
+        "start_year": 2009,
+        "end_year": 2013
+      }
+    ],
+    "publications": [
+      {
+        "title": "Βελτιστοποίηση της Ενσωμάτωσης Ανανεώσιμων Πηγών Ενέργειας στα Δίκτυα Ηλεκτρικής Ισχύος",
+        "publication_year": 2021,
+        "publication_type": "journal_article",
+        "journal_name": "Journal of Renewable Power Systems",
+        "abstract": "Μελέτη μεθόδων βελτιστοποίησης για την ενσωμάτωση ανανεώσιμων πηγών ενέργειας σε σύγχρονα δίκτυα ηλεκτρικής ισχύος."
+      },
+      {
+        "title": "Συστήματα Αποθήκευσης Ενέργειας για Εφαρμογές Έξυπνων Δικτύων",
+        "publication_year": 2022,
+        "publication_type": "journal_article",
+        "journal_name": "International Journal of Smart Energy Systems",
+        "abstract": "Διερεύνηση τεχνολογιών αποθήκευσης ενέργειας και του ρόλου τους στη βελτίωση της αξιοπιστίας και της ευελιξίας των έξυπνων ηλεκτρικών δικτύων."
+      },
+      {
+        "title": "Μοντελοποίηση Φωτοβολταϊκών Συστημάτων Ενέργειας",
+        "publication_year": 2020,
+        "publication_type": "conference_paper",
+        "conference_name": "International Conference on Sustainable Energy Engineering",
+        "abstract": "Υπολογιστική μελέτη της συμπεριφοράς φωτοβολταϊκών συστημάτων ενέργειας υπό διαφορετικές περιβαλλοντικές και λειτουργικές συνθήκες."
+      },
+      {
+        "title": "Στρατηγικές Απόκρισης Ζήτησης στα Σύγχρονα Δίκτυα Ηλεκτρικής Ισχύος",
+        "publication_year": 2023,
+        "publication_type": "journal_article",
+        "journal_name": "Journal of Electrical Energy Systems",
+        "abstract": "Ανάλυση στρατηγικών απόκρισης ζήτησης για τη βελτίωση της ενεργειακής αποδοτικότητας και την εξισορρόπηση της ζήτησης ηλεκτρικής ενέργειας στα σύγχρονα δίκτυα ηλεκτρικής ισχύος."
+      }
+    ],
+    "research_projects": [
+      {
+        "title": "Έξυπνη Διαχείριση Ενέργειας για Δίκτυα Ανανεώσιμης Ηλεκτρικής Ισχύος",
+        "acronym": "SMART-GRID",
+        "funding_program": "Ερευνητικό Πρόγραμμα",
+        "funding_organization": "European Research Consortium",
+        "role": "Ερευνητής",
+        "status": "ΟΛΟΚΛΗΡΩΜΕΝΟ",
+        "start_date": "2020-01-01",
+        "end_date": "2024-12-31",
+        "keywords": [
+          "Ανανεώσιμες Πηγές Ενέργειας",
+          "Συστήματα Ηλεκτρικής Ισχύος",
+          "Έξυπνα Δίκτυα",
+          "Διαχείριση Ενέργειας"
+        ],
+        "description": "Ερευνητικό έργο που διερευνά μεθόδους διαχείρισης ενέργειας για την ενσωμάτωση ανανεώσιμων πηγών ενέργειας σε σύγχρονα δίκτυα ηλεκτρικής ισχύος."
+      }
+    ],
+    "teaching_experience": [
+      {
+        "course_title": "Συστήματα Ηλεκτρικής Ισχύος",
+        "institution_name": "University of Bristol",
+        "department_name": "Department of Electrical and Electronic Engineering",
+        "academic_year": "2024-2025",
+        "semester": "Χειμερινό",
+        "course_level": "Προπτυχιακό",
+        "teaching_role": "Διδάσκων",
+        "hours_per_week": 4,
+        "description": "Διδασκαλία παραγωγής, μεταφοράς και διανομής ηλεκτρικής ενέργειας, καθώς και ανάλυσης συστημάτων ηλεκτρικής ισχύος."
+      },
+      {
+        "course_title": "Συστήματα Ανανεώσιμων Πηγών Ενέργειας",
+        "institution_name": "University of Bristol",
+        "department_name": "Department of Electrical and Electronic Engineering",
+        "academic_year": "2024-2025",
+        "semester": "Εαρινό",
+        "course_level": "Μεταπτυχιακό",
+        "teaching_role": "Διδάσκων",
+        "hours_per_week": 4,
+        "description": "Διδασκαλία τεχνολογιών ανανεώσιμων πηγών ενέργειας, φωτοβολταϊκών συστημάτων, αιολικής ενέργειας και ενσωμάτωσης στο ηλεκτρικό δίκτυο."
+      },
+      {
+        "course_title": "Τεχνολογίες Έξυπνων Δικτύων",
+        "institution_name": "University of Bristol",
+        "department_name": "Department of Electrical and Electronic Engineering",
+        "academic_year": "2023-2024",
+        "semester": "Εαρινό",
+        "course_level": "Μεταπτυχιακό",
+        "teaching_role": "Διδάσκων",
+        "hours_per_week": 3,
+        "description": "Διδασκαλία αρχιτεκτονικών έξυπνων δικτύων, διαχείρισης ενέργειας, κατανεμημένης παραγωγής και σύγχρονων τεχνολογιών δικτύων ηλεκτρικής ισχύος."
+      }
+    ]
+  }
+}

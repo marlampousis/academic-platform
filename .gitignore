@@ -34,3 +34,20 @@ dist/
 # Coverage
 .coverage
 htmlcov/
+
+# Uploads
+uploads/
+
+# AI benchmark generated results
+backend/ai_benchmark/results/
+
+# Additional local environments
+.venv/
+
+# Local environment variants
+.env.*
+!.env.example
+
+# Frontend dependencies and generated output
+node_modules/
+.next/

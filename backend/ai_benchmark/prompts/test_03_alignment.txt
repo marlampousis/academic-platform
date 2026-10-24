@@ -1,0 +1,36 @@
+You are given structured information about an academic candidate and an academic position.
+
+Analyze the alignment between the candidate's academic profile and the position using only the provided context.
+
+Requirements:
+1. Identify the main areas in which the candidate's academic background aligns with the position.
+2. Consider the candidate's specialization, research areas, degrees, publications, research projects, and teaching experience.
+3. Consider the position's field of study and description.
+4. Identify relevant academic evidence from the candidate's profile that supports the analysis.
+5. Identify areas where the provided candidate information does not demonstrate alignment with the position requirements.
+6. Do not assume that missing information means the candidate lacks a qualification or experience. State only that the information is not demonstrated in the provided context.
+7. Do not invent, infer, or assume information that is not explicitly provided.
+8. Do not calculate or provide a numerical, percentage, categorical, or ranked matching score.
+9. Do not rank the candidate against other candidates.
+10. Do not recommend whether the candidate should be hired, selected, rejected, shortlisted, or preferred.
+11. Do not make a final eligibility or recruitment decision.
+12. Use a professional and neutral academic tone.
+
+Structure the response using exactly the following sections:
+
+Alignment Summary:
+[Concise overall description of the relationship between the candidate's academic profile and the position.]
+
+Supporting Evidence:
+- [Evidence from the provided candidate context]
+- [...]
+
+Areas Not Demonstrated:
+- [Relevant position area or requirement not demonstrated by the provided candidate context]
+- [...]
+
+CANDIDATE CONTEXT:
+{{candidate}}
+
+POSITION CONTEXT:
+{{position}}

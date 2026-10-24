@@ -1,0 +1,39 @@
+You are given information about an academic candidate.
+
+Extract the candidate's academic information using only the provided context.
+
+Return ONLY valid JSON. Do not include Markdown, explanations, comments, or text outside the JSON object.
+
+Use exactly the following structure:
+
+{
+  "name": "",
+  "specialization": "",
+  "research_areas": [],
+  "degrees": [
+    {
+      "degree_type": "",
+      "title": "",
+      "field_of_study": "",
+      "institution_name": "",
+      "country": "",
+      "start_year": null,
+      "end_year": null
+    }
+  ],
+  "publication_titles": [],
+  "research_project_titles": [],
+  "teaching_course_titles": []
+}
+
+Rules:
+1. Use only information explicitly available in the provided context.
+2. Do not infer or invent missing information.
+3. Preserve the meaning of the original information.
+4. Return valid JSON.
+5. Do not add fields that are not defined in the required structure.
+6. If a requested scalar value is unavailable, use null.
+7. If a requested list has no available information, use an empty array.
+
+CANDIDATE CONTEXT:
+{{candidate}}

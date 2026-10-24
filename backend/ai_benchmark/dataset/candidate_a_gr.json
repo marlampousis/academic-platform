@@ -1,0 +1,132 @@
+{
+  "candidate": {
+    "name": "Alex Morgan",
+    "specialization": "Τεχνητή Νοημοσύνη",
+    "research_areas": [
+      "Μηχανική Μάθηση",
+      "Βαθιά Μάθηση",
+      "Υπολογιστική Όραση"
+    ],
+    "biography": "Επιστήμονας πληροφορικής με εξειδίκευση στην Τεχνητή Νοημοσύνη, τη Μηχανική Μάθηση, τη Βαθιά Μάθηση και την Υπολογιστική Όραση, με ερευνητική εμπειρία και εμπειρία διδασκαλίας σε πανεπιστημιακό επίπεδο.",
+    "degrees": [
+      {
+        "degree_type": "Διδακτορικό",
+        "title": "Διδακτορικό στην Επιστήμη Υπολογιστών",
+        "field_of_study": "Επιστήμη Υπολογιστών",
+        "institution_name": "University of Edinburgh",
+        "country": "Ηνωμένο Βασίλειο",
+        "start_year": 2017,
+        "end_year": 2021
+      },
+      {
+        "degree_type": "Μεταπτυχιακό",
+        "title": "Μεταπτυχιακό στην Τεχνητή Νοημοσύνη",
+        "field_of_study": "Τεχνητή Νοημοσύνη",
+        "institution_name": "University of Amsterdam",
+        "country": "Ολλανδία",
+        "start_year": 2015,
+        "end_year": 2017
+      },
+      {
+        "degree_type": "Πτυχίο",
+        "title": "Πτυχίο στην Επιστήμη Υπολογιστών",
+        "field_of_study": "Επιστήμη Υπολογιστών",
+        "institution_name": "University of Athens",
+        "country": "Ελλάδα",
+        "start_year": 2011,
+        "end_year": 2015
+      }
+    ],
+    "publications": [
+      {
+        "title": "Μέθοδοι Μηχανικής Μάθησης για την Υποστήριξη Κλινικών Αποφάσεων",
+        "publication_year": 2024,
+        "publication_type": "journal_article",
+        "journal_name": "Journal of Intelligent Clinical Systems",
+        "abstract": "Ανάλυση μεθόδων μηχανικής μάθησης για την υποστήριξη της λήψης κλινικών αποφάσεων με χρήση ιατρικών δεδομένων."
+      },
+      {
+        "title": "Εξηγήσιμη Τεχνητή Νοημοσύνη στην Υγειονομική Περίθαλψη",
+        "publication_year": 2023,
+        "publication_type": "journal_article",
+        "journal_name": "Artificial Intelligence in Healthcare",
+        "abstract": "Μελέτη τεχνικών εξηγήσιμης τεχνητής νοημοσύνης για τη βελτίωση της ερμηνευσιμότητας συστημάτων τεχνητής νοημοσύνης στην υγειονομική περίθαλψη."
+      },
+      {
+        "title": "Βαθιά Νευρωνικά Δίκτυα για την Ταξινόμηση Ιατρικών Εικόνων",
+        "publication_year": 2022,
+        "publication_type": "journal_article",
+        "journal_name": "Journal of Medical Artificial Intelligence",
+        "abstract": "Μελέτη μεθόδων βαθιών νευρωνικών δικτύων για την αυτοματοποιημένη ταξινόμηση ιατρικών εικόνων."
+      },
+      {
+        "title": "Μεταφορά Μάθησης για Οπτική Αναγνώριση",
+        "publication_year": 2021,
+        "publication_type": "journal_article",
+        "journal_name": "International Journal of Computer Vision Research",
+        "abstract": "Διερεύνηση τεχνικών μεταφοράς μάθησης για εργασίες οπτικής αναγνώρισης."
+      },
+      {
+        "title": "Αποδοτικές Αρχιτεκτονικές CNN για Ανάλυση Εικόνων",
+        "publication_year": 2020,
+        "publication_type": "conference_paper",
+        "conference_name": "International Conference on Computer Vision Systems",
+        "abstract": "Αξιολόγηση αποδοτικών αρχιτεκτονικών συνελικτικών νευρωνικών δικτύων για εφαρμογές ανάλυσης εικόνων."
+      }
+    ],
+    "research_projects": [
+      {
+        "title": "Τεχνητή Νοημοσύνη για Ιατρική Απεικόνιση",
+        "acronym": "AI-MED",
+        "funding_program": "Ερευνητικό Πρόγραμμα",
+        "funding_organization": "European Research Consortium",
+        "role": "Ερευνητής",
+        "status": "ΟΛΟΚΛΗΡΩΜΕΝΟ",
+        "start_date": "2021-01-01",
+        "end_date": "2024-12-31",
+        "keywords": [
+          "Τεχνητή Νοημοσύνη",
+          "Ιατρική Απεικόνιση",
+          "Βαθιά Μάθηση",
+          "Υπολογιστική Όραση"
+        ],
+        "description": "Ερευνητικό έργο που διερευνά μεθόδους τεχνητής νοημοσύνης και βαθιάς μάθησης για την ανάλυση ιατρικών εικόνων."
+      }
+    ],
+    "teaching_experience": [
+      {
+        "course_title": "Μηχανική Μάθηση",
+        "institution_name": "University of Edinburgh",
+        "department_name": "School of Informatics",
+        "academic_year": "2024-2025",
+        "semester": "Χειμερινό",
+        "course_level": "Μεταπτυχιακό",
+        "teaching_role": "Διδάσκων",
+        "hours_per_week": 4,
+        "description": "Διδασκαλία μεθόδων μηχανικής μάθησης, επιβλεπόμενης μάθησης, νευρωνικών δικτύων και αξιολόγησης μοντέλων."
+      },
+      {
+        "course_title": "Υπολογιστική Όραση",
+        "institution_name": "University of Edinburgh",
+        "department_name": "School of Informatics",
+        "academic_year": "2024-2025",
+        "semester": "Εαρινό",
+        "course_level": "Μεταπτυχιακό",
+        "teaching_role": "Διδάσκων",
+        "hours_per_week": 3,
+        "description": "Διδασκαλία υπολογιστικής όρασης, ανάλυσης εικόνων και τεχνικών βαθιάς μάθησης για οπτική αναγνώριση."
+      },
+      {
+        "course_title": "Εισαγωγή στην Τεχνητή Νοημοσύνη",
+        "institution_name": "University of Edinburgh",
+        "department_name": "School of Informatics",
+        "academic_year": "2023-2024",
+        "semester": "Εαρινό",
+        "course_level": "Προπτυχιακό",
+        "teaching_role": "Διδάσκων",
+        "hours_per_week": 4,
+        "description": "Διδασκαλία θεμελιωδών εννοιών και μεθόδων της τεχνητής νοημοσύνης."
+      }
+    ]
+  }
+}

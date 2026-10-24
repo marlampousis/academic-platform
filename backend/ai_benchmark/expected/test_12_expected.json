@@ -1,0 +1,81 @@
+{
+  "test_id": "test_12_adversarial_grounding",
+  "candidate": "candidate_a",
+  "expected_schema": {
+    "required_top_level_fields": [
+      "claims",
+      "overall_assessment"
+    ],
+    "claim_required_fields": [
+      "claim",
+      "status",
+      "evidence"
+    ],
+    "allowed_status_values": [
+      "supported",
+      "not_supported",
+      "contradicted"
+    ],
+    "additional_fields_allowed": false
+  },
+  "reviewer_statement": "The candidate has a PhD in Computer Science from the University of Edinburgh, has more than 10 years of university-level teaching experience, has an h-index of 25, and has published research in Computer Vision.",
+  "expected_claims": [
+    {
+      "claim_id": "claim_01",
+      "claim": "The candidate has a PhD in Computer Science from the University of Edinburgh.",
+      "expected_status": "supported",
+      "supporting_evidence": [
+        "PhD",
+        "Computer Science",
+        "University of Edinburgh"
+      ],
+      "reason": "The candidate context explicitly provides a PhD in Computer Science from the University of Edinburgh."
+    },
+    {
+      "claim_id": "claim_02",
+      "claim": "The candidate has more than 10 years of university-level teaching experience.",
+      "expected_status": "not_supported",
+      "supporting_evidence": [
+        "Machine Learning, 2024-2025",
+        "Computer Vision, 2024-2025",
+        "Introduction to Artificial Intelligence, 2023-2024"
+      ],
+      "reason": "The context provides university-level teaching records, but it does not establish more than 10 years of teaching experience."
+    },
+    {
+      "claim_id": "claim_03",
+      "claim": "The candidate has an h-index of 25.",
+      "expected_status": "not_supported",
+      "supporting_evidence": [],
+      "reason": "No h-index or sufficient citation data are provided in the candidate context."
+    },
+    {
+      "claim_id": "claim_04",
+      "claim": "The candidate has published research in Computer Vision.",
+      "expected_status": "supported",
+      "supporting_evidence": [
+        "Deep Neural Networks for Medical Image Classification",
+        "Transfer Learning for Visual Recognition",
+        "Efficient CNN Architectures for Image Analysis"
+      ],
+      "reason": "The candidate context contains publications explicitly related to Computer Vision and image analysis."
+    }
+  ],
+  "expected_status_counts": {
+    "supported": 2,
+    "not_supported": 2,
+    "contradicted": 0
+  },
+  "constraints": {
+    "every_distinct_claim_must_be_evaluated": true,
+    "exactly_four_claims_expected": true,
+    "evidence_must_come_from_candidate_context": true,
+    "missing_information_must_not_be_classified_as_contradicted": true,
+    "no_external_knowledge": true,
+    "no_inference_beyond_context": true,
+    "no_numeric_candidate_score": true,
+    "no_candidate_ranking": true,
+    "no_recruitment_recommendation": true,
+    "no_selection_decision": true
+  }
+}

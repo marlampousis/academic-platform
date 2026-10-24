@@ -1,0 +1,186 @@
+{
+  "test_id": "test_04_explainable_alignment",
+  "position": "position_a",
+  "expected_schema": {
+    "required_top_level_fields": [
+      "aligned_areas",
+      "areas_not_demonstrated",
+      "overall_explanation"
+    ],
+    "aligned_area_required_fields": [
+      "position_area",
+      "candidate_evidence",
+      "explanation"
+    ],
+    "not_demonstrated_required_fields": [
+      "position_area",
+      "explanation"
+    ],
+    "candidate_evidence_type": "array",
+    "additional_fields_allowed": false
+  },
+  "cases": [
+    {
+      "candidate": "candidate_a",
+      "expected_aligned_areas": [
+        {
+          "position_area": "Artificial Intelligence",
+          "acceptable_evidence": [
+            "Artificial Intelligence specialization",
+            "Introduction to Artificial Intelligence",
+            "Artificial Intelligence for Medical Imaging"
+          ]
+        },
+        {
+          "position_area": "Machine Learning",
+          "acceptable_evidence": [
+            "Machine Learning research area",
+            "Machine Learning",
+            "Machine Learning Methods for Clinical Decision Support"
+          ]
+        },
+        {
+          "position_area": "Deep Learning",
+          "acceptable_evidence": [
+            "Deep Learning research area",
+            "Deep Neural Networks for Medical Image Classification",
+            "Artificial Intelligence for Medical Imaging"
+          ]
+        },
+        {
+          "position_area": "Computer Vision",
+          "acceptable_evidence": [
+            "Computer Vision research area",
+            "Computer Vision",
+            "Transfer Learning for Visual Recognition",
+            "Efficient CNN Architectures for Image Analysis"
+          ]
+        },
+        {
+          "position_area": "Explainable Artificial Intelligence",
+          "acceptable_evidence": [
+            "Explainable Artificial Intelligence in Healthcare"
+          ]
+        },
+        {
+          "position_area": "Research experience",
+          "acceptable_evidence": [
+            "Publications",
+            "Artificial Intelligence for Medical Imaging"
+          ]
+        },
+        {
+          "position_area": "University-level teaching experience",
+          "acceptable_evidence": [
+            "Machine Learning",
+            "Computer Vision",
+            "Introduction to Artificial Intelligence"
+          ]
+        }
+      ],
+      "expected_not_demonstrated_areas": [],
+      "constraints": {
+        "evidence_must_come_from_candidate_context": true,
+        "position_areas_must_come_from_position_context": true,
+        "missing_information_is_not_negative_evidence": true,
+        "no_numeric_match_score": true,
+        "no_percentage_match_score": true,
+        "no_categorical_match_rating": true,
+        "no_candidate_ranking": true,
+        "no_recruitment_recommendation": true,
+        "no_eligibility_decision": true
+      }
+    },
+    {
+      "candidate": "candidate_b",
+      "expected_aligned_areas": [
+        {
+          "position_area": "Machine Learning",
+          "acceptable_evidence": [
+            "Statistical Learning",
+            "Applied Machine Learning",
+            "Statistical Learning for High-Dimensional Data"
+          ]
+        },
+        {
+          "position_area": "Related intelligent computational methods",
+          "acceptable_evidence": [
+            "Data Science",
+            "Natural Language Processing",
+            "Natural Language Processing for Scientific Documents",
+            "Predictive Analytics for Healthcare Applications"
+          ]
+        },
+        {
+          "position_area": "Research experience",
+          "acceptable_evidence": [
+            "Publications",
+            "Data Analytics for Healthcare Decision Support"
+          ]
+        },
+        {
+          "position_area": "University-level teaching experience",
+          "acceptable_evidence": [
+            "Data Science",
+            "Applied Machine Learning",
+            "Statistics for Computer Science"
+          ]
+        }
+      ],
+      "expected_not_demonstrated_areas": [
+        "Deep Learning",
+        "Computer Vision",
+        "Explainable Artificial Intelligence"
+      ],
+      "constraints": {
+        "evidence_must_come_from_candidate_context": true,
+        "position_areas_must_come_from_position_context": true,
+        "missing_information_is_not_negative_evidence": true,
+        "no_numeric_match_score": true,
+        "no_percentage_match_score": true,
+        "no_categorical_match_rating": true,
+        "no_candidate_ranking": true,
+        "no_recruitment_recommendation": true,
+        "no_eligibility_decision": true
+      }
+    },
+    {
+      "candidate": "candidate_c",
+      "expected_aligned_areas": [
+        {
+          "position_area": "Research experience",
+          "acceptable_evidence": [
+            "Publications",
+            "Smart Energy Management for Renewable Power Networks"
+          ]
+        },
+        {
+          "position_area": "University-level teaching experience",
+          "acceptable_evidence": [
+            "Electrical Power Systems",
+            "Renewable Energy Systems",
+            "Smart Grid Technologies"
+          ]
+        }
+      ],
+      "expected_not_demonstrated_areas": [
+        "Artificial Intelligence",
+        "Machine Learning",
+        "Deep Learning",
+        "Computer Vision",
+        "Explainable Artificial Intelligence"
+      ],
+      "constraints": {
+        "evidence_must_come_from_candidate_context": true,
+        "position_areas_must_come_from_position_context": true,
+        "missing_information_is_not_negative_evidence": true,
+        "no_numeric_match_score": true,
+        "no_percentage_match_score": true,
+        "no_categorical_match_rating": true,
+        "no_candidate_ranking": true,
+        "no_recruitment_recommendation": true,
+        "no_eligibility_decision": true
+      }
+    }
+  ]
+}

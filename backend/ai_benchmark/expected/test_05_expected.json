@@ -1,0 +1,39 @@
+{
+  "test_id": "test_05_grounded_qa",
+  "candidate": "candidate_a",
+  "expected_courses": [
+    {
+      "course_title": "Machine Learning",
+      "institution_name": "University of Edinburgh",
+      "academic_year": "2024-2025",
+      "course_level": "Postgraduate",
+      "teaching_role": "Lecturer"
+    },
+    {
+      "course_title": "Computer Vision",
+      "institution_name": "University of Edinburgh",
+      "academic_year": "2024-2025",
+      "course_level": "Postgraduate",
+      "teaching_role": "Lecturer"
+    },
+    {
+      "course_title": "Introduction to Artificial Intelligence",
+      "institution_name": "University of Edinburgh",
+      "academic_year": "2023-2024",
+      "course_level": "Undergraduate",
+      "teaching_role": "Lecturer"
+    }
+  ],
+  "expected_course_count": 3,
+  "constraints": {
+    "all_courses_must_be_included": true,
+    "unlisted_courses_must_not_be_included": true,
+    "requested_course_details_must_be_correct": true,
+    "missing_details_must_use": "Not provided",
+    "no_inference": true,
+    "no_recruitment_evaluation": true
+  },
+  "known_non_teaching_topics": [
+    "Deep Learning"
+  ]
+}

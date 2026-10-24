@@ -1,0 +1,89 @@
+{
+  "test_id": "test_10_greek_qa",
+  "candidate": "candidate_a_gr",
+  "response_language": "Greek",
+  "expected_core_facts": {
+    "specialization": "Τεχνητή Νοημοσύνη",
+    "research_areas": [
+      "Μηχανική Μάθηση",
+      "Βαθιά Μάθηση",
+      "Υπολογιστική Όραση"
+    ]
+  },
+  "valid_research_evidence": [
+    {
+      "type": "publication",
+      "title": "Machine Learning Methods for Clinical Decision Support",
+      "supports": [
+        "Μηχανική Μάθηση"
+      ]
+    },
+    {
+      "type": "publication",
+      "title": "Explainable Artificial Intelligence in Healthcare",
+      "supports": [
+        "Τεχνητή Νοημοσύνη"
+      ]
+    },
+    {
+      "type": "publication",
+      "title": "Deep Neural Networks for Medical Image Classification",
+      "supports": [
+        "Βαθιά Μάθηση",
+        "Υπολογιστική Όραση"
+      ]
+    },
+    {
+      "type": "publication",
+      "title": "Transfer Learning for Visual Recognition",
+      "supports": [
+        "Μηχανική Μάθηση",
+        "Βαθιά Μάθηση",
+        "Υπολογιστική Όραση"
+      ]
+    },
+    {
+      "type": "publication",
+      "title": "Efficient CNN Architectures for Image Analysis",
+      "supports": [
+        "Βαθιά Μάθηση",
+        "Υπολογιστική Όραση"
+      ]
+    },
+    {
+      "type": "research_project",
+      "title": "Artificial Intelligence for Medical Imaging",
+      "supports": [
+        "Τεχνητή Νοημοσύνη",
+        "Βαθιά Μάθηση",
+        "Υπολογιστική Όραση"
+      ]
+    }
+  ],
+  "constraints": {
+    "min_words": 100,
+    "max_words": 150,
+    "maximum_research_evidence_items": 3,
+    "must_answer_in_greek": true,
+    "proper_names_may_remain_in_original_language": true,
+    "publication_titles_may_remain_in_original_language": true,
+    "organization_names_may_remain_in_original_language": true,
+    "must_identify_main_research_areas": true,
+    "research_evidence_must_exist_in_candidate_context": true,
+    "no_external_knowledge": true,
+    "no_unsupported_metrics": true,
+    "no_candidate_ranking": true,
+    "no_recruitment_recommendation": true,
+    "no_selection_decision": true
+  },
+  "forbidden_claim_categories": [
+    "h_index",
+    "citation_metrics",
+    "phd_thesis_title",
+    "awards",
+    "unprovided_qualifications",
+    "candidate_ranking",
+    "recruitment_recommendation",
+    "selection_decision"
+  ]
+}

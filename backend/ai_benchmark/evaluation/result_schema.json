@@ -1,0 +1,139 @@
+{
+  "schema_version": "1.0",
+  "required_fields": [
+    "run_id",
+    "timestamp",
+    "provider",
+    "model",
+    "test_id",
+    "case_id",
+    "run_number",
+    "input",
+    "output",
+    "execution",
+    "evaluation"
+  ],
+  "field_definitions": {
+    "run_id": {
+      "type": "string",
+      "description": "Unique identifier for the benchmark run."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "ISO-8601",
+      "description": "UTC timestamp indicating when the model call started."
+    },
+    "provider": {
+      "type": "string",
+      "allowed_values": [
+        "ollama",
+        "huggingface",
+        "gemini",
+        "mock"
+      ]
+    },
+    "model": {
+      "type": "string",
+      "description": "Exact model identifier used for the benchmark run."
+    },
+    "test_id": {
+      "type": "string",
+      "description": "Benchmark test identifier."
+    },
+    "case_id": {
+      "type": "string",
+      "description": "Identifier of the benchmark case, such as candidate_a or candidate_a_gr."
+    },
+    "run_number": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Repeated run number for the same test case."
+    },
+    "input": {
+      "type": "object",
+      "required_fields": [
+        "prompt_file",
+        "dataset_files",
+        "expected_file",
+        "rendered_prompt"
+      ],
+      "fields": {
+        "prompt_file": {
+          "type": "string"
+        },
+        "dataset_files": {
+          "type": "array",
+          "items": "string"
+        },
+        "expected_file": {
+          "type": "string"
+        },
+        "rendered_prompt": {
+          "type": "string"
+        }
+      }
+    },
+    "output": {
+      "type": "object",
+      "required_fields": [
+        "raw_response",
+        "parsed_response"
+      ],
+      "fields": {
+        "raw_response": {
+          "type": "string"
+        },
+        "parsed_response": {
+          "type": [
+            "object",
+            "array",
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "execution": {
+      "type": "object",
+      "required_fields": [
+        "latency_ms",
+        "error",
+        "error_message"
+      ],
+      "fields": {
+        "latency_ms": {
+          "type": "number",
+          "minimum": 0
+        },
+        "error": {
+          "type": "boolean"
+        },
+        "error_message": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "evaluation": {
+      "type": "object",
+      "required_fields": [
+        "automatic_metrics",
+        "qualitative_metrics",
+        "safety_metrics"
+      ],
+      "fields": {
+        "automatic_metrics": {
+          "type": "object"
+        },
+        "qualitative_metrics": {
+          "type": "object"
+        },
+        "safety_metrics": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+You are given structured information about an academic candidate.
+
+Answer the question using only the information explicitly provided in the candidate context.
+
+Rules:
+1. Use only information explicitly available in the provided context.
+2. Do not infer, assume, reconstruct, or invent missing information.
+3. Do not use external knowledge.
+4. If the requested information is not explicitly available in the provided context, respond with exactly:
+Information not available in the provided context.
+5. Do not provide explanations, qualifications, guesses, or additional commentary.
+6. Return only the answer to the question.
+
+QUESTION:
+What is the title of the candidate's PhD thesis?
+
+CANDIDATE CONTEXT:
+{{candidate}}

@@ -1,0 +1,124 @@
+{
+  "test_id": "test_11_greek_json",
+  "candidate": "candidate_a_gr",
+  "expected_schema": {
+    "required_top_level_fields": [
+      "ονοματεπώνυμο",
+      "ειδίκευση",
+      "ερευνητικοί_τομείς",
+      "ανώτατος_τίτλος_σπουδών",
+      "δημοσιεύσεις",
+      "ερευνητικά_έργα",
+      "διδακτική_εμπειρία"
+    ],
+    "additional_fields_allowed": false
+  },
+  "expected": {
+    "ονοματεπώνυμο": "Alex Morgan",
+    "ειδίκευση": "Τεχνητή Νοημοσύνη",
+    "ερευνητικοί_τομείς": [
+      "Μηχανική Μάθηση",
+      "Βαθιά Μάθηση",
+      "Υπολογιστική Όραση"
+    ],
+    "ανώτατος_τίτλος_σπουδών": {
+      "τύπος": "Διδακτορικό",
+      "τίτλος": "Computer Science",
+      "γνωστικό_αντικείμενο": "Computer Science",
+      "ίδρυμα": "University of Edinburgh",
+      "χώρα": "Ηνωμένο Βασίλειο",
+      "έτος_ολοκλήρωσης": 2021
+    },
+    "δημοσιεύσεις": [
+      {
+        "τίτλος": "Machine Learning Methods for Clinical Decision Support",
+        "έτος": 2024
+      },
+      {
+        "τίτλος": "Explainable Artificial Intelligence in Healthcare",
+        "έτος": 2023
+      },
+      {
+        "τίτλος": "Deep Neural Networks for Medical Image Classification",
+        "έτος": 2022
+      },
+      {
+        "τίτλος": "Transfer Learning for Visual Recognition",
+        "έτος": 2021
+      },
+      {
+        "τίτλος": "Efficient CNN Architectures for Image Analysis",
+        "έτος": 2020
+      }
+    ],
+    "ερευνητικά_έργα": [
+      {
+        "τίτλος": "Artificial Intelligence for Medical Imaging",
+        "ακρωνύμιο": "AI-MED",
+        "ρόλος": "Ερευνητής"
+      }
+    ],
+    "διδακτική_εμπειρία": [
+      {
+        "μάθημα": "Μηχανική Μάθηση",
+        "ακαδημαϊκό_έτος": "2024-2025",
+        "επίπεδο": "Μεταπτυχιακό",
+        "ρόλος": "Διδάσκων"
+      },
+      {
+        "μάθημα": "Υπολογιστική Όραση",
+        "ακαδημαϊκό_έτος": "2024-2025",
+        "επίπεδο": "Μεταπτυχιακό",
+        "ρόλος": "Διδάσκων"
+      },
+      {
+        "μάθημα": "Εισαγωγή στην Τεχνητή Νοημοσύνη",
+        "ακαδημαϊκό_έτος": "2023-2024",
+        "επίπεδο": "Προπτυχιακό",
+        "ρόλος": "Διδάσκων"
+      }
+    ]
+  },
+  "nested_schema": {
+    "ανώτατος_τίτλος_σπουδών": [
+      "τύπος",
+      "τίτλος",
+      "γνωστικό_αντικείμενο",
+      "ίδρυμα",
+      "χώρα",
+      "έτος_ολοκλήρωσης"
+    ],
+    "δημοσίευση": [
+      "τίτλος",
+      "έτος"
+    ],
+    "ερευνητικό_έργο": [
+      "τίτλος",
+      "ακρωνύμιο",
+      "ρόλος"
+    ],
+    "διδακτική_εμπειρία": [
+      "μάθημα",
+      "ακαδημαϊκό_έτος",
+      "επίπεδο",
+      "ρόλος"
+    ]
+  },
+  "constraints": {
+    "strict_json": true,
+    "highest_degree_only": true,
+    "all_publications_required": true,
+    "all_research_projects_required": true,
+    "all_teaching_records_required": true,
+    "exact_keys_required": true,
+    "additional_fields_allowed": false,
+    "preserve_proper_names": true,
+    "use_greek_values_where_source_is_greek": true,
+    "missing_scalar_value": null,
+    "missing_list_value": [],
+    "no_external_knowledge": true,
+    "no_inference": true,
+    "no_unsupported_metrics": true,
+    "no_recruitment_decision": true
+  }
+}

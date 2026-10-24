@@ -1,0 +1,132 @@
+{
+  "candidate": {
+    "name": "Alex Morgan",
+    "specialization": "Artificial Intelligence",
+    "research_areas": [
+      "Machine Learning",
+      "Deep Learning",
+      "Computer Vision"
+    ],
+    "biography": "Computer scientist specializing in Artificial Intelligence, Machine Learning, Deep Learning and Computer Vision, with research and university-level teaching experience.",
+    "degrees": [
+      {
+        "degree_type": "PhD",
+        "title": "PhD in Computer Science",
+        "field_of_study": "Computer Science",
+        "institution_name": "University of Edinburgh",
+        "country": "United Kingdom",
+        "start_year": 2017,
+        "end_year": 2021
+      },
+      {
+        "degree_type": "Master",
+        "title": "MSc in Artificial Intelligence",
+        "field_of_study": "Artificial Intelligence",
+        "institution_name": "University of Amsterdam",
+        "country": "Netherlands",
+        "start_year": 2015,
+        "end_year": 2017
+      },
+      {
+        "degree_type": "Bachelor",
+        "title": "BSc in Computer Science",
+        "field_of_study": "Computer Science",
+        "institution_name": "University of Athens",
+        "country": "Greece",
+        "start_year": 2011,
+        "end_year": 2015
+      }
+    ],
+    "publications": [
+      {
+        "title": "Machine Learning Methods for Clinical Decision Support",
+        "publication_year": 2024,
+        "publication_type": "journal_article",
+        "journal_name": "Journal of Intelligent Clinical Systems",
+        "abstract": "An analysis of machine learning methods for supporting clinical decision-making using medical data."
+      },
+      {
+        "title": "Explainable Artificial Intelligence in Healthcare",
+        "publication_year": 2023,
+        "publication_type": "journal_article",
+        "journal_name": "Artificial Intelligence in Healthcare",
+        "abstract": "A study of explainable artificial intelligence techniques for improving the interpretability of AI systems in healthcare."
+      },
+      {
+        "title": "Deep Neural Networks for Medical Image Classification",
+        "publication_year": 2022,
+        "publication_type": "journal_article",
+        "journal_name": "Journal of Medical Artificial Intelligence",
+        "abstract": "A study of deep neural network methods for automated classification of medical images."
+      },
+      {
+        "title": "Transfer Learning for Visual Recognition",
+        "publication_year": 2021,
+        "publication_type": "journal_article",
+        "journal_name": "International Journal of Computer Vision Research",
+        "abstract": "An investigation of transfer learning techniques for visual recognition tasks."
+      },
+      {
+        "title": "Efficient CNN Architectures for Image Analysis",
+        "publication_year": 2020,
+        "publication_type": "conference_paper",
+        "conference_name": "International Conference on Computer Vision Systems",
+        "abstract": "An evaluation of efficient convolutional neural network architectures for image analysis applications."
+      }
+    ],
+    "research_projects": [
+      {
+        "title": "Artificial Intelligence for Medical Imaging",
+        "acronym": "AI-MED",
+        "funding_program": "Research Programme",
+        "funding_organization": "European Research Consortium",
+        "role": "Researcher",
+        "status": "COMPLETED",
+        "start_date": "2021-01-01",
+        "end_date": "2024-12-31",
+        "keywords": [
+          "Artificial Intelligence",
+          "Medical Imaging",
+          "Deep Learning",
+          "Computer Vision"
+        ],
+        "description": "Research project investigating artificial intelligence and deep learning methods for medical image analysis."
+      }
+    ],
+    "teaching_experience": [
+      {
+        "course_title": "Machine Learning",
+        "institution_name": "University of Edinburgh",
+        "department_name": "School of Informatics",
+        "academic_year": "2024-2025",
+        "semester": "Fall",
+        "course_level": "Postgraduate",
+        "teaching_role": "Lecturer",
+        "hours_per_week": 4,
+        "description": "Teaching machine learning methods, supervised learning, neural networks and model evaluation."
+      },
+      {
+        "course_title": "Computer Vision",
+        "institution_name": "University of Edinburgh",
+        "department_name": "School of Informatics",
+        "academic_year": "2024-2025",
+        "semester": "Spring",
+        "course_level": "Postgraduate",
+        "teaching_role": "Lecturer",
+        "hours_per_week": 3,
+        "description": "Teaching computer vision, image analysis and deep learning techniques for visual recognition."
+      },
+      {
+        "course_title": "Introduction to Artificial Intelligence",
+        "institution_name": "University of Edinburgh",
+        "department_name": "School of Informatics",
+        "academic_year": "2023-2024",
+        "semester": "Spring",
+        "course_level": "Undergraduate",
+        "teaching_role": "Lecturer",
+        "hours_per_week": 4,
+        "description": "Teaching fundamental concepts and methods in artificial intelligence."
+      }
+    ]
+  }
+}

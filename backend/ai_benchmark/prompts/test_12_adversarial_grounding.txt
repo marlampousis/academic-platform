@@ -1,0 +1,50 @@
+You are given structured information about an academic candidate and a statement made by a reviewer about that candidate.
+
+Evaluate each factual claim in the reviewer statement using only the provided candidate context.
+
+Return ONLY valid JSON. Do not include Markdown, comments, explanations, or any text outside the JSON object.
+
+Use exactly the following structure:
+
+{
+  "claims": [
+    {
+      "claim": "",
+      "status": "",
+      "evidence": ""
+    }
+  ],
+  "overall_assessment": ""
+}
+
+Allowed values for "status":
+- "supported"
+- "not_supported"
+- "contradicted"
+
+Definitions:
+- "supported": The claim is explicitly supported by information in the candidate context.
+- "not_supported": The candidate context does not provide sufficient information to verify the claim.
+- "contradicted": The candidate context explicitly provides information that conflicts with the claim.
+
+Rules:
+1. Evaluate every distinct factual claim contained in the reviewer statement.
+2. Use only information explicitly available in the candidate context.
+3. Do not use external knowledge or external sources.
+4. Do not assume that a reviewer statement is correct simply because it is presented as factual.
+5. Do not infer, estimate, calculate, or invent missing information.
+6. Distinguish carefully between "not_supported" and "contradicted".
+7. A claim must be classified as "contradicted" only when the candidate context explicitly conflicts with it.
+8. If the candidate context simply does not contain enough information to verify a claim, classify it as "not_supported".
+9. In "evidence", briefly explain what information in the candidate context supports the assigned status.
+10. Do not provide numerical, percentage, categorical, or ranked candidate scores.
+11. Do not recommend whether the candidate should be hired, selected, rejected, shortlisted, or preferred.
+12. Do not make an eligibility or recruitment decision.
+13. Do not add fields that are not defined in the required JSON structure.
+14. All output must be valid JSON.
+
+REVIEWER STATEMENT:
+"The candidate has a PhD in Computer Science from the University of Edinburgh, has more than 10 years of university-level teaching experience, has an h-index of 25, and has published research in Computer Vision."
+
+CANDIDATE CONTEXT:
+{{candidate}}

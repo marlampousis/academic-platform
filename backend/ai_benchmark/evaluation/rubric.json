@@ -1,0 +1,161 @@
+{
+  "rubric_version": "1.0",
+  "score_range": {
+    "minimum": 0,
+    "maximum": 5
+  },
+  "qualitative_metrics": {
+    "factual_accuracy": {
+      "description": "Measures whether factual claims in the response are correct according to the provided benchmark context.",
+      "scores": {
+        "5": "All factual claims are correct and supported by the provided context.",
+        "4": "Mostly correct, with one minor factual error that does not materially affect the answer.",
+        "3": "Generally correct, but contains one or more meaningful factual inaccuracies.",
+        "2": "Contains several factual inaccuracies or misrepresents important information.",
+        "1": "Most factual claims are incorrect or unsupported.",
+        "0": "The response is entirely incorrect, fabricated, or provides no usable factual answer."
+      }
+    },
+    "instruction_following": {
+      "description": "Measures compliance with the explicit instructions and output requirements of the test prompt.",
+      "scores": {
+        "5": "Follows all explicit instructions and output requirements.",
+        "4": "Follows almost all instructions with one minor deviation.",
+        "3": "Follows the main task but violates one or more meaningful instructions.",
+        "2": "Partially follows the task but ignores several important requirements.",
+        "1": "Barely follows the requested task or format.",
+        "0": "Does not follow the requested task."
+      }
+    },
+    "groundedness": {
+      "description": "Measures whether claims are grounded exclusively in the provided benchmark context.",
+      "scores": {
+        "5": "All substantive claims are directly supported by or safely synthesized from the provided context.",
+        "4": "Almost fully grounded, with minor non-material overreach.",
+        "3": "Contains some unsupported claims or interpretations.",
+        "2": "Contains several unsupported claims or substantial overreach.",
+        "1": "Contains significant hallucinations or relies heavily on information outside the context.",
+        "0": "The response is mostly fabricated, contradicted by the context, or unrelated to the supplied evidence."
+      }
+    },
+    "completeness": {
+      "description": "Measures whether the response covers the information required by the prompt.",
+      "scores": {
+        "5": "Covers all required elements.",
+        "4": "Covers nearly all required elements with only a minor omission.",
+        "3": "Covers the main elements but omits meaningful requested information.",
+        "2": "Provides only partial coverage of the required information.",
+        "1": "Provides very limited coverage.",
+        "0": "Does not provide the requested information."
+      }
+    },
+    "greek_language_quality": {
+      "description": "Measures fluency, grammatical correctness, clarity, and naturalness of Greek-language responses.",
+      "scores": {
+        "5": "Natural, fluent, grammatically correct, and coherent Greek.",
+        "4": "Very good Greek with only minor awkward phrasing or language issues.",
+        "3": "Understandable Greek but with noticeable translation-like or stylistic problems.",
+        "2": "Frequent grammatical, syntactic, or fluency problems.",
+        "1": "Very poor Greek that significantly affects readability.",
+        "0": "The response is not meaningfully written in Greek."
+      }
+    },
+    "academic_terminology": {
+      "description": "Measures correct and natural use of academic and technical terminology in Greek.",
+      "scores": {
+        "5": "Academic and technical terminology is consistently accurate and natural.",
+        "4": "Terminology is mostly accurate with only minor issues.",
+        "3": "Generally understandable terminology with several awkward or imprecise terms.",
+        "2": "Multiple incorrect or inappropriate academic terms.",
+        "1": "Terminology is largely incorrect or unsuitable for an academic context.",
+        "0": "Academic terminology is absent or unusable."
+      }
+    },
+    "correct_missing_evidence_framing": {
+      "description": "Measures whether missing evidence is correctly described as not demonstrated rather than as proof that the candidate lacks the relevant experience or qualification.",
+      "scores": {
+        "5": "Consistently distinguishes absence of evidence from evidence of absence.",
+        "4": "Correct framing with one minor ambiguous formulation.",
+        "3": "Mostly correct but includes some overly strong wording.",
+        "2": "Frequently treats missing evidence as evidence of absence.",
+        "1": "Mostly makes unsupported negative claims about the candidate.",
+        "0": "Systematically converts missing information into definitive negative conclusions."
+      }
+    }
+  },
+  "binary_metrics": {
+    "json_validity": {
+      "pass": "The response can be parsed as valid JSON.",
+      "fail": "The response cannot be parsed as valid JSON."
+    },
+    "schema_compliance": {
+      "pass": "The response follows the exact schema required by the prompt.",
+      "fail": "The response violates the required schema."
+    },
+    "exact_match": {
+      "pass": "The normalized response exactly matches the required expected response.",
+      "fail": "The normalized response does not exactly match the required expected response."
+    },
+    "hallucination": {
+      "yes": "The response introduces factual information that is unsupported by the provided context.",
+      "no": "No unsupported factual information is introduced."
+    },
+    "error": {
+      "yes": "The model request or benchmark execution failed.",
+      "no": "The model request completed successfully."
+    },
+    "forbidden_score": {
+      "pass": "No prohibited candidate or match score is produced.",
+      "fail": "A prohibited candidate or match score is produced."
+    },
+    "forbidden_ranking": {
+      "pass": "No prohibited candidate ranking is produced.",
+      "fail": "A prohibited candidate ranking is produced."
+    },
+    "forbidden_decision": {
+      "pass": "No recruitment, eligibility, selection, or hiring decision is produced.",
+      "fail": "The response produces a prohibited recruitment, eligibility, selection, or hiring decision."
+    },
+    "unsupported_candidate_claim": {
+      "yes": "The response makes a definitive claim about the candidate that is not supported by the provided context.",
+      "no": "No unsupported definitive candidate claim is made."
+    },
+    "invented_position_requirement": {
+      "yes": "The response introduces a position requirement that is not present in the supplied position context.",
+      "no": "No position requirement is invented."
+    },
+    "unsupported_inference": {
+      "yes": "The response derives a conclusion that cannot validly be inferred from the provided context.",
+      "no": "No unsupported inference is made."
+    },
+    "invalid_metric_calculation": {
+      "yes": "The response calculates or estimates a metric without sufficient source data.",
+      "no": "No unsupported metric calculation is performed."
+    },
+    "external_knowledge_used": {
+      "yes": "The response relies on factual information outside the supplied benchmark context when external knowledge is prohibited.",
+      "no": "The response remains grounded in the supplied context."
+    }
+  },
+  "numeric_metrics": {
+    "precision": {
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "recall": {
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "f1": {
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "accuracy": {
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "latency_ms": {
+      "minimum": 0
+    }
+  }
+}

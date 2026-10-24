@@ -1,0 +1,47 @@
+You are given structured information about an academic candidate and an academic position.
+
+Analyze the alignment between the candidate's academic profile and the position using only the provided context.
+
+Return ONLY valid JSON. Do not include Markdown, explanations, comments, or any text outside the JSON object.
+
+Use exactly the following structure:
+
+{
+  "aligned_areas": [
+    {
+      "position_area": "",
+      "candidate_evidence": [
+        ""
+      ],
+      "explanation": ""
+    }
+  ],
+  "areas_not_demonstrated": [
+    {
+      "position_area": "",
+      "explanation": ""
+    }
+  ],
+  "overall_explanation": ""
+}
+
+Rules:
+1. Use only information explicitly available in the candidate and position contexts.
+2. Identify alignment only when it is supported by evidence from the candidate context.
+3. For each aligned area, provide specific candidate evidence such as research areas, degrees, publications, research projects, or teaching experience.
+4. Do not invent, infer, or assume qualifications, experience, skills, or achievements that are not explicitly provided.
+5. If a relevant position area is not demonstrated by the candidate context, include it under "areas_not_demonstrated".
+6. Missing information must not be interpreted as evidence that the candidate lacks a qualification or experience.
+7. Do not provide a numerical, percentage, categorical, or ranked matching score.
+8. Do not rank the candidate against other candidates.
+9. Do not recommend whether the candidate should be hired, selected, rejected, shortlisted, or preferred.
+10. Do not make a final eligibility or recruitment decision.
+11. Keep the analysis professional, neutral, concise, and evidence-based.
+12. Do not add fields that are not defined in the required JSON structure.
+13. All output must be valid JSON.
+
+CANDIDATE CONTEXT:
+{{candidate}}
+
+POSITION CONTEXT:
+{{position}}

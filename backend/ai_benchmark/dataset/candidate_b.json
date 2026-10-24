@@ -1,0 +1,125 @@
+{
+  "candidate": {
+    "name": "Sophia Bennett",
+    "specialization": "Data Science",
+    "research_areas": [
+      "Data Analytics",
+      "Statistical Learning",
+      "Natural Language Processing"
+    ],
+    "biography": "Data scientist specializing in statistical learning, data analytics and natural language processing, with research experience in computational methods and university-level teaching.",
+    "degrees": [
+      {
+        "degree_type": "PhD",
+        "title": "PhD in Computational Statistics",
+        "field_of_study": "Computational Statistics",
+        "institution_name": "University of Warwick",
+        "country": "United Kingdom",
+        "start_year": 2016,
+        "end_year": 2020
+      },
+      {
+        "degree_type": "Master",
+        "title": "MSc in Data Science",
+        "field_of_study": "Data Science",
+        "institution_name": "University of Glasgow",
+        "country": "United Kingdom",
+        "start_year": 2014,
+        "end_year": 2016
+      },
+      {
+        "degree_type": "Bachelor",
+        "title": "BSc in Mathematics",
+        "field_of_study": "Mathematics",
+        "institution_name": "University of Manchester",
+        "country": "United Kingdom",
+        "start_year": 2010,
+        "end_year": 2014
+      }
+    ],
+    "publications": [
+      {
+        "title": "Natural Language Processing for Scientific Documents",
+        "publication_year": 2023,
+        "publication_type": "conference_paper",
+        "conference_name": "International Conference on Data Science",
+        "abstract": "An analysis of natural language processing techniques for extracting and organizing information from scientific documents."
+      },
+      {
+        "title": "Predictive Analytics for Healthcare Applications",
+        "publication_year": 2022,
+        "publication_type": "journal_article",
+        "journal_name": "Journal of Health Data Analytics",
+        "abstract": "An investigation of predictive data analytics methods for supporting healthcare applications and decision-making."
+      },
+      {
+        "title": "Statistical Learning for High-Dimensional Data",
+        "publication_year": 2021,
+        "publication_type": "journal_article",
+        "journal_name": "Journal of Computational Statistics",
+        "abstract": "A study of statistical learning techniques for modeling and analyzing high-dimensional datasets."
+      },
+      {
+        "title": "Bayesian Methods for Data Classification",
+        "publication_year": 2020,
+        "publication_type": "journal_article",
+        "journal_name": "Computational Statistics and Data Analysis",
+        "abstract": "A study of Bayesian statistical methods for classification problems in complex datasets."
+      }
+    ],
+    "research_projects": [
+      {
+        "title": "Data Analytics for Healthcare Decision Support",
+        "acronym": "DATA-HEALTH",
+        "funding_program": "Research Programme",
+        "funding_organization": "European Research Consortium",
+        "role": "Researcher",
+        "status": "COMPLETED",
+        "start_date": "2020-01-01",
+        "end_date": "2023-12-31",
+        "keywords": [
+          "Data Science",
+          "Predictive Analytics",
+          "Statistical Learning",
+          "Healthcare"
+        ],
+        "description": "Research project investigating data analytics and statistical learning methods for healthcare decision support."
+      }
+    ],
+    "teaching_experience": [
+      {
+        "course_title": "Data Science",
+        "institution_name": "University of Warwick",
+        "department_name": "Department of Statistics",
+        "academic_year": "2024-2025",
+        "semester": "Fall",
+        "course_level": "Postgraduate",
+        "teaching_role": "Lecturer",
+        "hours_per_week": 4,
+        "description": "Teaching data analysis, predictive modeling and computational methods for data science."
+      },
+      {
+        "course_title": "Applied Machine Learning",
+        "institution_name": "University of Warwick",
+        "department_name": "Department of Statistics",
+        "academic_year": "2024-2025",
+        "semester": "Spring",
+        "course_level": "Postgraduate",
+        "teaching_role": "Lecturer",
+        "hours_per_week": 3,
+        "description": "Teaching applied machine learning methods for classification, regression and predictive analytics."
+      },
+      {
+        "course_title": "Statistics for Computer Science",
+        "institution_name": "University of Warwick",
+        "department_name": "Department of Statistics",
+        "academic_year": "2023-2024",
+        "semester": "Spring",
+        "course_level": "Undergraduate",
+        "teaching_role": "Lecturer",
+        "hours_per_week": 3,
+        "description": "Teaching probability, statistical inference and statistical methods for computer science applications."
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "test_id": "test_06_missing_thesis",
+  "candidate": "candidate_a",
+  "question": "What is the title of the candidate's PhD thesis?",
+  "information_available": false,
+  "expected_response": "Information not available in the provided context.",
+  "constraints": {
+    "exact_response_required": true,
+    "no_external_knowledge": true,
+    "no_inference": true,
+    "no_guessing": true,
+    "no_additional_commentary": true
+  }
+}

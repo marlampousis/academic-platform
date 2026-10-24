@@ -1,0 +1,20 @@
+You are given structured information about an academic candidate.
+
+Answer the question using only the information explicitly provided in the candidate context.
+
+Rules:
+1. Use only information explicitly available in the provided context.
+2. Do not infer, assume, or invent information.
+3. Include all teaching courses explicitly listed in the candidate context.
+4. Do not include courses that are not explicitly listed.
+5. For each course, provide the course title, institution, academic year, course level, and teaching role.
+6. If any requested detail is not available in the context, state "Not provided" for that detail.
+7. Do not evaluate the candidate or make any recruitment-related recommendation.
+8. Keep the answer concise and factual.
+9. Return only the answer to the question, without additional commentary.
+
+QUESTION:
+Which university-level courses has the candidate taught?
+
+CANDIDATE CONTEXT:
+{{candidate}}

@@ -1,0 +1,44 @@
+You are given structured information about an academic candidate and an academic position.
+
+Identify relevant areas, qualifications, or experience described in the academic position that are not demonstrated by the information available in the candidate context.
+
+Use only the provided candidate and position contexts.
+
+Return ONLY valid JSON. Do not include Markdown, comments, explanations, or any text outside the JSON object.
+
+Use exactly the following structure:
+
+{
+  "potential_gaps": [
+    {
+      "position_requirement": "",
+      "candidate_evidence_status": "not_demonstrated",
+      "explanation": ""
+    }
+  ],
+  "limitations": ""
+}
+
+Rules:
+1. Use only information explicitly available in the candidate and position contexts.
+2. Identify a potential gap only when an area, qualification, or experience relevant to the position is not demonstrated by the provided candidate context.
+3. Do not claim that the candidate lacks a qualification, skill, knowledge, or experience simply because it is not present in the provided context.
+4. Use the phrase "not demonstrated in the provided context" or equivalent wording when describing missing evidence.
+5. Do not infer, assume, or invent information about the candidate.
+6. Do not treat unrelated academic achievements as evidence for a position requirement unless the provided information establishes a clear connection.
+7. Do not create position requirements that are not present in the provided position context.
+8. Do not provide a numerical, percentage, categorical, or ranked matching score.
+9. Do not rank the candidate against other candidates.
+10. Do not recommend whether the candidate should be hired, selected, rejected, shortlisted, or preferred.
+11. Do not make an eligibility or recruitment decision.
+12. If all relevant position areas are demonstrated by the candidate context, return an empty "potential_gaps" array.
+13. Set "candidate_evidence_status" exactly to "not_demonstrated" for every returned potential gap.
+14. In "limitations", explicitly state that absence of evidence in the provided context does not establish that the candidate lacks the qualification or experience.
+15. Do not add fields that are not defined in the required JSON structure.
+16. All output must be valid JSON.
+
+CANDIDATE CONTEXT:
+{{candidate}}
+
+POSITION CONTEXT:
+{{position}}

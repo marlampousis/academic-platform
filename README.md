@@ -57,12 +57,23 @@ This project aims to modernize academic qualification management systems such as
 
 ### Sprint 2 - Academic Institutions
 
-- [] Institution Model
-- [] Institutions API
-- [] Greek Universities Dataset
-- [] Institution Seeder
-- [] Department Model
-- [] Department API
+- [x] Institution Model
+- [x] Institutions API
+- [x] Greek Universities Dataset
+- [x] Institution Seeder
+- [x] Department Model
+- [x] Department API
+
+---
+
+### Sprint 3 - Academic CV & Research Portfolio
+
+- [x] Academic Profile Model
+- [x] Profile API
+- [x] Degrees Module
+- [x] Publications Module
+- [x] Research Projects Module
+- [x] Teaching Experience Module
 
 ## Author
 

@@ -1,0 +1,106 @@
+{
+  "test_id": "test_09_potential_gaps",
+  "position": "position_a",
+  "expected_schema": {
+    "required_top_level_fields": [
+      "potential_gaps",
+      "limitations"
+    ],
+    "potential_gap_required_fields": [
+      "position_requirement",
+      "candidate_evidence_status",
+      "explanation"
+    ],
+    "allowed_evidence_status_values": [
+      "not_demonstrated"
+    ],
+    "additional_fields_allowed": false
+  },
+  "cases": [
+    {
+      "candidate": "candidate_a",
+      "expected_potential_gaps": [],
+      "constraints": {
+        "only_position_requirements_may_be_used": true,
+        "only_missing_evidence_may_be_reported": true,
+        "required_status": "not_demonstrated",
+        "absence_of_evidence_is_not_evidence_of_absence": true,
+        "limitations_must_state_evidence_boundary": true,
+        "no_unsupported_candidate_claims": true,
+        "no_invented_position_requirements": true,
+        "no_numeric_match_score": true,
+        "no_candidate_ranking": true,
+        "no_recruitment_recommendation": true,
+        "no_eligibility_decision": true
+      }
+    },
+    {
+      "candidate": "candidate_b",
+      "expected_potential_gaps": [
+        {
+          "position_requirement": "Deep Learning",
+          "candidate_evidence_status": "not_demonstrated"
+        },
+        {
+          "position_requirement": "Computer Vision",
+          "candidate_evidence_status": "not_demonstrated"
+        },
+        {
+          "position_requirement": "Explainable Artificial Intelligence",
+          "candidate_evidence_status": "not_demonstrated"
+        }
+      ],
+      "constraints": {
+        "only_position_requirements_may_be_used": true,
+        "only_missing_evidence_may_be_reported": true,
+        "required_status": "not_demonstrated",
+        "absence_of_evidence_is_not_evidence_of_absence": true,
+        "limitations_must_state_evidence_boundary": true,
+        "no_unsupported_candidate_claims": true,
+        "no_invented_position_requirements": true,
+        "no_numeric_match_score": true,
+        "no_candidate_ranking": true,
+        "no_recruitment_recommendation": true,
+        "no_eligibility_decision": true
+      }
+    },
+    {
+      "candidate": "candidate_c",
+      "expected_potential_gaps": [
+        {
+          "position_requirement": "Artificial Intelligence",
+          "candidate_evidence_status": "not_demonstrated"
+        },
+        {
+          "position_requirement": "Machine Learning",
+          "candidate_evidence_status": "not_demonstrated"
+        },
+        {
+          "position_requirement": "Deep Learning",
+          "candidate_evidence_status": "not_demonstrated"
+        },
+        {
+          "position_requirement": "Computer Vision",
+          "candidate_evidence_status": "not_demonstrated"
+        },
+        {
+          "position_requirement": "Explainable Artificial Intelligence",
+          "candidate_evidence_status": "not_demonstrated"
+        }
+      ],
+      "constraints": {
+        "only_position_requirements_may_be_used": true,
+        "only_missing_evidence_may_be_reported": true,
+        "required_status": "not_demonstrated",
+        "absence_of_evidence_is_not_evidence_of_absence": true,
+        "limitations_must_state_evidence_boundary": true,
+        "no_unsupported_candidate_claims": true,
+        "no_invented_position_requirements": true,
+        "no_numeric_match_score": true,
+        "no_candidate_ranking": true,
+        "no_recruitment_recommendation": true,
+        "no_eligibility_decision": true
+      }
+    }
+  ]
+}

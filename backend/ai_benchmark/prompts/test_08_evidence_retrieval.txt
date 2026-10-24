@@ -1,0 +1,43 @@
+You are given structured information about an academic candidate and an academic position.
+
+Identify up to three publications from the candidate's provided publication record that are directly relevant to the academic position.
+
+Use only the information explicitly provided in the candidate and position contexts.
+
+Return ONLY valid JSON. Do not include Markdown, comments, explanations, or any text outside the JSON object.
+
+Use exactly the following structure:
+
+{
+  "relevant_publications": [
+    {
+      "title": "",
+      "publication_year": 0,
+      "relevant_position_areas": [],
+      "evidence": ""
+    }
+  ]
+}
+
+Rules:
+1. Select a maximum of three publications.
+2. Select only publications explicitly present in the candidate context.
+3. Base relevance only on the publication title, abstract, and the provided position context.
+4. Prioritize publications with the clearest direct relevance to the position's stated research areas and field of study.
+5. The publication title and publication year must exactly match the candidate context.
+6. In "relevant_position_areas", include only areas explicitly stated or clearly represented in the position context.
+7. In "evidence", briefly explain why the publication is relevant using only information available in the publication and position contexts.
+8. Do not invent publication details, methods, results, citations, impact, venues, or research topics.
+9. Do not assume that a publication is relevant merely because it belongs to a broadly related discipline.
+10. Do not provide a numerical, percentage, categorical, or ranked relevance score.
+11. Do not rank or compare the candidate against other candidates.
+12. Do not make any hiring, selection, eligibility, or recruitment recommendation.
+13. If no publication has direct relevance to the position, return an empty "relevant_publications" array.
+14. Do not add fields that are not defined in the required JSON structure.
+15. All output must be valid JSON.
+
+CANDIDATE CONTEXT:
+{{candidate}}
+
+POSITION CONTEXT:
+{{position}}

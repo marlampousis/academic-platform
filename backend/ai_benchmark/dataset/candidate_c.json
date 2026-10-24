@@ -1,0 +1,178 @@
+{
+  "profile": {
+    "id": 4,
+    "department_id": 42,
+    "specialization": "Renewable Energy Systems",
+    "research_areas": "Renewable Energy, Power Systems, Smart Grids",
+    "biography": "Electrical engineer specializing in renewable energy systems, power systems and smart grids, with research experience in sustainable energy technologies and university-level teaching.",
+    "user_id": 7,
+    "institution_id": 2,
+    "academic_rank_id": 3,
+    "orcid_id": null
+  },
+  "metrics": {
+    "profile_id": 4,
+    "total_publications": 4,
+    "total_citations": 0,
+    "average_citations": 0,
+    "h_index": 0
+  },
+  "degrees": [
+    {
+      "degree_type": "PhD",
+      "field_of_study": "Electrical Engineering",
+      "country": "United Kingdom",
+      "start_year": 2015,
+      "profile_id": 4,
+      "title": "PhD in Electrical Engineering",
+      "id": 13,
+      "institution_name": "University of Bristol",
+      "end_year": 2019
+    },
+    {
+      "degree_type": "Master",
+      "field_of_study": "Sustainable Energy Systems",
+      "country": "United Kingdom",
+      "start_year": 2013,
+      "profile_id": 4,
+      "title": "MSc in Sustainable Energy Systems",
+      "id": 12,
+      "institution_name": "University of Southampton",
+      "end_year": 2015
+    },
+    {
+      "degree_type": "Bachelor",
+      "field_of_study": "Electrical Engineering",
+      "country": "United Kingdom",
+      "start_year": 2009,
+      "profile_id": 4,
+      "title": "BEng in Electrical Engineering",
+      "id": 11,
+      "institution_name": "University of Leeds",
+      "end_year": 2013
+    }
+  ],
+  "publications": [
+    {
+      "title": "Demand Response Strategies in Modern Power Networks",
+      "publication_year": 2023,
+      "journal_name": "Journal of Electrical Energy Systems",
+      "publisher": "",
+      "openalex_id": "",
+      "id": 23,
+      "profile_id": 4,
+      "abstract": "An analysis of demand response strategies for improving energy efficiency and balancing electricity demand in modern power networks.",
+      "publication_type": "journal_article",
+      "doi": "",
+      "conference_name": "",
+      "citation_count": 0,
+      "orcid_work_id": ""
+    },
+    {
+      "title": "Optimization of Renewable Energy Integration in Power Grids",
+      "publication_year": 2021,
+      "journal_name": "Journal of Renewable Power Systems",
+      "publisher": "",
+      "openalex_id": "",
+      "id": 20,
+      "profile_id": 4,
+      "abstract": "A study of optimization methods for integrating renewable energy sources into modern electrical power grids.",
+      "publication_type": "journal_article",
+      "doi": "",
+      "conference_name": "",
+      "citation_count": 0,
+      "orcid_work_id": ""
+    },
+    {
+      "title": "Optimization of Renewable Energy Integration in Power Grids",
+      "publication_year": 2021,
+      "journal_name": "Journal of Renewable Power Systems",
+      "publisher": "",
+      "openalex_id": "",
+      "id": 21,
+      "profile_id": 4,
+      "abstract": "A study of optimization methods for integrating renewable energy sources into modern electrical power grids.",
+      "publication_type": "journal_article",
+      "doi": "",
+      "conference_name": "",
+      "citation_count": 0,
+      "orcid_work_id": ""
+    },
+    {
+      "title": "Modeling of Photovoltaic Energy Systems",
+      "publication_year": 2020,
+      "journal_name": "",
+      "publisher": "",
+      "openalex_id": "",
+      "id": 22,
+      "profile_id": 4,
+      "abstract": "A computational study of photovoltaic energy system behavior under varying environmental and operational conditions.",
+      "publication_type": "conference_paper",
+      "doi": "",
+      "conference_name": "International Conference on Sustainable Energy Engineering",
+      "citation_count": 0,
+      "orcid_work_id": ""
+    }
+  ],
+  "research_projects": [
+    {
+      "acronym": "SMART-GRID",
+      "title": "Smart Energy Management for Renewable Power Networks",
+      "profile_id": 4,
+      "funding_organization": "European Research Consortium",
+      "status": "COMPLETED",
+      "currency": "EUR",
+      "end_date": "2024-12-31",
+      "project_identifier": "SMART-GRID-2020",
+      "keywords": "Renewable Energy, Power Systems, Smart Grids, Energy Management",
+      "id": 7,
+      "funding_program": "Research Programme",
+      "role": "Researcher",
+      "funding_amount": 0,
+      "start_date": "2020-01-01",
+      "website_url": "",
+      "description": "Research project investigating energy management methods for integrating renewable energy sources into modern electrical power networks."
+    }
+  ],
+  "teaching_experience": [
+    {
+      "course_title": "Electrical Power Systems",
+      "institution_name": "University of Bristol",
+      "course_level": "Undergraduate",
+      "hours_per_week": 4,
+      "profile_id": 4,
+      "id": 15,
+      "department_name": "Department of Electrical and Electronic Engineering",
+      "academic_year": "2024-2025",
+      "semester": "Fall",
+      "teaching_role": "Lecturer",
+      "description": "Teaching electrical power generation, transmission, distribution and power system analysis."
+    },
+    {
+      "course_title": "Renewable Energy Systems",
+      "institution_name": "University of Bristol",
+      "course_level": "Postgraduate",
+      "hours_per_week": 4,
+      "profile_id": 4,
+      "id": 16,
+      "department_name": "Department of Electrical and Electronic Engineering",
+      "academic_year": "2024-2025",
+      "semester": "Spring",
+      "teaching_role": "Lecturer",
+      "description": "Teaching renewable energy technologies, photovoltaic systems, wind energy and grid integration."
+    },
+    {
+      "course_title": "Smart Grid Technologies",
+      "institution_name": "University of Bristol",
+      "course_level": "Postgraduate",
+      "hours_per_week": 3,
+      "profile_id": 4,
+      "id": 17,
+      "department_name": "Department of Electrical and Electronic Engineering",
+      "academic_year": "2023-2024",
+      "semester": "Spring",
+      "teaching_role": "Lecturer",
+      "description": "Teaching smart grid architectures, energy management, distributed generation and modern power network technologies."
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+You are given structured information about an academic candidate.
+
+Answer the question using only the information explicitly provided in the candidate context.
+
+Rules:
+1. Use only information explicitly available in the provided context.
+2. Do not use external knowledge or external sources.
+3. Do not infer, estimate, calculate, or invent citation metrics.
+4. The existence or number of publications alone is not sufficient to determine an h-index.
+5. If the candidate's h-index cannot be determined from the provided context, respond with exactly:
+Cannot be determined from the provided context.
+6. Do not provide explanations, calculations, qualifications, guesses, or additional commentary.
+7. Return only the answer to the question.
+
+QUESTION:
+What is the candidate's h-index?
+
+CANDIDATE CONTEXT:
+{{candidate}}

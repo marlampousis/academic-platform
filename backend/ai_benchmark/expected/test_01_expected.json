@@ -1,0 +1,171 @@
+{
+  "test_id": "test_01_extraction",
+  "cases": [
+    {
+      "candidate": "candidate_a",
+      "expected": {
+        "name": "Alex Morgan",
+        "specialization": "Artificial Intelligence",
+        "research_areas": [
+          "Machine Learning",
+          "Deep Learning",
+          "Computer Vision"
+        ],
+        "degrees": [
+          {
+            "degree_type": "PhD",
+            "title": "PhD in Computer Science",
+            "field_of_study": "Computer Science",
+            "institution_name": "University of Edinburgh",
+            "country": "United Kingdom",
+            "start_year": 2017,
+            "end_year": 2021
+          },
+          {
+            "degree_type": "Master",
+            "title": "MSc in Artificial Intelligence",
+            "field_of_study": "Artificial Intelligence",
+            "institution_name": "University of Amsterdam",
+            "country": "Netherlands",
+            "start_year": 2015,
+            "end_year": 2017
+          },
+          {
+            "degree_type": "Bachelor",
+            "title": "BSc in Computer Science",
+            "field_of_study": "Computer Science",
+            "institution_name": "University of Athens",
+            "country": "Greece",
+            "start_year": 2011,
+            "end_year": 2015
+          }
+        ],
+        "publication_titles": [
+          "Machine Learning Methods for Clinical Decision Support",
+          "Explainable Artificial Intelligence in Healthcare",
+          "Deep Neural Networks for Medical Image Classification",
+          "Transfer Learning for Visual Recognition",
+          "Efficient CNN Architectures for Image Analysis"
+        ],
+        "research_project_titles": [
+          "Artificial Intelligence for Medical Imaging"
+        ],
+        "teaching_course_titles": [
+          "Machine Learning",
+          "Computer Vision",
+          "Introduction to Artificial Intelligence"
+        ]
+      }
+    },
+    {
+      "candidate": "candidate_b",
+      "expected": {
+        "name": "Sophia Bennett",
+        "specialization": "Data Science",
+        "research_areas": [
+          "Data Analytics",
+          "Statistical Learning",
+          "Natural Language Processing"
+        ],
+        "degrees": [
+          {
+            "degree_type": "PhD",
+            "title": "PhD in Computational Statistics",
+            "field_of_study": "Computational Statistics",
+            "institution_name": "University of Warwick",
+            "country": "United Kingdom",
+            "start_year": 2016,
+            "end_year": 2020
+          },
+          {
+            "degree_type": "Master",
+            "title": "MSc in Data Science",
+            "field_of_study": "Data Science",
+            "institution_name": "University of Glasgow",
+            "country": "United Kingdom",
+            "start_year": 2014,
+            "end_year": 2016
+          },
+          {
+            "degree_type": "Bachelor",
+            "title": "BSc in Mathematics",
+            "field_of_study": "Mathematics",
+            "institution_name": "University of Manchester",
+            "country": "United Kingdom",
+            "start_year": 2010,
+            "end_year": 2014
+          }
+        ],
+        "publication_titles": [
+          "Natural Language Processing for Scientific Documents",
+          "Predictive Analytics for Healthcare Applications",
+          "Statistical Learning for High-Dimensional Data",
+          "Bayesian Methods for Data Classification"
+        ],
+        "research_project_titles": [
+          "Data Analytics for Healthcare Decision Support"
+        ],
+        "teaching_course_titles": [
+          "Data Science",
+          "Applied Machine Learning",
+          "Statistics for Computer Science"
+        ]
+      }
+    },
+    {
+      "candidate": "candidate_c",
+      "expected": {
+        "name": "Daniel Carter",
+        "specialization": "Renewable Energy Systems",
+        "research_areas": [
+          "Renewable Energy",
+          "Power Systems",
+          "Smart Grids"
+        ],
+        "degrees": [
+          {
+            "degree_type": "PhD",
+            "title": "PhD in Electrical Engineering",
+            "field_of_study": "Electrical Engineering",
+            "institution_name": "University of Bristol",
+            "country": "United Kingdom",
+            "start_year": 2015,
+            "end_year": 2019
+          },
+          {
+            "degree_type": "Master",
+            "title": "MSc in Sustainable Energy Systems",
+            "field_of_study": "Sustainable Energy Systems",
+            "institution_name": "University of Southampton",
+            "country": "United Kingdom",
+            "start_year": 2013,
+            "end_year": 2015
+          },
+          {
+            "degree_type": "Bachelor",
+            "title": "BEng in Electrical Engineering",
+            "field_of_study": "Electrical Engineering",
+            "institution_name": "University of Leeds",
+            "country": "United Kingdom",
+            "start_year": 2009,
+            "end_year": 2013
+          }
+        ],
+        "publication_titles": [
+          "Demand Response Strategies in Modern Power Networks",
+          "Energy Storage Systems for Smart Grid Applications",
+          "Optimization of Renewable Energy Integration in Power Grids",
+          "Modeling of Photovoltaic Energy Systems"
+        ],
+        "research_project_titles": [
+          "Smart Energy Management for Renewable Power Networks"
+        ],
+        "teaching_course_titles": [
+          "Electrical Power Systems",
+          "Renewable Energy Systems",
+          "Smart Grid Technologies"
+        ]
+      }
+    }
+  ]
+}
