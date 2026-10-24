@@ -5,6 +5,7 @@ import hashlib
 import re
 from dataclasses import asdict
 import argparse
+from math import isfinite
 
 from providers.base import BaseModelProvider, ModelResponse, GenerationOptions
 from providers.registry import create_provider
@@ -1401,10 +1402,63 @@ def parse_arguments() -> argparse.Namespace:
         help="Repetitions per case. Defaults to test_config.json.",
     )
 
+    parser.add_argument(
+        "--model",
+        default=None,
+        help="Ollama model identifier; default: qwen3:1.7b.",
+    )
+
+    parser.add_argument(
+        "--context-length",
+        type=int,
+        default=None,
+        help="Requested Ollama context tokens; default: 4096.",
+    )
+
+    parser.add_argument(
+        "--timeout",
+        type=float,
+        default=None,
+        help="Ollama request timeout in seconds; default: 300.",
+    )
+
     arguments = parser.parse_args()
 
     if arguments.runs is not None and arguments.runs < 1:
         parser.error("--runs must be a positive integer")
+
+    if arguments.model is not None:
+        arguments.model = arguments.model.strip()
+        if not arguments.model:
+            parser.error("--model must not be empty")
+
+    if (
+        arguments.context_length is not None
+        and arguments.context_length < 1
+    ):
+        parser.error("--context-length must be positive")
+
+    if arguments.timeout is not None:
+        if (
+            not isfinite(arguments.timeout)
+            or arguments.timeout <= 0
+        ):
+            parser.error("--timeout must be finite and positive")
+
+    has_runtime_overrides = any(
+        value is not None
+        for value in (
+            arguments.model,
+            arguments.context_length,
+            arguments.timeout,
+        )
+    )
+
+    if arguments.provider != "ollama" and has_runtime_overrides:
+        parser.error(
+            "--model, --context-length and --timeout "
+            "currently require --provider ollama"
+        )
 
     return arguments
 
@@ -1486,7 +1540,12 @@ def main() -> None:
     print()
     print("Testing provider interface...")
 
-    provider = create_provider(arguments.provider)
+    provider = create_provider(
+        arguments.provider,
+        model_name=arguments.model,
+        context_length=arguments.context_length,
+        timeout_seconds=arguments.timeout,
+    )
     batch_id = str(uuid4())
     print(f"Batch ID: {batch_id}")
 

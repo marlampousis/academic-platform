@@ -1,4 +1,3 @@
-
 import re
 import unicodedata
 from typing import Any
@@ -101,22 +100,33 @@ def calculate_evidence_validity(
     return 1.0 if found else 0.0
 
 
+def count_enumerated_evidence_items(response: str) -> int:
+    """Count explicit numbered/bulleted items, including unsupported evidence.
+
+    This assumes list items are evidence items, as requested by this task.
+    Prose and nested lists still require manual review.
+    """
+    pattern = r"(?m)^\s*(?:\*\*)?(?:[0-9]+[.)]|[-*•])\s+\S"
+    return len(re.findall(pattern, response))
+
+
 def calculate_maximum_item_compliance(
     response: str,
     expected_data: dict[str, Any],
-) -> bool:
-    """Check the count of recognized evidence titles."""
+) -> bool | None:
+    """Check an explicit evidence list; leave ambiguous prose unassessed.
 
-    maximum = expected_data["constraints"][
-        "maximum_research_evidence_items"
-    ]
-
-    found = find_research_evidence(
-        response,
-        expected_data,
-    )
-
-    return len(found) <= maximum
+    Recognized titles provide a lower bound even without a list. Recognition
+    alone cannot establish compliance because unknown evidence may be present.
+    """
+    maximum = expected_data["constraints"]["maximum_research_evidence_items"]
+    recognized = len(find_research_evidence(response, expected_data))
+    enumerated = count_enumerated_evidence_items(response)
+    if max(recognized, enumerated) > maximum:
+        return False
+    if enumerated:
+        return True
+    return None
 
 
 def calculate_greek_response(response: str) -> bool:
@@ -168,6 +178,12 @@ def evaluate_test_10(
                 raw_response,
                 expected_data,
             ),
+
+        "recognized_evidence_titles": find_research_evidence(
+            raw_response, expected_data,
+        ),
+        "enumerated_evidence_items": count_enumerated_evidence_items(raw_response),
+        "evidence_review_required": True,
 
         "greek_response":
             calculate_greek_response(

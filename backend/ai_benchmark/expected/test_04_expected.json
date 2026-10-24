@@ -63,10 +63,24 @@
           ]
         },
         {
+          "position_area": "Related intelligent computational methods",
+          "acceptable_evidence": [
+            "Machine Learning",
+            "Deep Learning",
+            "Machine Learning Methods for Clinical Decision Support",
+            "Transfer Learning for Visual Recognition"
+          ]
+        },
+        {
           "position_area": "Research experience",
           "acceptable_evidence": [
             "Publications",
-            "Artificial Intelligence for Medical Imaging"
+            "Artificial Intelligence for Medical Imaging",
+            "Machine Learning Methods for Clinical Decision Support",
+            "Explainable Artificial Intelligence in Healthcare",
+            "Deep Neural Networks for Medical Image Classification",
+            "Transfer Learning for Visual Recognition",
+            "Efficient CNN Architectures for Image Analysis"
           ]
         },
         {
@@ -115,7 +129,11 @@
           "position_area": "Research experience",
           "acceptable_evidence": [
             "Publications",
-            "Data Analytics for Healthcare Decision Support"
+            "Data Analytics for Healthcare Decision Support",
+            "Natural Language Processing for Scientific Documents",
+            "Predictive Analytics for Healthcare Applications",
+            "Statistical Learning for High-Dimensional Data",
+            "Bayesian Methods for Data Classification"
           ]
         },
         {
@@ -128,6 +146,7 @@
         }
       ],
       "expected_not_demonstrated_areas": [
+        "Artificial Intelligence",
         "Deep Learning",
         "Computer Vision",
         "Explainable Artificial Intelligence"
@@ -151,7 +170,11 @@
           "position_area": "Research experience",
           "acceptable_evidence": [
             "Publications",
-            "Smart Energy Management for Renewable Power Networks"
+            "Smart Energy Management for Renewable Power Networks",
+            "Demand Response Strategies in Modern Power Networks",
+            "Energy Storage Systems for Smart Grid Applications",
+            "Optimization of Renewable Energy Integration in Power Grids",
+            "Modeling of Photovoltaic Energy Systems"
           ]
         },
         {
@@ -168,7 +191,8 @@
         "Machine Learning",
         "Deep Learning",
         "Computer Vision",
-        "Explainable Artificial Intelligence"
+        "Explainable Artificial Intelligence",
+        "Related intelligent computational methods"
       ],
       "constraints": {
         "evidence_must_come_from_candidate_context": true,

@@ -1,4 +1,3 @@
-
 from collections import Counter
 from typing import Any
 import json
@@ -132,50 +131,37 @@ def _greek_value_consistency(
     actual: Any,
     expected: Any,
 ) -> float:
+    """Compare Greek scalar values by field path, ignoring list order.
+
+    Multiset counts preserve duplicates. This measures value coverage only;
+    complete-record metrics separately check which values belong together.
     """
-    Compare all Greek-language scalar values.
+    def greek_values(value: Any) -> Counter:
+        result = Counter()
 
-    English titles and proper names are not included.
-    """
-
-    pairs = []
-
-    def collect(actual_value, expected_value):
-        if isinstance(expected_value, dict):
-            if not isinstance(actual_value, dict):
-                actual_value = {}
-
-            for key, value in expected_value.items():
-                collect(actual_value.get(key), value)
-
-        elif isinstance(expected_value, list):
-            if not isinstance(actual_value, list):
-                actual_value = []
-
-            for index, value in enumerate(expected_value):
-                item = (
-                    actual_value[index]
-                    if index < len(actual_value)
-                    else None
-                )
-                collect(item, value)
-
-        elif isinstance(expected_value, str):
-            if any(
-                "\u0370" <= char <= "\u03ff"
-                or "\u1f00" <= char <= "\u1fff"
-                for char in expected_value
+        def collect(item: Any, path: tuple) -> None:
+            if isinstance(item, dict):
+                for key, child in item.items():
+                    collect(child, path + (key,))
+            elif isinstance(item, list):
+                for child in item:
+                    collect(child, path + ("[]",))
+            elif isinstance(item, str) and any(
+                ("\u0370" <= char <= "\u03ff" or
+                 "\u1f00" <= char <= "\u1fff") and char.isalpha()
+                for char in item
             ):
-                pairs.append(
-                    actual_value == expected_value
-                )
+                result[(path, item)] += 1
 
-    collect(actual, expected)
+        collect(value, ())
+        return result
 
+    expected_values = greek_values(expected)
+    actual_values = greek_values(actual)
+    total = sum(expected_values.values())
     return (
-        sum(pairs) / len(pairs)
-        if pairs
-        else 1.0
+        sum((actual_values & expected_values).values()) / total
+        if total else 1.0
     )
 
 
@@ -195,6 +181,9 @@ def evaluate_test_11(
             "schema_compliance": False,
             "exact_keys": False,
             "highest_degree_selection": False,
+            "name_accuracy": False,
+            "specialization_accuracy": False,
+            "research_areas_exact_match": False,
             "publication_precision": 0.0,
             "publication_recall": 0.0,
             "publication_f1": 0.0,
@@ -252,6 +241,17 @@ def evaluate_test_11(
         "schema_compliance": schema_compliance,
         "exact_keys": exact_keys,
         "highest_degree_selection": highest_degree_selection,
+        "name_accuracy": _same_type_and_value(
+            parsed_response.get(keys[0]), reference[keys[0]],
+        ),
+        "specialization_accuracy": _same_type_and_value(
+            parsed_response.get(keys[1]), reference[keys[1]],
+        ),
+        "research_areas_exact_match": (
+            isinstance(parsed_response.get(keys[2]), list)
+            and Counter(_fingerprint(x) for x in parsed_response[keys[2]])
+            == Counter(_fingerprint(x) for x in reference[keys[2]])
+        ),
         "publication_precision": pub_p,
         "publication_recall": pub_r,
         "publication_f1": pub_f1,

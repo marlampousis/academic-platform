@@ -1,4 +1,3 @@
-
 from typing import Any
 
 from .automatic import (
@@ -88,7 +87,8 @@ def validate_test_04_schema(
         }:
             return False
 
-        if not isinstance(item["position_area"], str):
+        if (not isinstance(item["position_area"], str)
+            or not item["position_area"].strip()):
             return False
 
         if (
@@ -119,10 +119,12 @@ def validate_test_04_schema(
         }:
             return False
 
-        if not isinstance(item["position_area"], str):
+        if (not isinstance(item["position_area"], str)
+            or not item["position_area"].strip()):
             return False
 
-        if not isinstance(item["explanation"], str):
+        if (not isinstance(item["explanation"], str)
+            or not item["explanation"].strip()):
             return False
 
     return True
@@ -247,6 +249,7 @@ def evaluate_test_04(
         )
 
 
+    # This checks structural contradictions, not semantic grounding.
     missing_checks = {
         area: area in actual_missing
         for area in expected_missing
@@ -272,6 +275,7 @@ def evaluate_test_04(
         
         "duplicate_aligned_areas": duplicate_aligned_areas,
         "duplicate_missing_areas": duplicate_missing_areas,
+        "logical_consistency_scope": "duplicate_labels_and_cross_section_overlap",
         "logical_consistency": (
             not duplicate_aligned_areas
             and not duplicate_missing_areas
