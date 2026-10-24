@@ -7,7 +7,6 @@ from dataclasses import asdict
 import argparse
 
 from providers.base import BaseModelProvider, ModelResponse, GenerationOptions
-from providers.mock import MockProvider
 from providers.registry import create_provider
 from benchmark_logging import logger
 
@@ -446,7 +445,7 @@ def print_run_summary(
         )
 
     print("=" * 60)
-    
+
 # ============================================================
 # EXPECTED DATA RESOLUTION
 # ============================================================
@@ -565,7 +564,7 @@ def evaluate_automatic_metrics(
         metrics.update(
             test_specific_metrics
         )
-        
+
     elif test_id == "test_02_summary":
 
         test_specific_metrics = evaluate_test_02(
@@ -573,9 +572,9 @@ def evaluate_automatic_metrics(
             expected_data=expected_data,
         )
 
-        metrics.update(test_specific_metrics)    
+        metrics.update(test_specific_metrics)
 
-    
+
     elif test_id == "test_03_alignment":
 
         test_specific_metrics = evaluate_test_03(
@@ -584,8 +583,8 @@ def evaluate_automatic_metrics(
         )
 
         metrics.update(test_specific_metrics)
-        
-    
+
+
     elif test_id == "test_04_explainable_alignment":
 
         test_specific_metrics = evaluate_test_04(
@@ -593,7 +592,7 @@ def evaluate_automatic_metrics(
             expected_data=expected_data,
         )
 
-        metrics.update(test_specific_metrics)    
+        metrics.update(test_specific_metrics)
 
     elif test_id == "test_05_grounded_qa":
 
@@ -603,7 +602,7 @@ def evaluate_automatic_metrics(
         )
 
         metrics.update(test_specific_metrics)
-    
+
     elif test_id == "test_06_missing_thesis":
 
         test_specific_metrics = evaluate_test_06(
@@ -612,7 +611,7 @@ def evaluate_automatic_metrics(
         )
 
         metrics.update(test_specific_metrics)
-    
+
     elif test_id == "test_07_missing_hindex":
 
         test_specific_metrics = evaluate_test_07(
@@ -621,14 +620,14 @@ def evaluate_automatic_metrics(
         )
 
         metrics.update(test_specific_metrics)
-    
+
     elif test_id == "test_08_evidence_retrieval":
         test_specific_metrics = evaluate_test_08(
             parsed_response=parsed_response,
             expected_data=expected_data,
         )
         metrics.update(test_specific_metrics)
-        
+
     elif test_id == "test_09_potential_gaps":
         test_specific_metrics = evaluate_test_09(
             parsed_response=parsed_response,
@@ -637,21 +636,21 @@ def evaluate_automatic_metrics(
         )
 
         metrics.update(test_specific_metrics)
-    
+
     elif test_id == "test_10_greek_qa":
         test_specific_metrics = evaluate_test_10(
             raw_response=raw_response,
             expected_data=expected_data,
         )
         metrics.update(test_specific_metrics)
-                        
+
     elif test_id == "test_11_greek_json":
         test_specific_metrics = evaluate_test_11(
             parsed_response=parsed_response,
             expected_data=expected_data,
         )
         metrics.update(test_specific_metrics)
-            
+
 
     elif test_id == "test_12_adversarial_grounding":
         test_specific_metrics = evaluate_test_12(
@@ -661,7 +660,7 @@ def evaluate_automatic_metrics(
         metrics.update(test_specific_metrics)
 
     return metrics
-    
+
 # ============================================================
 # MODEL EXECUTION
 # ============================================================
@@ -770,6 +769,7 @@ def execute_run(
         "latency_ms": response.latency_ms,
         "error": response.error,
         "error_message": response.error_message,
+        "runtime_metadata": response.runtime_metadata,
 
         "automatic_metrics": automatic_metrics,
 
@@ -1010,6 +1010,7 @@ def build_result_record(
             "latency_ms": result["latency_ms"],
             "error": result["error"],
             "error_message": result["error_message"],
+            "runtime_metadata": result["runtime_metadata"],
         },
         "evaluation": {
             "automatic_metrics": result[
@@ -1201,6 +1202,53 @@ def validate_result_record(
         and not isinstance(execution["error_message"], str)
     ):
         raise ValueError("Invalid error_message")
+
+    metadata = execution["runtime_metadata"]
+    if not isinstance(metadata, dict):
+        raise ValueError("runtime_metadata must be an object")
+
+    metadata_definition = definitions["execution"]["fields"]["runtime_metadata"]
+    allowed_metadata = metadata_definition["fields"]
+    if set(metadata) - set(allowed_metadata):
+        raise ValueError("Unknown runtime metadata fields")
+
+    if record["provider"] == "ollama" and set(metadata) != set(allowed_metadata):
+        raise ValueError("Ollama runtime metadata fields are missing")
+
+    for name, value in metadata.items():
+        if value is None:
+            continue
+        definition = allowed_metadata[name]
+        types = definition["type"]
+        if "boolean" in types:
+            valid = type(value) is bool
+        elif "integer" in types:
+            valid = type(value) is int
+        elif "number" in types:
+            valid = (
+                type(value) in (int, float)
+                and 0 <= value < float("inf")
+            )
+        else:
+            valid = isinstance(value, str) and bool(value.strip())
+        if not valid:
+            raise ValueError(f"Invalid runtime metadata: {name}")
+        if "minimum" in definition and value < definition["minimum"]:
+            raise ValueError(f"Runtime metadata below minimum: {name}")
+        if "exclusive_minimum" in definition and value <= definition["exclusive_minimum"]:
+            raise ValueError(f"Runtime metadata must be positive: {name}")
+
+    if record["provider"] == "ollama":
+        if metadata["requested_context_length"] is None:
+            raise ValueError("Ollama requested context length must be recorded")
+        if metadata["timeout_seconds"] is None:
+            raise ValueError("Ollama timeout must be recorded")
+        if metadata["thinking_enabled"] is not False:
+            raise ValueError("Current Ollama adapter requests thinking disabled")
+        reason = metadata["finish_reason"]
+        expected_truncation = {"length": True, "stop": False}.get(reason)
+        if metadata["output_truncated"] is not expected_truncation:
+            raise ValueError("Ollama truncation flag conflicts with finish reason")
 
     evaluation = record["evaluation"]
 
@@ -1434,7 +1482,7 @@ def main() -> None:
     print_run_summary(
         run_specifications
     )
-    
+
     print()
     print("Testing provider interface...")
 
@@ -1444,6 +1492,7 @@ def main() -> None:
 
     saved_count = 0
     provider_error_count = 0
+    truncated_output_count = 0
 
     print()
     print(f"Executing {len(run_specifications)} benchmark runs...")
@@ -1474,6 +1523,13 @@ def main() -> None:
 
         saved_count += 1
         provider_error_count += int(result["error"])
+        truncated = result["runtime_metadata"].get("output_truncated")
+        truncated_output_count += int(truncated is True)
+        if truncated is True:
+            logger.warning(
+                "output_truncated test=%s case=%s run=%s",
+                run["test_id"], run["case_id"], run["run_number"],
+            )
 
         print(
             f"[{index}/{len(run_specifications)}] "
@@ -1489,6 +1545,7 @@ def main() -> None:
     print(f"Planned runs: {len(run_specifications)}")
     print(f"Executed and saved: {saved_count}")
     print(f"Provider errors: {provider_error_count}")
+    print(f"Confirmed output truncations: {truncated_output_count}")
     print("Answer quality is recorded separately in each result.")
     print("Benchmark configuration validated successfully.")
 

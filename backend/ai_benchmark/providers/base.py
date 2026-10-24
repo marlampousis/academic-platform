@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from math import isfinite
-from typing import Literal
+from typing import Any, Literal
 
 
 @dataclass(frozen=True)
@@ -44,6 +44,7 @@ class ModelResponse:
     latency_ms: float
     error: bool = False
     error_message: str | None = None
+    runtime_metadata: dict[str, Any] = field(default_factory=dict)
 
 
 class BaseModelProvider(ABC):

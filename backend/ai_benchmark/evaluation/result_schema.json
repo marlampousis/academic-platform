@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "required_fields": [
     "run_id",
     "timestamp",
@@ -114,7 +114,8 @@
       "required_fields": [
         "latency_ms",
         "error",
-        "error_message"
+        "error_message",
+        "runtime_metadata"
       ],
       "fields": {
         "latency_ms": {
@@ -129,6 +130,76 @@
             "string",
             "null"
           ]
+        },
+        "runtime_metadata": {
+          "type": "object",
+          "description": "Provider runtime metadata. Mock may return an empty object; Ollama supplies every defined key, using null for unavailable measurements.",
+          "fields": {
+            "finish_reason": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Provider-reported completion reason; null if unavailable."
+            },
+            "output_truncated": {
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "description": "True for output token limit, false for a normal stop, null if unknown. Does not assess input truncation."
+            },
+            "input_tokens": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "output_tokens": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "load_duration_ms": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "total_duration_ms": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "requested_context_length": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 1,
+              "description": "Requested context tokens, not proof of effective allocation or complete input retention."
+            },
+            "thinking_enabled": {
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "description": "Requested thinking setting."
+            },
+            "timeout_seconds": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "exclusive_minimum": 0
+            }
+          }
         }
       }
     },
