@@ -4,7 +4,7 @@ from typing import Any
 import hashlib
 import re
 
-from providers.base import BaseModelProvider, ModelResponse
+from providers.base import BaseModelProvider, ModelResponse, GenerationOptions
 from providers.mock import MockProvider
 from benchmark_logging import logger
 
@@ -12,10 +12,7 @@ from evaluators.automatic import (
     evaluate_basic_automatic_metrics,
 )
 
-from evaluators.test_01 import (
-    evaluate_test_01,
-    validate_test_01_expected_data,
-)
+from evaluators.test_01 import evaluate_test_01, validate_test_01_expected_data
 
 from evaluators.test_02 import evaluate_test_02
 from evaluators.test_03 import evaluate_test_03
@@ -684,9 +681,20 @@ def execute_run(
         provider.model_name,
     )
 
+    options = GenerationOptions(
+        temperature=0.0,
+        max_output_tokens=2048,
+        response_format=(
+            "json"
+            if expects_json_response(run_specification["test_id"])
+            else "text"
+        ),
+    )
+
     try:
         response: ModelResponse = provider.generate(
-            run_specification["rendered_prompt"]
+            run_specification["rendered_prompt"],
+            options=options,
         )
     except Exception as exc:
         logger.error(
