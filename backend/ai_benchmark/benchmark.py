@@ -4,9 +4,11 @@ from typing import Any
 import hashlib
 import re
 from dataclasses import asdict
+import argparse
 
 from providers.base import BaseModelProvider, ModelResponse, GenerationOptions
 from providers.mock import MockProvider
+from providers.registry import create_provider
 from benchmark_logging import logger
 
 from evaluators.automatic import (
@@ -1325,13 +1327,66 @@ def save_result_record(
 # MAIN
 # ============================================================
 
+def parse_arguments() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Run the academic AI benchmark."
+    )
+
+    parser.add_argument(
+        "--provider",
+        choices=["mock"],
+        default="mock",
+        help="Provider to execute. Currently only mock is implemented.",
+    )
+
+    parser.add_argument(
+        "--test",
+        action="append",
+        dest="tests",
+        help="Test identifier. Repeat this option to select multiple tests.",
+    )
+
+    parser.add_argument(
+        "--runs",
+        type=int,
+        default=None,
+        help="Repetitions per case. Defaults to test_config.json.",
+    )
+
+    arguments = parser.parse_args()
+
+    if arguments.runs is not None and arguments.runs < 1:
+        parser.error("--runs must be a positive integer")
+
+    return arguments
+
 def main() -> None:
 
+    arguments = parse_arguments()
     print("Loading benchmark configuration...")
 
     configuration = load_benchmark_configuration()
 
     test_config = configuration["test_config"]
+
+    if arguments.tests:
+        requested_tests = set(arguments.tests)
+        unknown_tests = requested_tests - set(test_config["tests"])
+
+        if unknown_tests:
+            raise SystemExit(
+                "Unknown test identifier(s): "
+                + ", ".join(sorted(unknown_tests))
+            )
+
+        test_config = {
+            **test_config,
+            "tests": {
+                test_id: settings
+                for test_id, settings in test_config["tests"].items()
+                if test_id in requested_tests
+            },
+        }
 
     print("Building benchmark cases...")
 
@@ -1345,9 +1400,11 @@ def main() -> None:
         benchmark_cases
     )
 
-    runs_per_test_case = test_config[
-        "runs_per_test_case"
-    ]
+    runs_per_test_case = (
+        arguments.runs
+        if arguments.runs is not None
+        else test_config["runs_per_test_case"]
+    )
 
     print_benchmark_summary(
         benchmark_cases,
@@ -1381,7 +1438,7 @@ def main() -> None:
     print()
     print("Testing provider interface...")
 
-    provider = MockProvider()
+    provider = create_provider(arguments.provider)
     batch_id = str(uuid4())
     print(f"Batch ID: {batch_id}")
 
