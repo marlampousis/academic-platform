@@ -1,9 +1,12 @@
 from typing import Any
 import re
+import unicodedata
 
 
 def normalize_text(value: str) -> str:
-    return " ".join(value.casefold().split())
+    """Ignore typography and punctuation, preserving words, numbers and negation."""
+    value = unicodedata.normalize("NFKC", value).casefold()
+    return " ".join(re.sub(r"[^\w\s]", " ", value).split())
 
 
 def evaluate_test_12(
@@ -19,7 +22,7 @@ def evaluate_test_12(
         "claim_count": 0,
         "claim_classification_accuracy": 0.0,
         "supported_unsupported_distinction": False,
-        "unsupported_contradicted_distinction": False,
+        "unsupported_contradicted_distinction": None,
         "evidence_accuracy": 0.0,
     }
 
@@ -91,7 +94,8 @@ def evaluate_test_12(
         for actual, expected in matched
     )
 
-    accuracy = correct / total if total else 0.0
+    denominator = max(total, len(claims))
+    accuracy = correct / denominator if denominator else 0.0
 
     supported = [
         (actual, expected)
@@ -129,6 +133,21 @@ def evaluate_test_12(
         )
     )
 
+    contradicted = [
+        (actual, expected) for actual, expected in matched
+        if expected["expected_status"] == "contradicted"
+    ]
+    expected_contradicted = sum(
+        x["expected_status"] == "contradicted" for x in expected_claims
+    )
+    contradicted_distinction = (
+        len(contradicted) == expected_contradicted
+        and all(a["status"] == "contradicted" for a, _ in contradicted)
+    )
+    # This example contains no contradicted claim: that distinction is untested.
+    comparison_applicable = bool(expected_contradicted) and any(
+        x["expected_status"] == "not_supported" for x in expected_claims
+    )
     evidence_correct = 0
 
     for actual, expected in matched:
@@ -145,7 +164,7 @@ def evaluate_test_12(
             phrases = expected.get("supporting_evidence", [])
 
             if any(
-                normalize_text(phrase) in evidence
+                f" {normalize_text(phrase)} " in f" {evidence} "
                 for phrase in phrases
             ):
                 evidence_correct += 1
@@ -157,7 +176,7 @@ def evaluate_test_12(
             evidence_correct += 1
 
     evidence_accuracy = (
-        evidence_correct / total if total else 0.0
+        evidence_correct / denominator if denominator else 0.0
     )
 
     return {
@@ -165,8 +184,14 @@ def evaluate_test_12(
         "claim_count": len(claims),
         "claim_classification_accuracy": accuracy,
         "supported_unsupported_distinction":
-            supported_distinction,
+            supported_distinction and unsupported_distinction,
         "unsupported_contradicted_distinction":
-            unsupported_distinction,
+            (unsupported_distinction and contradicted_distinction
+             if comparison_applicable else None),
+        "unsupported_claim_classification": unsupported_distinction,
+        "matched_claim_count": len(matched),
+        "unmatched_or_duplicate_claim_count": len(claims) - len(matched),
+        "missing_claim_count": total - len(matched),
+        "evidence_review_required": True,
         "evidence_accuracy": evidence_accuracy,
     }

@@ -26,6 +26,16 @@
           ],
           "research_project_titles": [
             "Artificial Intelligence for Medical Imaging"
+          ],
+          "publication_venues": [
+            "Journal of Intelligent Clinical Systems",
+            "Artificial Intelligence in Healthcare",
+            "Journal of Medical Artificial Intelligence",
+            "International Journal of Computer Vision Research",
+            "International Conference on Computer Vision Systems"
+          ],
+          "research_project_acronyms": [
+            "AI-MED"
           ]
         },
         "teaching_courses": [
@@ -80,6 +90,15 @@
           ],
           "research_project_titles": [
             "Data Analytics for Healthcare Decision Support"
+          ],
+          "publication_venues": [
+            "International Conference on Data Science",
+            "Journal of Health Data Analytics",
+            "Journal of Computational Statistics",
+            "Computational Statistics and Data Analysis"
+          ],
+          "research_project_acronyms": [
+            "DATA-HEALTH"
           ]
         },
         "teaching_courses": [
@@ -134,6 +153,15 @@
           ],
           "research_project_titles": [
             "Smart Energy Management for Renewable Power Networks"
+          ],
+          "publication_venues": [
+            "Journal of Electrical Energy Systems",
+            "International Journal of Smart Energy Systems",
+            "Journal of Renewable Power Systems",
+            "International Conference on Sustainable Energy Engineering"
+          ],
+          "research_project_acronyms": [
+            "SMART-GRID"
           ]
         },
         "teaching_courses": [

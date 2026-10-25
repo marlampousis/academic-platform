@@ -1,4 +1,3 @@
-
 import re
 import unicodedata
 from typing import Any
@@ -49,6 +48,15 @@ def contains_any_fact(
     )
 
 
+def contains_project_acronym(text: str, acronym: str) -> bool:
+    """Preserve internal punctuation: SMART-GRID is not Smart Grid Technologies."""
+    text = unicodedata.normalize("NFKC", text).casefold()
+    acronym = unicodedata.normalize("NFKC", acronym).casefold().strip()
+    return bool(acronym) and re.search(
+        r"(?<!\w)" + re.escape(acronym) + r"(?!\w)", text,
+    ) is not None
+
+
 def calculate_required_facts_coverage(
     raw_response: str,
     required_facts: dict[str, Any],
@@ -57,7 +65,8 @@ def calculate_required_facts_coverage(
     Measure explicit lexical coverage of six academic
     information categories.
 
-    This is not a semantic completeness score.
+    Known venue names and project acronyms count as lexical mentions.
+    This is not a semantic completeness, factuality, or negation-aware score.
     """
 
     research_evidence = required_facts.get(
@@ -79,11 +88,15 @@ def calculate_required_facts_coverage(
         ),
         "publications": contains_any_fact(
             raw_response,
-            research_evidence.get("publication_titles", []),
+            research_evidence.get("publication_titles", [])
+            + research_evidence.get("publication_venues", []),
         ),
         "research_projects": contains_any_fact(
             raw_response,
             research_evidence.get("research_project_titles", []),
+        ) or any(
+            contains_project_acronym(raw_response, acronym)
+            for acronym in research_evidence.get("research_project_acronyms", [])
         ),
         "teaching_experience": contains_any_fact(
             raw_response,

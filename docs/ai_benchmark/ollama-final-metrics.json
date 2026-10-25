@@ -1,0 +1,3552 @@
+{
+  "batch_id": "c42e7725-2ed4-49d3-8ce9-2c05ccfcf61e",
+  "archive_sha256": "87b475f2c09ff1c85a1cb4a280a9362e044696d673250cc3b756f9a7b1b5e2e8",
+  "reproducibility_user_reported": {
+    "git_commit": "11e37293d2c5d1794724e64201fd6343ad0cb156",
+    "working_tree": "clean when checked after benchmark",
+    "ollama_version": "0.40.6",
+    "model": "qwen3:1.7b",
+    "model_id_prefix": "8f68893c685c",
+    "hardware": "7.8 GB RAM, Intel Core i5-10210U, Intel UHD Graphics (previously user reported)",
+    "qualification": "These metadata were reported after the run; run-time commit identity and full model digest were not embedded in results."
+  },
+  "n": 66,
+  "provider_errors": 0,
+  "output_truncations": 0,
+  "json_requested": 36,
+  "valid_json": 36,
+  "schema_compliant": 33,
+  "latency_seconds": {
+    "mean": 91.58602684545578,
+    "median": 50.986116549989674,
+    "min": 1.2232721999753267,
+    "max": 539.5904863000615,
+    "sum": 6044.677771800081,
+    "p95_nearest_rank": 359.4345221000258
+  },
+  "all_qualitative_ratings_unassessed": true,
+  "all_safety_ratings_unassessed": true,
+  "case_repeatability": [
+    {
+      "test_id": "test_01_extraction",
+      "case_id": "candidate_a",
+      "distinct_raw_responses": 1,
+      "distinct_automatic_metric_records": 1
+    },
+    {
+      "test_id": "test_01_extraction",
+      "case_id": "candidate_b",
+      "distinct_raw_responses": 1,
+      "distinct_automatic_metric_records": 1
+    },
+    {
+      "test_id": "test_01_extraction",
+      "case_id": "candidate_c",
+      "distinct_raw_responses": 1,
+      "distinct_automatic_metric_records": 1
+    },
+    {
+      "test_id": "test_02_summary",
+      "case_id": "candidate_a",
+      "distinct_raw_responses": 2,
+      "distinct_automatic_metric_records": 2
+    },
+    {
+      "test_id": "test_02_summary",
+      "case_id": "candidate_b",
+      "distinct_raw_responses": 2,
+      "distinct_automatic_metric_records": 2
+    },
+    {
+      "test_id": "test_02_summary",
+      "case_id": "candidate_c",
+      "distinct_raw_responses": 2,
+      "distinct_automatic_metric_records": 2
+    },
+    {
+      "test_id": "test_03_alignment",
+      "case_id": "candidate_a",
+      "distinct_raw_responses": 2,
+      "distinct_automatic_metric_records": 2
+    },
+    {
+      "test_id": "test_03_alignment",
+      "case_id": "candidate_b",
+      "distinct_raw_responses": 2,
+      "distinct_automatic_metric_records": 2
+    },
+    {
+      "test_id": "test_03_alignment",
+      "case_id": "candidate_c",
+      "distinct_raw_responses": 2,
+      "distinct_automatic_metric_records": 1
+    },
+    {
+      "test_id": "test_04_explainable_alignment",
+      "case_id": "candidate_a",
+      "distinct_raw_responses": 2,
+      "distinct_automatic_metric_records": 1
+    },
+    {
+      "test_id": "test_04_explainable_alignment",
+      "case_id": "candidate_b",
+      "distinct_raw_responses": 2,
+      "distinct_automatic_metric_records": 2
+    },
+    {
+      "test_id": "test_04_explainable_alignment",
+      "case_id": "candidate_c",
+      "distinct_raw_responses": 2,
+      "distinct_automatic_metric_records": 1
+    },
+    {
+      "test_id": "test_05_grounded_qa",
+      "case_id": "candidate_a",
+      "distinct_raw_responses": 1,
+      "distinct_automatic_metric_records": 1
+    },
+    {
+      "test_id": "test_06_missing_thesis",
+      "case_id": "candidate_a",
+      "distinct_raw_responses": 1,
+      "distinct_automatic_metric_records": 1
+    },
+    {
+      "test_id": "test_07_missing_hindex",
+      "case_id": "candidate_a",
+      "distinct_raw_responses": 1,
+      "distinct_automatic_metric_records": 1
+    },
+    {
+      "test_id": "test_08_evidence_retrieval",
+      "case_id": "candidate_a",
+      "distinct_raw_responses": 2,
+      "distinct_automatic_metric_records": 2
+    },
+    {
+      "test_id": "test_09_potential_gaps",
+      "case_id": "candidate_a",
+      "distinct_raw_responses": 1,
+      "distinct_automatic_metric_records": 1
+    },
+    {
+      "test_id": "test_09_potential_gaps",
+      "case_id": "candidate_b",
+      "distinct_raw_responses": 2,
+      "distinct_automatic_metric_records": 1
+    },
+    {
+      "test_id": "test_09_potential_gaps",
+      "case_id": "candidate_c",
+      "distinct_raw_responses": 2,
+      "distinct_automatic_metric_records": 1
+    },
+    {
+      "test_id": "test_10_greek_qa",
+      "case_id": "candidate_a_gr",
+      "distinct_raw_responses": 2,
+      "distinct_automatic_metric_records": 2
+    },
+    {
+      "test_id": "test_11_greek_json",
+      "case_id": "candidate_a_gr",
+      "distinct_raw_responses": 1,
+      "distinct_automatic_metric_records": 1
+    },
+    {
+      "test_id": "test_12_adversarial_grounding",
+      "case_id": "candidate_a",
+      "distinct_raw_responses": 2,
+      "distinct_automatic_metric_records": 1
+    }
+  ],
+  "per_test": [
+    {
+      "test_id": "test_01_extraction",
+      "n": 9,
+      "mean_latency_seconds": 60.61756548889551,
+      "stored_numeric_metric_means": {
+        "degree_field_accuracy": {
+          "mean": 1.0,
+          "n": 9
+        },
+        "field_accuracy": {
+          "mean": 1.0,
+          "n": 9
+        },
+        "list_f1": {
+          "mean": 1.0,
+          "n": 9
+        },
+        "list_precision": {
+          "mean": 1.0,
+          "n": 9
+        },
+        "list_recall": {
+          "mean": 1.0,
+          "n": 9
+        }
+      },
+      "json_validity_counts": {
+        "True": 9
+      },
+      "schema_compliance_counts": {
+        "True": 9
+      }
+    },
+    {
+      "test_id": "test_02_summary",
+      "n": 9,
+      "mean_latency_seconds": 26.90762102224916,
+      "stored_numeric_metric_means": {
+        "required_facts_coverage": {
+          "mean": 0.6666666666666666,
+          "n": 9
+        },
+        "word_count": {
+          "mean": 123.66666666666667,
+          "n": 9
+        }
+      },
+      "json_validity_counts": {
+        "None": 9
+      },
+      "schema_compliance_counts": {
+        "not_applicable": 9
+      }
+    },
+    {
+      "test_id": "test_03_alignment",
+      "n": 9,
+      "mean_latency_seconds": 71.79954785554825,
+      "stored_numeric_metric_means": {
+        "alignment_area_recall": {
+          "mean": 0.5317460317460317,
+          "n": 9
+        },
+        "missing_evidence_accuracy": {
+          "mean": 0.5888888888888889,
+          "n": 6
+        }
+      },
+      "json_validity_counts": {
+        "None": 9
+      },
+      "schema_compliance_counts": {
+        "not_applicable": 9
+      }
+    },
+    {
+      "test_id": "test_04_explainable_alignment",
+      "n": 9,
+      "mean_latency_seconds": 149.95624719997352,
+      "stored_numeric_metric_means": {
+        "alignment_area_f1": {
+          "mean": 0.8,
+          "n": 6
+        },
+        "alignment_area_precision": {
+          "mean": 0.75,
+          "n": 6
+        },
+        "alignment_area_recall": {
+          "mean": 0.9375,
+          "n": 6
+        },
+        "missing_evidence_accuracy": {
+          "mean": 0.375,
+          "n": 6
+        }
+      },
+      "json_validity_counts": {
+        "True": 9
+      },
+      "schema_compliance_counts": {
+        "True": 6,
+        "False": 3
+      }
+    },
+    {
+      "test_id": "test_05_grounded_qa",
+      "n": 3,
+      "mean_latency_seconds": 46.41182286668724,
+      "stored_numeric_metric_means": {
+        "course_detail_accuracy": {
+          "mean": 0.2,
+          "n": 3
+        },
+        "course_f1": {
+          "mean": 1.0,
+          "n": 3
+        },
+        "course_precision": {
+          "mean": 1.0,
+          "n": 3
+        },
+        "course_recall": {
+          "mean": 1.0,
+          "n": 3
+        }
+      },
+      "json_validity_counts": {
+        "None": 3
+      },
+      "schema_compliance_counts": {
+        "not_applicable": 3
+      }
+    },
+    {
+      "test_id": "test_06_missing_thesis",
+      "n": 3,
+      "mean_latency_seconds": 9.023260566677587,
+      "stored_numeric_metric_means": {},
+      "json_validity_counts": {
+        "None": 3
+      },
+      "schema_compliance_counts": {
+        "not_applicable": 3
+      }
+    },
+    {
+      "test_id": "test_07_missing_hindex",
+      "n": 3,
+      "mean_latency_seconds": 10.904272733333832,
+      "stored_numeric_metric_means": {},
+      "json_validity_counts": {
+        "None": 3
+      },
+      "schema_compliance_counts": {
+        "not_applicable": 3
+      }
+    },
+    {
+      "test_id": "test_08_evidence_retrieval",
+      "n": 3,
+      "mean_latency_seconds": 50.81529096669207,
+      "stored_numeric_metric_means": {
+        "position_area_accuracy": {
+          "mean": 0.6666666666666666,
+          "n": 3
+        },
+        "publication_precision": {
+          "mean": 1.0,
+          "n": 3
+        },
+        "publication_year_accuracy": {
+          "mean": 1.0,
+          "n": 3
+        }
+      },
+      "json_validity_counts": {
+        "True": 3
+      },
+      "schema_compliance_counts": {
+        "True": 3
+      }
+    },
+    {
+      "test_id": "test_09_potential_gaps",
+      "n": 9,
+      "mean_latency_seconds": 31.108548099990003,
+      "stored_numeric_metric_means": {
+        "gap_f1": {
+          "mean": 0.0,
+          "n": 9
+        },
+        "gap_precision": {
+          "mean": 0.0,
+          "n": 9
+        },
+        "gap_recall": {
+          "mean": 0.0,
+          "n": 9
+        }
+      },
+      "json_validity_counts": {
+        "True": 9
+      },
+      "schema_compliance_counts": {
+        "True": 9
+      }
+    },
+    {
+      "test_id": "test_10_greek_qa",
+      "n": 3,
+      "mean_latency_seconds": 446.389712800039,
+      "stored_numeric_metric_means": {
+        "enumerated_evidence_items": {
+          "mean": 3,
+          "n": 3
+        },
+        "evidence_validity": {
+          "mean": 1.0,
+          "n": 3
+        },
+        "research_area_coverage": {
+          "mean": 0.75,
+          "n": 3
+        },
+        "word_count": {
+          "mean": 122.66666666666667,
+          "n": 3
+        }
+      },
+      "json_validity_counts": {
+        "None": 3
+      },
+      "schema_compliance_counts": {
+        "not_applicable": 3
+      }
+    },
+    {
+      "test_id": "test_11_greek_json",
+      "n": 3,
+      "mean_latency_seconds": 378.5325826999809,
+      "stored_numeric_metric_means": {
+        "greek_value_consistency": {
+          "mean": 1.0,
+          "n": 3
+        },
+        "publication_f1": {
+          "mean": 1.0,
+          "n": 3
+        },
+        "publication_precision": {
+          "mean": 1.0,
+          "n": 3
+        },
+        "publication_recall": {
+          "mean": 1.0,
+          "n": 3
+        },
+        "research_project_accuracy": {
+          "mean": 1.0,
+          "n": 3
+        },
+        "teaching_f1": {
+          "mean": 1.0,
+          "n": 3
+        },
+        "teaching_precision": {
+          "mean": 1.0,
+          "n": 3
+        },
+        "teaching_recall": {
+          "mean": 1.0,
+          "n": 3
+        }
+      },
+      "json_validity_counts": {
+        "True": 3
+      },
+      "schema_compliance_counts": {
+        "True": 3
+      }
+    },
+    {
+      "test_id": "test_12_adversarial_grounding",
+      "n": 3,
+      "mean_latency_seconds": 51.647058966647215,
+      "stored_numeric_metric_means": {
+        "claim_classification_accuracy": {
+          "mean": 0.0,
+          "n": 3
+        },
+        "claim_count": {
+          "mean": 4,
+          "n": 3
+        },
+        "evidence_accuracy": {
+          "mean": 0.0,
+          "n": 3
+        }
+      },
+      "json_validity_counts": {
+        "True": 3
+      },
+      "schema_compliance_counts": {
+        "True": 3
+      }
+    }
+  ],
+  "test05_independent_field_audit": [
+    {
+      "run_id": "35d1ac4b-aa49-4323-903c-d413b7d64d74",
+      "matching_requested_fields": 15,
+      "total_requested_fields": 15,
+      "stored_course_detail_accuracy": 0.2,
+      "audit_method": "Exact comparison to embedded candidate records; audit only, stored result unchanged"
+    },
+    {
+      "run_id": "9e9c577d-2a6d-4cca-b34b-35451770f781",
+      "matching_requested_fields": 15,
+      "total_requested_fields": 15,
+      "stored_course_detail_accuracy": 0.2,
+      "audit_method": "Exact comparison to embedded candidate records; audit only, stored result unchanged"
+    },
+    {
+      "run_id": "bc03939f-d474-4297-96a9-3258664bc827",
+      "matching_requested_fields": 15,
+      "total_requested_fields": 15,
+      "stored_course_detail_accuracy": 0.2,
+      "audit_method": "Exact comparison to embedded candidate records; audit only, stored result unchanged"
+    }
+  ],
+  "per_run": [
+    {
+      "run_id": "5ec7bb98-a1cb-4707-82ef-ef02b041ba0d",
+      "test_id": "test_01_extraction",
+      "case_id": "candidate_a",
+      "run_number": 1,
+      "latency_seconds": 92.44568370003253,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1384,
+        "output_tokens": 374,
+        "load_duration_ms": 8853.075,
+        "total_duration_ms": 92317.1832,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "field_accuracy": 1.0,
+        "list_precision": 1.0,
+        "list_recall": 1.0,
+        "list_f1": 1.0,
+        "degree_field_accuracy": 1.0
+      }
+    },
+    {
+      "run_id": "5754cf3f-82ed-47f9-bddc-c025f3cf4d3e",
+      "test_id": "test_01_extraction",
+      "case_id": "candidate_a",
+      "run_number": 2,
+      "latency_seconds": 51.62301199999638,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1384,
+        "output_tokens": 374,
+        "load_duration_ms": 30.5972,
+        "total_duration_ms": 51602.9357,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "field_accuracy": 1.0,
+        "list_precision": 1.0,
+        "list_recall": 1.0,
+        "list_f1": 1.0,
+        "degree_field_accuracy": 1.0
+      }
+    },
+    {
+      "run_id": "b7e0e9a5-203e-4e81-829e-9560a4a4266f",
+      "test_id": "test_01_extraction",
+      "case_id": "candidate_a",
+      "run_number": 3,
+      "latency_seconds": 50.2686547000194,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1384,
+        "output_tokens": 374,
+        "load_duration_ms": 23.2341,
+        "total_duration_ms": 50246.2175,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "field_accuracy": 1.0,
+        "list_precision": 1.0,
+        "list_recall": 1.0,
+        "list_f1": 1.0,
+        "degree_field_accuracy": 1.0
+      }
+    },
+    {
+      "run_id": "64eda2ee-5f1d-44c6-8b74-d64bffc951aa",
+      "test_id": "test_01_extraction",
+      "case_id": "candidate_b",
+      "run_number": 1,
+      "latency_seconds": 72.36648830003105,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1316,
+        "output_tokens": 365,
+        "load_duration_ms": 18.2823,
+        "total_duration_ms": 72344.1193,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "field_accuracy": 1.0,
+        "list_precision": 1.0,
+        "list_recall": 1.0,
+        "list_f1": 1.0,
+        "degree_field_accuracy": 1.0
+      }
+    },
+    {
+      "run_id": "10ff3d37-ac1d-44e0-8e06-5ad0fc410e05",
+      "test_id": "test_01_extraction",
+      "case_id": "candidate_b",
+      "run_number": 2,
+      "latency_seconds": 54.64890099992044,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1316,
+        "output_tokens": 365,
+        "load_duration_ms": 17.6534,
+        "total_duration_ms": 54632.033,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "field_accuracy": 1.0,
+        "list_precision": 1.0,
+        "list_recall": 1.0,
+        "list_f1": 1.0,
+        "degree_field_accuracy": 1.0
+      }
+    },
+    {
+      "run_id": "1d7a7bb0-4c4a-4f8e-baac-a044f13c4bbb",
+      "test_id": "test_01_extraction",
+      "case_id": "candidate_b",
+      "run_number": 3,
+      "latency_seconds": 50.34922109998297,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1316,
+        "output_tokens": 365,
+        "load_duration_ms": 15.1084,
+        "total_duration_ms": 50321.491,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "field_accuracy": 1.0,
+        "list_precision": 1.0,
+        "list_recall": 1.0,
+        "list_f1": 1.0,
+        "degree_field_accuracy": 1.0
+      }
+    },
+    {
+      "run_id": "9931b532-bda6-4b8e-8eea-9774da6fe6b2",
+      "test_id": "test_01_extraction",
+      "case_id": "candidate_c",
+      "run_number": 1,
+      "latency_seconds": 76.65712550003082,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1370,
+        "output_tokens": 383,
+        "load_duration_ms": 14.5621,
+        "total_duration_ms": 76636.9447,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "field_accuracy": 1.0,
+        "list_precision": 1.0,
+        "list_recall": 1.0,
+        "list_f1": 1.0,
+        "degree_field_accuracy": 1.0
+      }
+    },
+    {
+      "run_id": "04d35ad7-3e75-42be-b074-d7ae757058ae",
+      "test_id": "test_01_extraction",
+      "case_id": "candidate_c",
+      "run_number": 2,
+      "latency_seconds": 48.748997700051405,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1370,
+        "output_tokens": 383,
+        "load_duration_ms": 20.43,
+        "total_duration_ms": 48724.4526,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "field_accuracy": 1.0,
+        "list_precision": 1.0,
+        "list_recall": 1.0,
+        "list_f1": 1.0,
+        "degree_field_accuracy": 1.0
+      }
+    },
+    {
+      "run_id": "72330353-01fc-42a0-92cd-16b8f1d3e8cb",
+      "test_id": "test_01_extraction",
+      "case_id": "candidate_c",
+      "run_number": 3,
+      "latency_seconds": 48.45000539999455,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1370,
+        "output_tokens": 383,
+        "load_duration_ms": 22.7536,
+        "total_duration_ms": 48432.3458,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "field_accuracy": 1.0,
+        "list_precision": 1.0,
+        "list_recall": 1.0,
+        "list_f1": 1.0,
+        "degree_field_accuracy": 1.0
+      }
+    },
+    {
+      "run_id": "2cdc8f21-f620-419a-9d2e-fa1a913baf18",
+      "test_id": "test_02_summary",
+      "case_id": "candidate_a",
+      "run_number": 1,
+      "latency_seconds": 48.57193269999698,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1351,
+        "output_tokens": 154,
+        "load_duration_ms": 24.0007,
+        "total_duration_ms": 48538.995,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "word_count": 132,
+        "word_count_compliance": true,
+        "required_facts_coverage": 0.6666666666666666,
+        "required_facts_checks": {
+          "specialization": true,
+          "research_areas": true,
+          "education": true,
+          "publications": false,
+          "research_projects": false,
+          "teaching_experience": true
+        }
+      }
+    },
+    {
+      "run_id": "c180bf09-76ab-481e-8fc3-c643600a739a",
+      "test_id": "test_02_summary",
+      "case_id": "candidate_a",
+      "run_number": 2,
+      "latency_seconds": 17.669072100077756,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1351,
+        "output_tokens": 143,
+        "load_duration_ms": 12.7497,
+        "total_duration_ms": 17649.3049,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "word_count": 121,
+        "word_count_compliance": true,
+        "required_facts_coverage": 0.6666666666666666,
+        "required_facts_checks": {
+          "specialization": true,
+          "research_areas": true,
+          "education": true,
+          "publications": false,
+          "research_projects": false,
+          "teaching_experience": true
+        }
+      }
+    },
+    {
+      "run_id": "1436406e-5c73-4088-aa79-2667f16ee0d0",
+      "test_id": "test_02_summary",
+      "case_id": "candidate_a",
+      "run_number": 3,
+      "latency_seconds": 17.073932699975558,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1351,
+        "output_tokens": 143,
+        "load_duration_ms": 15.4546,
+        "total_duration_ms": 17059.9856,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "word_count": 121,
+        "word_count_compliance": true,
+        "required_facts_coverage": 0.6666666666666666,
+        "required_facts_checks": {
+          "specialization": true,
+          "research_areas": true,
+          "education": true,
+          "publications": false,
+          "research_projects": false,
+          "teaching_experience": true
+        }
+      }
+    },
+    {
+      "run_id": "9f4eb258-49c0-4028-a63e-3c4fb4d927a0",
+      "test_id": "test_02_summary",
+      "case_id": "candidate_b",
+      "run_number": 1,
+      "latency_seconds": 41.83846410003025,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1283,
+        "output_tokens": 145,
+        "load_duration_ms": 15.9726,
+        "total_duration_ms": 41811.6368,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "word_count": 123,
+        "word_count_compliance": true,
+        "required_facts_coverage": 0.6666666666666666,
+        "required_facts_checks": {
+          "specialization": true,
+          "research_areas": true,
+          "education": true,
+          "publications": false,
+          "research_projects": false,
+          "teaching_experience": true
+        }
+      }
+    },
+    {
+      "run_id": "3d00a0bf-f71a-4891-bb80-1b8e2750dd26",
+      "test_id": "test_02_summary",
+      "case_id": "candidate_b",
+      "run_number": 2,
+      "latency_seconds": 17.31932200002484,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1283,
+        "output_tokens": 147,
+        "load_duration_ms": 13.8675,
+        "total_duration_ms": 17297.124,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "word_count": 120,
+        "word_count_compliance": true,
+        "required_facts_coverage": 0.6666666666666666,
+        "required_facts_checks": {
+          "specialization": true,
+          "research_areas": true,
+          "education": true,
+          "publications": false,
+          "research_projects": false,
+          "teaching_experience": true
+        }
+      }
+    },
+    {
+      "run_id": "83fa41e0-089c-45f6-9311-8d3422e38160",
+      "test_id": "test_02_summary",
+      "case_id": "candidate_b",
+      "run_number": 3,
+      "latency_seconds": 17.502466800040565,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1283,
+        "output_tokens": 147,
+        "load_duration_ms": 19.1513,
+        "total_duration_ms": 17488.4247,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "word_count": 120,
+        "word_count_compliance": true,
+        "required_facts_coverage": 0.6666666666666666,
+        "required_facts_checks": {
+          "specialization": true,
+          "research_areas": true,
+          "education": true,
+          "publications": false,
+          "research_projects": false,
+          "teaching_experience": true
+        }
+      }
+    },
+    {
+      "run_id": "5fffc6c8-69ee-4bb9-92f9-eb215f87d36f",
+      "test_id": "test_02_summary",
+      "case_id": "candidate_c",
+      "run_number": 1,
+      "latency_seconds": 48.106681600096636,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1337,
+        "output_tokens": 148,
+        "load_duration_ms": 14.6313,
+        "total_duration_ms": 48080.9651,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "word_count": 128,
+        "word_count_compliance": true,
+        "required_facts_coverage": 0.6666666666666666,
+        "required_facts_checks": {
+          "specialization": true,
+          "research_areas": true,
+          "education": true,
+          "publications": false,
+          "research_projects": false,
+          "teaching_experience": true
+        }
+      }
+    },
+    {
+      "run_id": "7ebc02c4-83c9-4182-9349-b279e7e6c1a1",
+      "test_id": "test_02_summary",
+      "case_id": "candidate_c",
+      "run_number": 2,
+      "latency_seconds": 17.09963150008116,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1337,
+        "output_tokens": 142,
+        "load_duration_ms": 14.0457,
+        "total_duration_ms": 17081.6652,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "word_count": 124,
+        "word_count_compliance": true,
+        "required_facts_coverage": 0.6666666666666666,
+        "required_facts_checks": {
+          "specialization": true,
+          "research_areas": true,
+          "education": true,
+          "publications": false,
+          "research_projects": false,
+          "teaching_experience": true
+        }
+      }
+    },
+    {
+      "run_id": "9d0c7f2e-7c0c-49ec-a322-1966466d2acb",
+      "test_id": "test_02_summary",
+      "case_id": "candidate_c",
+      "run_number": 3,
+      "latency_seconds": 16.98708569991868,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1337,
+        "output_tokens": 142,
+        "load_duration_ms": 14.4243,
+        "total_duration_ms": 16962.4282,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "word_count": 124,
+        "word_count_compliance": true,
+        "required_facts_coverage": 0.6666666666666666,
+        "required_facts_checks": {
+          "specialization": true,
+          "research_areas": true,
+          "education": true,
+          "publications": false,
+          "research_projects": false,
+          "teaching_experience": true
+        }
+      }
+    },
+    {
+      "run_id": "28154f25-c31e-4b43-9e67-763960f27022",
+      "test_id": "test_03_alignment",
+      "case_id": "candidate_a",
+      "run_number": 1,
+      "latency_seconds": 94.16716349998023,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1602,
+        "output_tokens": 403,
+        "load_duration_ms": 15.1296,
+        "total_duration_ms": 94113.8618,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "alignment_area_precision": null,
+        "alignment_area_recall": 0.8571428571428571,
+        "alignment_area_f1": null,
+        "missing_evidence_accuracy": null,
+        "unsupported_alignment_areas": [],
+        "unsupported_alignment_checks": {},
+        "unsupported_alignment_detected": false,
+        "alignment_area_checks": {
+          "Artificial Intelligence": true,
+          "Machine Learning": true,
+          "Deep Learning": true,
+          "Computer Vision": true,
+          "Explainable Artificial Intelligence": false,
+          "Research experience": true,
+          "University-level teaching experience": true
+        },
+        "missing_evidence_checks": {},
+        "section_presence": {
+          "Alignment Summary:": true,
+          "Supporting Evidence:": true,
+          "Areas Not Demonstrated:": true
+        },
+        "negative_qualification_claims": [],
+        "negative_qualification_claim_detected": false
+      }
+    },
+    {
+      "run_id": "1512fd35-8c54-4ae2-8e75-83c90ade1ddd",
+      "test_id": "test_03_alignment",
+      "case_id": "candidate_a",
+      "run_number": 2,
+      "latency_seconds": 60.6720414001029,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1602,
+        "output_tokens": 407,
+        "load_duration_ms": 18.2334,
+        "total_duration_ms": 60644.9446,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "alignment_area_precision": null,
+        "alignment_area_recall": 0.7142857142857143,
+        "alignment_area_f1": null,
+        "missing_evidence_accuracy": null,
+        "unsupported_alignment_areas": [],
+        "unsupported_alignment_checks": {},
+        "unsupported_alignment_detected": false,
+        "alignment_area_checks": {
+          "Artificial Intelligence": true,
+          "Machine Learning": true,
+          "Deep Learning": true,
+          "Computer Vision": true,
+          "Explainable Artificial Intelligence": false,
+          "Research experience": true,
+          "University-level teaching experience": false
+        },
+        "missing_evidence_checks": {},
+        "section_presence": {
+          "Alignment Summary:": true,
+          "Supporting Evidence:": true,
+          "Areas Not Demonstrated:": true
+        },
+        "negative_qualification_claims": [],
+        "negative_qualification_claim_detected": false
+      }
+    },
+    {
+      "run_id": "fdce6030-18fc-423e-b92a-392bf2c3a103",
+      "test_id": "test_03_alignment",
+      "case_id": "candidate_a",
+      "run_number": 3,
+      "latency_seconds": 57.50710769998841,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1602,
+        "output_tokens": 407,
+        "load_duration_ms": 16.2273,
+        "total_duration_ms": 57477.3482,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "alignment_area_precision": null,
+        "alignment_area_recall": 0.7142857142857143,
+        "alignment_area_f1": null,
+        "missing_evidence_accuracy": null,
+        "unsupported_alignment_areas": [],
+        "unsupported_alignment_checks": {},
+        "unsupported_alignment_detected": false,
+        "alignment_area_checks": {
+          "Artificial Intelligence": true,
+          "Machine Learning": true,
+          "Deep Learning": true,
+          "Computer Vision": true,
+          "Explainable Artificial Intelligence": false,
+          "Research experience": true,
+          "University-level teaching experience": false
+        },
+        "missing_evidence_checks": {},
+        "section_presence": {
+          "Alignment Summary:": true,
+          "Supporting Evidence:": true,
+          "Areas Not Demonstrated:": true
+        },
+        "negative_qualification_claims": [],
+        "negative_qualification_claim_detected": false
+      }
+    },
+    {
+      "run_id": "0ceb032a-cee8-44ae-91d2-46debdff60ab",
+      "test_id": "test_03_alignment",
+      "case_id": "candidate_b",
+      "run_number": 1,
+      "latency_seconds": 91.15052349993493,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1534,
+        "output_tokens": 454,
+        "load_duration_ms": 13.0411,
+        "total_duration_ms": 91110.7867,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "alignment_area_precision": null,
+        "alignment_area_recall": 0.5,
+        "alignment_area_f1": null,
+        "missing_evidence_accuracy": 1.0,
+        "unsupported_alignment_areas": [
+          "Deep Learning",
+          "Computer Vision",
+          "Explainable Artificial Intelligence"
+        ],
+        "unsupported_alignment_checks": {
+          "Deep Learning": true,
+          "Computer Vision": true,
+          "Explainable Artificial Intelligence": true
+        },
+        "unsupported_alignment_detected": true,
+        "alignment_area_checks": {
+          "Machine Learning": true,
+          "Related intelligent computational methods": false,
+          "Research experience": false,
+          "University-level teaching experience": true
+        },
+        "missing_evidence_checks": {
+          "Deep Learning": true,
+          "Computer Vision": true,
+          "Explainable Artificial Intelligence": true
+        },
+        "section_presence": {
+          "Alignment Summary:": true,
+          "Supporting Evidence:": true,
+          "Areas Not Demonstrated:": true
+        },
+        "negative_qualification_claims": [],
+        "negative_qualification_claim_detected": false
+      }
+    },
+    {
+      "run_id": "aecabac7-eaae-4610-84fc-402fae8136e5",
+      "test_id": "test_03_alignment",
+      "case_id": "candidate_b",
+      "run_number": 2,
+      "latency_seconds": 55.4556199000217,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1534,
+        "output_tokens": 410,
+        "load_duration_ms": 20.0664,
+        "total_duration_ms": 55413.4724,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "alignment_area_precision": null,
+        "alignment_area_recall": 0.25,
+        "alignment_area_f1": null,
+        "missing_evidence_accuracy": 0.6666666666666666,
+        "unsupported_alignment_areas": [],
+        "unsupported_alignment_checks": {
+          "Deep Learning": false,
+          "Computer Vision": false,
+          "Explainable Artificial Intelligence": false
+        },
+        "unsupported_alignment_detected": false,
+        "alignment_area_checks": {
+          "Machine Learning": true,
+          "Related intelligent computational methods": false,
+          "Research experience": false,
+          "University-level teaching experience": false
+        },
+        "missing_evidence_checks": {
+          "Deep Learning": true,
+          "Computer Vision": true,
+          "Explainable Artificial Intelligence": false
+        },
+        "section_presence": {
+          "Alignment Summary:": true,
+          "Supporting Evidence:": true,
+          "Areas Not Demonstrated:": true
+        },
+        "negative_qualification_claims": [],
+        "negative_qualification_claim_detected": false
+      }
+    },
+    {
+      "run_id": "99565358-7d0b-4abc-be58-4920226e0f15",
+      "test_id": "test_03_alignment",
+      "case_id": "candidate_b",
+      "run_number": 3,
+      "latency_seconds": 61.10818959993776,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1534,
+        "output_tokens": 410,
+        "load_duration_ms": 17.7698,
+        "total_duration_ms": 61086.7243,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "alignment_area_precision": null,
+        "alignment_area_recall": 0.25,
+        "alignment_area_f1": null,
+        "missing_evidence_accuracy": 0.6666666666666666,
+        "unsupported_alignment_areas": [],
+        "unsupported_alignment_checks": {
+          "Deep Learning": false,
+          "Computer Vision": false,
+          "Explainable Artificial Intelligence": false
+        },
+        "unsupported_alignment_detected": false,
+        "alignment_area_checks": {
+          "Machine Learning": true,
+          "Related intelligent computational methods": false,
+          "Research experience": false,
+          "University-level teaching experience": false
+        },
+        "missing_evidence_checks": {
+          "Deep Learning": true,
+          "Computer Vision": true,
+          "Explainable Artificial Intelligence": false
+        },
+        "section_presence": {
+          "Alignment Summary:": true,
+          "Supporting Evidence:": true,
+          "Areas Not Demonstrated:": true
+        },
+        "negative_qualification_claims": [],
+        "negative_qualification_claim_detected": false
+      }
+    },
+    {
+      "run_id": "521e0bf4-2f73-43ad-960c-6c19a536967c",
+      "test_id": "test_03_alignment",
+      "case_id": "candidate_c",
+      "run_number": 1,
+      "latency_seconds": 105.18275949999224,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1588,
+        "output_tokens": 478,
+        "load_duration_ms": 15.911,
+        "total_duration_ms": 105131.1455,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "alignment_area_precision": null,
+        "alignment_area_recall": 0.5,
+        "alignment_area_f1": null,
+        "missing_evidence_accuracy": 0.4,
+        "unsupported_alignment_areas": [
+          "Artificial Intelligence",
+          "Machine Learning"
+        ],
+        "unsupported_alignment_checks": {
+          "Artificial Intelligence": true,
+          "Machine Learning": true,
+          "Deep Learning": false,
+          "Computer Vision": false,
+          "Explainable Artificial Intelligence": false
+        },
+        "unsupported_alignment_detected": true,
+        "alignment_area_checks": {
+          "Research experience": true,
+          "University-level teaching experience": false
+        },
+        "missing_evidence_checks": {
+          "Artificial Intelligence": true,
+          "Machine Learning": true,
+          "Deep Learning": false,
+          "Computer Vision": false,
+          "Explainable Artificial Intelligence": false
+        },
+        "section_presence": {
+          "Alignment Summary:": true,
+          "Supporting Evidence:": true,
+          "Areas Not Demonstrated:": true
+        },
+        "negative_qualification_claims": [],
+        "negative_qualification_claim_detected": false
+      }
+    },
+    {
+      "run_id": "fe75464c-6534-4356-a52b-ea9daea1634e",
+      "test_id": "test_03_alignment",
+      "case_id": "candidate_c",
+      "run_number": 2,
+      "latency_seconds": 59.50344150001183,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1588,
+        "output_tokens": 426,
+        "load_duration_ms": 15.8161,
+        "total_duration_ms": 59477.7124,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "alignment_area_precision": null,
+        "alignment_area_recall": 0.5,
+        "alignment_area_f1": null,
+        "missing_evidence_accuracy": 0.4,
+        "unsupported_alignment_areas": [
+          "Artificial Intelligence",
+          "Machine Learning"
+        ],
+        "unsupported_alignment_checks": {
+          "Artificial Intelligence": true,
+          "Machine Learning": true,
+          "Deep Learning": false,
+          "Computer Vision": false,
+          "Explainable Artificial Intelligence": false
+        },
+        "unsupported_alignment_detected": true,
+        "alignment_area_checks": {
+          "Research experience": true,
+          "University-level teaching experience": false
+        },
+        "missing_evidence_checks": {
+          "Artificial Intelligence": true,
+          "Machine Learning": true,
+          "Deep Learning": false,
+          "Computer Vision": false,
+          "Explainable Artificial Intelligence": false
+        },
+        "section_presence": {
+          "Alignment Summary:": true,
+          "Supporting Evidence:": true,
+          "Areas Not Demonstrated:": true
+        },
+        "negative_qualification_claims": [],
+        "negative_qualification_claim_detected": false
+      }
+    },
+    {
+      "run_id": "e367f927-42d3-4798-92ec-551a4e87b15a",
+      "test_id": "test_03_alignment",
+      "case_id": "candidate_c",
+      "run_number": 3,
+      "latency_seconds": 61.44908409996424,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1588,
+        "output_tokens": 426,
+        "load_duration_ms": 14.4515,
+        "total_duration_ms": 61419.6024,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "alignment_area_precision": null,
+        "alignment_area_recall": 0.5,
+        "alignment_area_f1": null,
+        "missing_evidence_accuracy": 0.4,
+        "unsupported_alignment_areas": [
+          "Artificial Intelligence",
+          "Machine Learning"
+        ],
+        "unsupported_alignment_checks": {
+          "Artificial Intelligence": true,
+          "Machine Learning": true,
+          "Deep Learning": false,
+          "Computer Vision": false,
+          "Explainable Artificial Intelligence": false
+        },
+        "unsupported_alignment_detected": true,
+        "alignment_area_checks": {
+          "Research experience": true,
+          "University-level teaching experience": false
+        },
+        "missing_evidence_checks": {
+          "Artificial Intelligence": true,
+          "Machine Learning": true,
+          "Deep Learning": false,
+          "Computer Vision": false,
+          "Explainable Artificial Intelligence": false
+        },
+        "section_presence": {
+          "Alignment Summary:": true,
+          "Supporting Evidence:": true,
+          "Areas Not Demonstrated:": true
+        },
+        "negative_qualification_claims": [],
+        "negative_qualification_claim_detected": false
+      }
+    },
+    {
+      "run_id": "bf5f7b9a-7627-4a39-b42d-efb51ffc1e11",
+      "test_id": "test_04_explainable_alignment",
+      "case_id": "candidate_a",
+      "run_number": 1,
+      "latency_seconds": 174.72850379999727,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 2055,
+        "output_tokens": 724,
+        "load_duration_ms": 17.3043,
+        "total_duration_ms": 174693.4691,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "alignment_area_precision": 1.0,
+        "alignment_area_recall": 0.875,
+        "alignment_area_f1": 0.9333333333333333,
+        "missing_evidence_accuracy": 0.0,
+        "evidence_checks": {
+          "artificial intelligence": false,
+          "machine learning": false,
+          "deep learning": true,
+          "computer vision": true,
+          "explainable artificial intelligence": true,
+          "related intelligent computational methods": true,
+          "research experience": true,
+          "university-level teaching experience": true
+        },
+        "missing_evidence_checks": {},
+        "unexpected_aligned_areas": [],
+        "unexpected_missing_areas": [
+          "computer vision",
+          "deep learning",
+          "explainable artificial intelligence",
+          "machine learning",
+          "related intelligent computational methods"
+        ],
+        "contradictory_areas": [
+          "computer vision",
+          "deep learning",
+          "explainable artificial intelligence",
+          "related intelligent computational methods"
+        ],
+        "duplicate_aligned_areas": [],
+        "duplicate_missing_areas": [],
+        "logical_consistency_scope": "duplicate_labels_and_cross_section_overlap",
+        "logical_consistency": false
+      }
+    },
+    {
+      "run_id": "53de56f8-b52e-4dd9-b2c6-92b4df666f5a",
+      "test_id": "test_04_explainable_alignment",
+      "case_id": "candidate_a",
+      "run_number": 2,
+      "latency_seconds": 140.45351739996113,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 2055,
+        "output_tokens": 723,
+        "load_duration_ms": 21.4646,
+        "total_duration_ms": 140225.2394,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "alignment_area_precision": 1.0,
+        "alignment_area_recall": 0.875,
+        "alignment_area_f1": 0.9333333333333333,
+        "missing_evidence_accuracy": 0.0,
+        "evidence_checks": {
+          "artificial intelligence": false,
+          "machine learning": false,
+          "deep learning": true,
+          "computer vision": true,
+          "explainable artificial intelligence": true,
+          "related intelligent computational methods": true,
+          "research experience": true,
+          "university-level teaching experience": true
+        },
+        "missing_evidence_checks": {},
+        "unexpected_aligned_areas": [],
+        "unexpected_missing_areas": [
+          "computer vision",
+          "deep learning",
+          "explainable artificial intelligence",
+          "machine learning",
+          "related intelligent computational methods"
+        ],
+        "contradictory_areas": [
+          "computer vision",
+          "deep learning",
+          "explainable artificial intelligence",
+          "related intelligent computational methods"
+        ],
+        "duplicate_aligned_areas": [],
+        "duplicate_missing_areas": [],
+        "logical_consistency_scope": "duplicate_labels_and_cross_section_overlap",
+        "logical_consistency": false
+      }
+    },
+    {
+      "run_id": "6d71eb01-1367-40d9-a7b6-d889e65d8e05",
+      "test_id": "test_04_explainable_alignment",
+      "case_id": "candidate_a",
+      "run_number": 3,
+      "latency_seconds": 126.02761330001522,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 2055,
+        "output_tokens": 723,
+        "load_duration_ms": 28.8427,
+        "total_duration_ms": 125999.1442,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "alignment_area_precision": 1.0,
+        "alignment_area_recall": 0.875,
+        "alignment_area_f1": 0.9333333333333333,
+        "missing_evidence_accuracy": 0.0,
+        "evidence_checks": {
+          "artificial intelligence": false,
+          "machine learning": false,
+          "deep learning": true,
+          "computer vision": true,
+          "explainable artificial intelligence": true,
+          "related intelligent computational methods": true,
+          "research experience": true,
+          "university-level teaching experience": true
+        },
+        "missing_evidence_checks": {},
+        "unexpected_aligned_areas": [],
+        "unexpected_missing_areas": [
+          "computer vision",
+          "deep learning",
+          "explainable artificial intelligence",
+          "machine learning",
+          "related intelligent computational methods"
+        ],
+        "contradictory_areas": [
+          "computer vision",
+          "deep learning",
+          "explainable artificial intelligence",
+          "related intelligent computational methods"
+        ],
+        "duplicate_aligned_areas": [],
+        "duplicate_missing_areas": [],
+        "logical_consistency_scope": "duplicate_labels_and_cross_section_overlap",
+        "logical_consistency": false
+      }
+    },
+    {
+      "run_id": "1d138b17-cb40-48b1-87c3-d3f91d1c3fc8",
+      "test_id": "test_04_explainable_alignment",
+      "case_id": "candidate_b",
+      "run_number": 1,
+      "latency_seconds": 166.67697049991693,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1987,
+        "output_tokens": 783,
+        "load_duration_ms": 34.224,
+        "total_duration_ms": 166627.4466,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "alignment_area_precision": 0.5,
+        "alignment_area_recall": 1.0,
+        "alignment_area_f1": 0.6666666666666666,
+        "missing_evidence_accuracy": 0.75,
+        "evidence_checks": {
+          "machine learning": true,
+          "related intelligent computational methods": true,
+          "research experience": true,
+          "university-level teaching experience": true
+        },
+        "missing_evidence_checks": {
+          "artificial intelligence": false,
+          "explainable artificial intelligence": true,
+          "deep learning": true,
+          "computer vision": true
+        },
+        "unexpected_aligned_areas": [
+          "artificial intelligence",
+          "computer vision",
+          "deep learning",
+          "explainable artificial intelligence"
+        ],
+        "unexpected_missing_areas": [],
+        "contradictory_areas": [
+          "computer vision",
+          "deep learning",
+          "explainable artificial intelligence"
+        ],
+        "duplicate_aligned_areas": [],
+        "duplicate_missing_areas": [],
+        "logical_consistency_scope": "duplicate_labels_and_cross_section_overlap",
+        "logical_consistency": false
+      }
+    },
+    {
+      "run_id": "93ff16a9-7798-4b0b-9096-152acdd1af81",
+      "test_id": "test_04_explainable_alignment",
+      "case_id": "candidate_b",
+      "run_number": 2,
+      "latency_seconds": 147.2889793999493,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1987,
+        "output_tokens": 846,
+        "load_duration_ms": 17.5884,
+        "total_duration_ms": 147252.0805,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "alignment_area_precision": 0.5,
+        "alignment_area_recall": 1.0,
+        "alignment_area_f1": 0.6666666666666666,
+        "missing_evidence_accuracy": 0.75,
+        "evidence_checks": {
+          "machine learning": true,
+          "related intelligent computational methods": true,
+          "research experience": false,
+          "university-level teaching experience": true
+        },
+        "missing_evidence_checks": {
+          "artificial intelligence": false,
+          "explainable artificial intelligence": true,
+          "deep learning": true,
+          "computer vision": true
+        },
+        "unexpected_aligned_areas": [
+          "artificial intelligence",
+          "computer vision",
+          "deep learning",
+          "explainable artificial intelligence"
+        ],
+        "unexpected_missing_areas": [],
+        "contradictory_areas": [
+          "computer vision",
+          "deep learning",
+          "explainable artificial intelligence"
+        ],
+        "duplicate_aligned_areas": [],
+        "duplicate_missing_areas": [],
+        "logical_consistency_scope": "duplicate_labels_and_cross_section_overlap",
+        "logical_consistency": false
+      }
+    },
+    {
+      "run_id": "3108a9cc-40b1-4e42-a353-980c89cc655c",
+      "test_id": "test_04_explainable_alignment",
+      "case_id": "candidate_b",
+      "run_number": 3,
+      "latency_seconds": 166.6450266999891,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1987,
+        "output_tokens": 846,
+        "load_duration_ms": 17.5873,
+        "total_duration_ms": 166612.7324,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "alignment_area_precision": 0.5,
+        "alignment_area_recall": 1.0,
+        "alignment_area_f1": 0.6666666666666666,
+        "missing_evidence_accuracy": 0.75,
+        "evidence_checks": {
+          "machine learning": true,
+          "related intelligent computational methods": true,
+          "research experience": false,
+          "university-level teaching experience": true
+        },
+        "missing_evidence_checks": {
+          "artificial intelligence": false,
+          "explainable artificial intelligence": true,
+          "deep learning": true,
+          "computer vision": true
+        },
+        "unexpected_aligned_areas": [
+          "artificial intelligence",
+          "computer vision",
+          "deep learning",
+          "explainable artificial intelligence"
+        ],
+        "unexpected_missing_areas": [],
+        "contradictory_areas": [
+          "computer vision",
+          "deep learning",
+          "explainable artificial intelligence"
+        ],
+        "duplicate_aligned_areas": [],
+        "duplicate_missing_areas": [],
+        "logical_consistency_scope": "duplicate_labels_and_cross_section_overlap",
+        "logical_consistency": false
+      }
+    },
+    {
+      "run_id": "148b002b-3713-47cf-adac-e86c00058cda",
+      "test_id": "test_04_explainable_alignment",
+      "case_id": "candidate_c",
+      "run_number": 1,
+      "latency_seconds": 164.38045950001106,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 2041,
+        "output_tokens": 636,
+        "load_duration_ms": 17.6013,
+        "total_duration_ms": 164067.0459,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": false,
+        "alignment_area_precision": null,
+        "alignment_area_recall": null,
+        "alignment_area_f1": null,
+        "missing_evidence_accuracy": null,
+        "evidence_checks": {},
+        "missing_evidence_checks": {}
+      }
+    },
+    {
+      "run_id": "3db3461e-2b6d-45e6-9a9e-62d6b8c1b054",
+      "test_id": "test_04_explainable_alignment",
+      "case_id": "candidate_c",
+      "run_number": 2,
+      "latency_seconds": 132.35339249996468,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 2041,
+        "output_tokens": 678,
+        "load_duration_ms": 44.5213,
+        "total_duration_ms": 132309.0198,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": false,
+        "alignment_area_precision": null,
+        "alignment_area_recall": null,
+        "alignment_area_f1": null,
+        "missing_evidence_accuracy": null,
+        "evidence_checks": {},
+        "missing_evidence_checks": {}
+      }
+    },
+    {
+      "run_id": "c27b46ac-a29f-4e6e-9f28-f5d8f08b20e1",
+      "test_id": "test_04_explainable_alignment",
+      "case_id": "candidate_c",
+      "run_number": 3,
+      "latency_seconds": 131.05176169995684,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 2041,
+        "output_tokens": 678,
+        "load_duration_ms": 24.0579,
+        "total_duration_ms": 131020.5312,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": false,
+        "alignment_area_precision": null,
+        "alignment_area_recall": null,
+        "alignment_area_f1": null,
+        "missing_evidence_accuracy": null,
+        "evidence_checks": {},
+        "missing_evidence_checks": {}
+      }
+    },
+    {
+      "run_id": "35d1ac4b-aa49-4323-903c-d413b7d64d74",
+      "test_id": "test_05_grounded_qa",
+      "case_id": "candidate_a",
+      "run_number": 1,
+      "latency_seconds": 64.62682110001333,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1326,
+        "output_tokens": 263,
+        "load_duration_ms": 20.021,
+        "total_duration_ms": 64572.4365,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "course_precision": 1.0,
+        "course_recall": 1.0,
+        "course_f1": 1.0,
+        "course_detail_accuracy": 0.2,
+        "course_detail_checks": {
+          "Machine Learning": {
+            "course_title": true,
+            "institution_name": false,
+            "academic_year": false,
+            "course_level": false,
+            "teaching_role": false
+          },
+          "Computer Vision": {
+            "course_title": true,
+            "institution_name": false,
+            "academic_year": false,
+            "course_level": false,
+            "teaching_role": false
+          },
+          "Introduction to Artificial Intelligence": {
+            "course_title": true,
+            "institution_name": false,
+            "academic_year": false,
+            "course_level": false,
+            "teaching_role": false
+          }
+        },
+        "found_courses": [
+          "computer vision",
+          "introduction to artificial intelligence",
+          "machine learning"
+        ],
+        "missing_courses": [],
+        "unexpected_topics": [],
+        "unexpected_course_lines": [],
+        "unexpected_courses": [],
+        "course_contradictions": [],
+        "has_course_contradictions": false
+      }
+    },
+    {
+      "run_id": "9e9c577d-2a6d-4cca-b34b-35451770f781",
+      "test_id": "test_05_grounded_qa",
+      "case_id": "candidate_a",
+      "run_number": 2,
+      "latency_seconds": 37.528528499999084,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1326,
+        "output_tokens": 263,
+        "load_duration_ms": 13.1131,
+        "total_duration_ms": 37507.2277,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "course_precision": 1.0,
+        "course_recall": 1.0,
+        "course_f1": 1.0,
+        "course_detail_accuracy": 0.2,
+        "course_detail_checks": {
+          "Machine Learning": {
+            "course_title": true,
+            "institution_name": false,
+            "academic_year": false,
+            "course_level": false,
+            "teaching_role": false
+          },
+          "Computer Vision": {
+            "course_title": true,
+            "institution_name": false,
+            "academic_year": false,
+            "course_level": false,
+            "teaching_role": false
+          },
+          "Introduction to Artificial Intelligence": {
+            "course_title": true,
+            "institution_name": false,
+            "academic_year": false,
+            "course_level": false,
+            "teaching_role": false
+          }
+        },
+        "found_courses": [
+          "computer vision",
+          "introduction to artificial intelligence",
+          "machine learning"
+        ],
+        "missing_courses": [],
+        "unexpected_topics": [],
+        "unexpected_course_lines": [],
+        "unexpected_courses": [],
+        "course_contradictions": [],
+        "has_course_contradictions": false
+      }
+    },
+    {
+      "run_id": "bc03939f-d474-4297-96a9-3258664bc827",
+      "test_id": "test_05_grounded_qa",
+      "case_id": "candidate_a",
+      "run_number": 3,
+      "latency_seconds": 37.08011900004931,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1326,
+        "output_tokens": 263,
+        "load_duration_ms": 20.2045,
+        "total_duration_ms": 37059.6786,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "course_precision": 1.0,
+        "course_recall": 1.0,
+        "course_f1": 1.0,
+        "course_detail_accuracy": 0.2,
+        "course_detail_checks": {
+          "Machine Learning": {
+            "course_title": true,
+            "institution_name": false,
+            "academic_year": false,
+            "course_level": false,
+            "teaching_role": false
+          },
+          "Computer Vision": {
+            "course_title": true,
+            "institution_name": false,
+            "academic_year": false,
+            "course_level": false,
+            "teaching_role": false
+          },
+          "Introduction to Artificial Intelligence": {
+            "course_title": true,
+            "institution_name": false,
+            "academic_year": false,
+            "course_level": false,
+            "teaching_role": false
+          }
+        },
+        "found_courses": [
+          "computer vision",
+          "introduction to artificial intelligence",
+          "machine learning"
+        ],
+        "missing_courses": [],
+        "unexpected_topics": [],
+        "unexpected_course_lines": [],
+        "unexpected_courses": [],
+        "course_contradictions": [],
+        "has_course_contradictions": false
+      }
+    },
+    {
+      "run_id": "8f4b4b19-f260-487a-b24f-44a8fc2a4f19",
+      "test_id": "test_06_missing_thesis",
+      "case_id": "candidate_a",
+      "run_number": 1,
+      "latency_seconds": 24.307423099991865,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1284,
+        "output_tokens": 9,
+        "load_duration_ms": 13.5777,
+        "total_duration_ms": 24288.573,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "exact_match": true,
+        "semantic_abstention": true,
+        "expected_response": "Information not available in the provided context.",
+        "normalized_response": "Information not available in the provided context."
+      }
+    },
+    {
+      "run_id": "e6efcfe7-c460-4d32-a3ff-039a26358c29",
+      "test_id": "test_06_missing_thesis",
+      "case_id": "candidate_a",
+      "run_number": 2,
+      "latency_seconds": 1.3170487999450415,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1284,
+        "output_tokens": 9,
+        "load_duration_ms": 18.6429,
+        "total_duration_ms": 1292.8965,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "exact_match": true,
+        "semantic_abstention": true,
+        "expected_response": "Information not available in the provided context.",
+        "normalized_response": "Information not available in the provided context."
+      }
+    },
+    {
+      "run_id": "1652aaf4-3d7d-4d18-b0f1-07f4a52ed4fd",
+      "test_id": "test_06_missing_thesis",
+      "case_id": "candidate_a",
+      "run_number": 3,
+      "latency_seconds": 1.4453098000958562,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1284,
+        "output_tokens": 9,
+        "load_duration_ms": 12.0425,
+        "total_duration_ms": 1393.5398,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "exact_match": true,
+        "semantic_abstention": true,
+        "expected_response": "Information not available in the provided context.",
+        "normalized_response": "Information not available in the provided context."
+      }
+    },
+    {
+      "run_id": "4be27943-f836-47e0-8638-56ad99b7e1a3",
+      "test_id": "test_07_missing_hindex",
+      "case_id": "candidate_a",
+      "run_number": 1,
+      "latency_seconds": 30.11336710001342,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1305,
+        "output_tokens": 9,
+        "load_duration_ms": 17.4101,
+        "total_duration_ms": 30094.2988,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "exact_match": true,
+        "semantic_abstention": true,
+        "expected_response": "Cannot be determined from the provided context.",
+        "normalized_response": "Cannot be determined from the provided context."
+      }
+    },
+    {
+      "run_id": "df9867d3-50b5-4ddd-87e1-66a67a641ea6",
+      "test_id": "test_07_missing_hindex",
+      "case_id": "candidate_a",
+      "run_number": 2,
+      "latency_seconds": 1.2232721999753267,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1305,
+        "output_tokens": 9,
+        "load_duration_ms": 26.533,
+        "total_duration_ms": 1207.6466,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "exact_match": true,
+        "semantic_abstention": true,
+        "expected_response": "Cannot be determined from the provided context.",
+        "normalized_response": "Cannot be determined from the provided context."
+      }
+    },
+    {
+      "run_id": "e39ad009-cf69-40c2-a5b5-15edf88946f8",
+      "test_id": "test_07_missing_hindex",
+      "case_id": "candidate_a",
+      "run_number": 3,
+      "latency_seconds": 1.3761789000127465,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1305,
+        "output_tokens": 9,
+        "load_duration_ms": 21.1905,
+        "total_duration_ms": 1359.3261,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "exact_match": true,
+        "semantic_abstention": true,
+        "expected_response": "Cannot be determined from the provided context.",
+        "normalized_response": "Cannot be determined from the provided context."
+      }
+    },
+    {
+      "run_id": "91c27223-98aa-44f2-aa53-023520231208",
+      "test_id": "test_08_evidence_retrieval",
+      "case_id": "candidate_a",
+      "run_number": 1,
+      "latency_seconds": 81.95847870002035,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1671,
+        "output_tokens": 287,
+        "load_duration_ms": 15.1847,
+        "total_duration_ms": 81915.6011,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "publication_precision": 1.0,
+        "publication_year_accuracy": 1.0,
+        "position_area_accuracy": 0.8,
+        "maximum_item_compliance": true
+      }
+    },
+    {
+      "run_id": "aa51866f-6fa0-4eb1-9f57-3ebe5d72e8d0",
+      "test_id": "test_08_evidence_retrieval",
+      "case_id": "candidate_a",
+      "run_number": 2,
+      "latency_seconds": 35.17850990011357,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1671,
+        "output_tokens": 251,
+        "load_duration_ms": 11.5518,
+        "total_duration_ms": 35141.2383,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "publication_precision": 1.0,
+        "publication_year_accuracy": 1.0,
+        "position_area_accuracy": 0.6,
+        "maximum_item_compliance": true
+      }
+    },
+    {
+      "run_id": "0e734a46-0f4c-4d79-84d1-8d1ee5492d29",
+      "test_id": "test_08_evidence_retrieval",
+      "case_id": "candidate_a",
+      "run_number": 3,
+      "latency_seconds": 35.30888429994229,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1671,
+        "output_tokens": 251,
+        "load_duration_ms": 20.5884,
+        "total_duration_ms": 35245.8247,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "publication_precision": 1.0,
+        "publication_year_accuracy": 1.0,
+        "position_area_accuracy": 0.6,
+        "maximum_item_compliance": true
+      }
+    },
+    {
+      "run_id": "15c4afc6-57f9-466d-a82d-c4f25cfd6534",
+      "test_id": "test_09_potential_gaps",
+      "case_id": "candidate_a",
+      "run_number": 1,
+      "latency_seconds": 55.9209934999235,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1730,
+        "output_tokens": 134,
+        "load_duration_ms": 14.0691,
+        "total_duration_ms": 55888.2409,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "gap_precision": 0.0,
+        "gap_recall": 0.0,
+        "gap_f1": 0.0
+      }
+    },
+    {
+      "run_id": "311550f4-b9d2-499e-8a80-0587c3a7b564",
+      "test_id": "test_09_potential_gaps",
+      "case_id": "candidate_a",
+      "run_number": 2,
+      "latency_seconds": 21.516143499989994,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1730,
+        "output_tokens": 134,
+        "load_duration_ms": 24.4433,
+        "total_duration_ms": 21494.9459,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "gap_precision": 0.0,
+        "gap_recall": 0.0,
+        "gap_f1": 0.0
+      }
+    },
+    {
+      "run_id": "96f0e77a-d62e-46d6-87d3-4f0b700bba49",
+      "test_id": "test_09_potential_gaps",
+      "case_id": "candidate_a",
+      "run_number": 3,
+      "latency_seconds": 23.388481299974956,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1730,
+        "output_tokens": 134,
+        "load_duration_ms": 20.1749,
+        "total_duration_ms": 23362.289,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "gap_precision": 0.0,
+        "gap_recall": 0.0,
+        "gap_f1": 0.0
+      }
+    },
+    {
+      "run_id": "5ffc36ff-f427-4f93-b63d-480f3090fca6",
+      "test_id": "test_09_potential_gaps",
+      "case_id": "candidate_b",
+      "run_number": 1,
+      "latency_seconds": 43.9188165999949,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1662,
+        "output_tokens": 115,
+        "load_duration_ms": 26.6145,
+        "total_duration_ms": 43891.0176,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "gap_precision": 0.0,
+        "gap_recall": 0.0,
+        "gap_f1": 0.0
+      }
+    },
+    {
+      "run_id": "ff309eb9-f263-473d-aba9-a87626dcc852",
+      "test_id": "test_09_potential_gaps",
+      "case_id": "candidate_b",
+      "run_number": 2,
+      "latency_seconds": 18.536942099919543,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1662,
+        "output_tokens": 121,
+        "load_duration_ms": 25.0677,
+        "total_duration_ms": 18491.6742,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "gap_precision": 0.0,
+        "gap_recall": 0.0,
+        "gap_f1": 0.0
+      }
+    },
+    {
+      "run_id": "fbbca3cd-e3a7-4d14-8ff3-2ea832df6890",
+      "test_id": "test_09_potential_gaps",
+      "case_id": "candidate_b",
+      "run_number": 3,
+      "latency_seconds": 22.184525500051677,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1662,
+        "output_tokens": 121,
+        "load_duration_ms": 24.4743,
+        "total_duration_ms": 22121.1541,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "gap_precision": 0.0,
+        "gap_recall": 0.0,
+        "gap_f1": 0.0
+      }
+    },
+    {
+      "run_id": "03e6e19c-4366-4d03-9446-bebabceb49ee",
+      "test_id": "test_09_potential_gaps",
+      "case_id": "candidate_c",
+      "run_number": 1,
+      "latency_seconds": 50.219346300000325,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1716,
+        "output_tokens": 145,
+        "load_duration_ms": 17.4553,
+        "total_duration_ms": 50188.304,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "gap_precision": 0.0,
+        "gap_recall": 0.0,
+        "gap_f1": 0.0
+      }
+    },
+    {
+      "run_id": "5b398dee-5419-474d-8326-edfd216f9f89",
+      "test_id": "test_09_potential_gaps",
+      "case_id": "candidate_c",
+      "run_number": 2,
+      "latency_seconds": 21.858961599995382,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1716,
+        "output_tokens": 141,
+        "load_duration_ms": 27.5591,
+        "total_duration_ms": 21833.8357,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "gap_precision": 0.0,
+        "gap_recall": 0.0,
+        "gap_f1": 0.0
+      }
+    },
+    {
+      "run_id": "5d0b7c88-4848-4ae1-ac1e-fa631cd65842",
+      "test_id": "test_09_potential_gaps",
+      "case_id": "candidate_c",
+      "run_number": 3,
+      "latency_seconds": 22.432722500059754,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1716,
+        "output_tokens": 141,
+        "load_duration_ms": 21.7029,
+        "total_duration_ms": 22418.8278,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "gap_precision": 0.0,
+        "gap_recall": 0.0,
+        "gap_f1": 0.0
+      }
+    },
+    {
+      "run_id": "0bb145ec-00d3-4349-9b5a-7707c3d44fb1",
+      "test_id": "test_10_greek_qa",
+      "case_id": "candidate_a_gr",
+      "run_number": 1,
+      "latency_seconds": 359.4345221000258,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 3853,
+        "output_tokens": 701,
+        "load_duration_ms": 19.4486,
+        "total_duration_ms": 359218.9779,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "word_count": 108,
+        "word_count_compliance": true,
+        "research_area_coverage": 0.75,
+        "evidence_validity": 1.0,
+        "maximum_item_compliance": true,
+        "recognized_evidence_titles": [
+          "Μέθοδοι Μηχανικής Μάθησης για την Υποστήριξη Κλινικών Αποφάσεων"
+        ],
+        "enumerated_evidence_items": 3,
+        "evidence_review_required": true,
+        "greek_response": true
+      }
+    },
+    {
+      "run_id": "ae37d1c7-f08f-4e90-897c-2ff340a9190b",
+      "test_id": "test_10_greek_qa",
+      "case_id": "candidate_a_gr",
+      "run_number": 2,
+      "latency_seconds": 440.1441300000297,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 3853,
+        "output_tokens": 860,
+        "load_duration_ms": 31.6115,
+        "total_duration_ms": 426939.9119,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "word_count": 130,
+        "word_count_compliance": true,
+        "research_area_coverage": 0.75,
+        "evidence_validity": 1.0,
+        "maximum_item_compliance": true,
+        "recognized_evidence_titles": [
+          "Μεταφορά Μάθησης για Οπτική Αναγνώριση",
+          "Αποδοτικές Αρχιτεκτονικές CNN για Ανάλυση Εικόνων",
+          "Τεχνητή Νοημοσύνη για Ιατρική Απεικόνιση"
+        ],
+        "enumerated_evidence_items": 3,
+        "evidence_review_required": true,
+        "greek_response": true
+      }
+    },
+    {
+      "run_id": "80876f22-5399-4a9e-b781-785db0594577",
+      "test_id": "test_10_greek_qa",
+      "case_id": "candidate_a_gr",
+      "run_number": 3,
+      "latency_seconds": 539.5904863000615,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 3853,
+        "output_tokens": 860,
+        "load_duration_ms": 29.4526,
+        "total_duration_ms": 539346.5994,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "word_count": 130,
+        "word_count_compliance": true,
+        "research_area_coverage": 0.75,
+        "evidence_validity": 1.0,
+        "maximum_item_compliance": true,
+        "recognized_evidence_titles": [
+          "Μεταφορά Μάθησης για Οπτική Αναγνώριση",
+          "Αποδοτικές Αρχιτεκτονικές CNN για Ανάλυση Εικόνων",
+          "Τεχνητή Νοημοσύνη για Ιατρική Απεικόνιση"
+        ],
+        "enumerated_evidence_items": 3,
+        "evidence_review_required": true,
+        "greek_response": true
+      }
+    },
+    {
+      "run_id": "84c1718e-0ed9-4a43-9a7f-7a92e75a7885",
+      "test_id": "test_11_greek_json",
+      "case_id": "candidate_a_gr",
+      "run_number": 1,
+      "latency_seconds": 469.1302678999491,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 4441,
+        "output_tokens": 1201,
+        "load_duration_ms": 55.2943,
+        "total_duration_ms": 469023.9673,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "exact_keys": true,
+        "highest_degree_selection": true,
+        "name_accuracy": true,
+        "specialization_accuracy": true,
+        "research_areas_exact_match": true,
+        "publication_precision": 1.0,
+        "publication_recall": 1.0,
+        "publication_f1": 1.0,
+        "teaching_precision": 1.0,
+        "teaching_recall": 1.0,
+        "teaching_f1": 1.0,
+        "research_project_accuracy": 1.0,
+        "greek_value_consistency": 1.0
+      }
+    },
+    {
+      "run_id": "30ad6d61-d60c-4682-939f-4ac06b9dac65",
+      "test_id": "test_11_greek_json",
+      "case_id": "candidate_a_gr",
+      "run_number": 2,
+      "latency_seconds": 334.06671189994086,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 4441,
+        "output_tokens": 1201,
+        "load_duration_ms": 28.516,
+        "total_duration_ms": 333981.8887,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "exact_keys": true,
+        "highest_degree_selection": true,
+        "name_accuracy": true,
+        "specialization_accuracy": true,
+        "research_areas_exact_match": true,
+        "publication_precision": 1.0,
+        "publication_recall": 1.0,
+        "publication_f1": 1.0,
+        "teaching_precision": 1.0,
+        "teaching_recall": 1.0,
+        "teaching_f1": 1.0,
+        "research_project_accuracy": 1.0,
+        "greek_value_consistency": 1.0
+      }
+    },
+    {
+      "run_id": "f964d749-6a1d-4f89-91c1-4cf0f9c6f135",
+      "test_id": "test_11_greek_json",
+      "case_id": "candidate_a_gr",
+      "run_number": 3,
+      "latency_seconds": 332.40076830005273,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 4441,
+        "output_tokens": 1201,
+        "load_duration_ms": 31.6153,
+        "total_duration_ms": 332350.75,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "exact_keys": true,
+        "highest_degree_selection": true,
+        "name_accuracy": true,
+        "specialization_accuracy": true,
+        "research_areas_exact_match": true,
+        "publication_precision": 1.0,
+        "publication_recall": 1.0,
+        "publication_f1": 1.0,
+        "teaching_precision": 1.0,
+        "teaching_recall": 1.0,
+        "teaching_f1": 1.0,
+        "research_project_accuracy": 1.0,
+        "greek_value_consistency": 1.0
+      }
+    },
+    {
+      "run_id": "09b86188-5c13-481a-ac1f-c09699db81cd",
+      "test_id": "test_12_adversarial_grounding",
+      "case_id": "candidate_a",
+      "run_number": 1,
+      "latency_seconds": 75.15088650002144,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1616,
+        "output_tokens": 278,
+        "load_duration_ms": 17.1618,
+        "total_duration_ms": 75071.9995,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "claim_count": 4,
+        "claim_classification_accuracy": 0.0,
+        "supported_unsupported_distinction": false,
+        "unsupported_contradicted_distinction": false,
+        "evidence_accuracy": 0.0
+      }
+    },
+    {
+      "run_id": "45b79a75-82a6-4275-a912-bb00aa200396",
+      "test_id": "test_12_adversarial_grounding",
+      "case_id": "candidate_a",
+      "run_number": 2,
+      "latency_seconds": 41.444590499973856,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1616,
+        "output_tokens": 281,
+        "load_duration_ms": 14.394,
+        "total_duration_ms": 41414.9694,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "claim_count": 4,
+        "claim_classification_accuracy": 0.0,
+        "supported_unsupported_distinction": false,
+        "unsupported_contradicted_distinction": false,
+        "evidence_accuracy": 0.0
+      }
+    },
+    {
+      "run_id": "ae041e67-df2b-4d05-8694-1fc7b6a5a38c",
+      "test_id": "test_12_adversarial_grounding",
+      "case_id": "candidate_a",
+      "run_number": 3,
+      "latency_seconds": 38.34569989994634,
+      "runtime_metadata": {
+        "finish_reason": "stop",
+        "output_truncated": false,
+        "input_tokens": 1616,
+        "output_tokens": 281,
+        "load_duration_ms": 12.7281,
+        "total_duration_ms": 38321.9619,
+        "requested_context_length": 8192,
+        "thinking_enabled": false,
+        "timeout_seconds": 600.0
+      },
+      "stored_automatic_metrics": {
+        "json_validity": true,
+        "schema_compliance": true,
+        "claim_count": 4,
+        "claim_classification_accuracy": 0.0,
+        "supported_unsupported_distinction": false,
+        "unsupported_contradicted_distinction": false,
+        "evidence_accuracy": 0.0
+      }
+    }
+  ],
+  "scoring_audit_v1": {
+    "scorer_version": "ollama-scoring-audit-v1",
+    "source_batch_id": "c42e7725-2ed4-49d3-8ce9-2c05ccfcf61e",
+    "source_archive_sha256": "87b475f2c09ff1c85a1cb4a280a9362e044696d673250cc3b756f9a7b1b5e2e8",
+    "source_run_count": 66,
+    "audit_run_count": 15,
+    "artifact_sha256": {
+      "/workspace/scratch/6f7a6605fada/outputs/scoring_audit/evaluators/test_02.py": "3b77dd79c1492cb701f610714e9b76bf050276c61a24dc0fb8c5e7219671a83f",
+      "/workspace/scratch/6f7a6605fada/outputs/scoring_audit/evaluators/test_05.py": "9651126dd14e6fa3e988b7566d32843b22bcccf4856efd675e806bec6c0ce2b4",
+      "/workspace/scratch/6f7a6605fada/outputs/scoring_audit/evaluators/test_12.py": "501c649b331871b190b43d1dcddc40012ab11d7603d24ca843de6c51dabffa85",
+      "/workspace/scratch/6f7a6605fada/outputs/scoring_audit/expected/test_02_expected.json": "b0d244a4d424f7d8a00a2e51493cd606a37e4e396c41499ac247f2cb4061f741",
+      "/workspace/scratch/6f7a6605fada/outputs/scoring_audit/expected/test_05_expected.json": "23e800e342f3765ae285592e81981c0454a12b6ef00ae20190ff6ac52a3ade1c",
+      "/workspace/scratch/6f7a6605fada/outputs/scoring_audit/expected/test_12_expected.json": "195867590d80b755ba99355a0ea594d111dc6899aac3dd097fb0d43b775d89b6",
+      "/workspace/scratch/6f7a6605fada/outputs/scoring_audit/rescore_ollama_audit.py": "bf4a5d949d6b17f955bb9357b5e60b36993c844253ec5b3a526e43693a74e83a"
+    },
+    "scope": "Tests 02, 05, 12 only; generation, runtime metadata, and original files unchanged",
+    "limitations": [
+      "Coverage and evidence scores are lexical recognition heuristics, not semantic grounding scores.",
+      "Test05 non-JSON answers still use the conservative same-line text baseline.",
+      "No contradicted reference claim exists in this Test12 case; that distinction is untested (null)."
+    ],
+    "entries": [
+      {
+        "run_id": "2cdc8f21-f620-419a-9d2e-fa1a913baf18",
+        "test_id": "test_02_summary",
+        "case_id": "candidate_a",
+        "run_number": 1,
+        "original_archive_member": "candidate_a_run_1_2cdc8f21-f620-419a-9d2e-fa1a913baf18.json",
+        "original_metrics": {
+          "word_count": 132,
+          "word_count_compliance": true,
+          "required_facts_coverage": 0.6666666666666666,
+          "required_facts_checks": {
+            "specialization": true,
+            "research_areas": true,
+            "education": true,
+            "publications": false,
+            "research_projects": false,
+            "teaching_experience": true
+          }
+        },
+        "rescored_metrics": {
+          "word_count": 132,
+          "word_count_compliance": true,
+          "required_facts_coverage": 1.0,
+          "required_facts_checks": {
+            "specialization": true,
+            "research_areas": true,
+            "education": true,
+            "publications": true,
+            "research_projects": true,
+            "teaching_experience": true
+          }
+        },
+        "changed_fields": [
+          "required_facts_checks",
+          "required_facts_coverage"
+        ]
+      },
+      {
+        "run_id": "c180bf09-76ab-481e-8fc3-c643600a739a",
+        "test_id": "test_02_summary",
+        "case_id": "candidate_a",
+        "run_number": 2,
+        "original_archive_member": "candidate_a_run_2_c180bf09-76ab-481e-8fc3-c643600a739a.json",
+        "original_metrics": {
+          "word_count": 121,
+          "word_count_compliance": true,
+          "required_facts_coverage": 0.6666666666666666,
+          "required_facts_checks": {
+            "specialization": true,
+            "research_areas": true,
+            "education": true,
+            "publications": false,
+            "research_projects": false,
+            "teaching_experience": true
+          }
+        },
+        "rescored_metrics": {
+          "word_count": 121,
+          "word_count_compliance": true,
+          "required_facts_coverage": 0.8333333333333334,
+          "required_facts_checks": {
+            "specialization": true,
+            "research_areas": true,
+            "education": true,
+            "publications": false,
+            "research_projects": true,
+            "teaching_experience": true
+          }
+        },
+        "changed_fields": [
+          "required_facts_checks",
+          "required_facts_coverage"
+        ]
+      },
+      {
+        "run_id": "1436406e-5c73-4088-aa79-2667f16ee0d0",
+        "test_id": "test_02_summary",
+        "case_id": "candidate_a",
+        "run_number": 3,
+        "original_archive_member": "candidate_a_run_3_1436406e-5c73-4088-aa79-2667f16ee0d0.json",
+        "original_metrics": {
+          "word_count": 121,
+          "word_count_compliance": true,
+          "required_facts_coverage": 0.6666666666666666,
+          "required_facts_checks": {
+            "specialization": true,
+            "research_areas": true,
+            "education": true,
+            "publications": false,
+            "research_projects": false,
+            "teaching_experience": true
+          }
+        },
+        "rescored_metrics": {
+          "word_count": 121,
+          "word_count_compliance": true,
+          "required_facts_coverage": 0.8333333333333334,
+          "required_facts_checks": {
+            "specialization": true,
+            "research_areas": true,
+            "education": true,
+            "publications": false,
+            "research_projects": true,
+            "teaching_experience": true
+          }
+        },
+        "changed_fields": [
+          "required_facts_checks",
+          "required_facts_coverage"
+        ]
+      },
+      {
+        "run_id": "9f4eb258-49c0-4028-a63e-3c4fb4d927a0",
+        "test_id": "test_02_summary",
+        "case_id": "candidate_b",
+        "run_number": 1,
+        "original_archive_member": "candidate_b_run_1_9f4eb258-49c0-4028-a63e-3c4fb4d927a0.json",
+        "original_metrics": {
+          "word_count": 123,
+          "word_count_compliance": true,
+          "required_facts_coverage": 0.6666666666666666,
+          "required_facts_checks": {
+            "specialization": true,
+            "research_areas": true,
+            "education": true,
+            "publications": false,
+            "research_projects": false,
+            "teaching_experience": true
+          }
+        },
+        "rescored_metrics": {
+          "word_count": 123,
+          "word_count_compliance": true,
+          "required_facts_coverage": 1.0,
+          "required_facts_checks": {
+            "specialization": true,
+            "research_areas": true,
+            "education": true,
+            "publications": true,
+            "research_projects": true,
+            "teaching_experience": true
+          }
+        },
+        "changed_fields": [
+          "required_facts_checks",
+          "required_facts_coverage"
+        ]
+      },
+      {
+        "run_id": "3d00a0bf-f71a-4891-bb80-1b8e2750dd26",
+        "test_id": "test_02_summary",
+        "case_id": "candidate_b",
+        "run_number": 2,
+        "original_archive_member": "candidate_b_run_2_3d00a0bf-f71a-4891-bb80-1b8e2750dd26.json",
+        "original_metrics": {
+          "word_count": 120,
+          "word_count_compliance": true,
+          "required_facts_coverage": 0.6666666666666666,
+          "required_facts_checks": {
+            "specialization": true,
+            "research_areas": true,
+            "education": true,
+            "publications": false,
+            "research_projects": false,
+            "teaching_experience": true
+          }
+        },
+        "rescored_metrics": {
+          "word_count": 120,
+          "word_count_compliance": true,
+          "required_facts_coverage": 1.0,
+          "required_facts_checks": {
+            "specialization": true,
+            "research_areas": true,
+            "education": true,
+            "publications": true,
+            "research_projects": true,
+            "teaching_experience": true
+          }
+        },
+        "changed_fields": [
+          "required_facts_checks",
+          "required_facts_coverage"
+        ]
+      },
+      {
+        "run_id": "83fa41e0-089c-45f6-9311-8d3422e38160",
+        "test_id": "test_02_summary",
+        "case_id": "candidate_b",
+        "run_number": 3,
+        "original_archive_member": "candidate_b_run_3_83fa41e0-089c-45f6-9311-8d3422e38160.json",
+        "original_metrics": {
+          "word_count": 120,
+          "word_count_compliance": true,
+          "required_facts_coverage": 0.6666666666666666,
+          "required_facts_checks": {
+            "specialization": true,
+            "research_areas": true,
+            "education": true,
+            "publications": false,
+            "research_projects": false,
+            "teaching_experience": true
+          }
+        },
+        "rescored_metrics": {
+          "word_count": 120,
+          "word_count_compliance": true,
+          "required_facts_coverage": 1.0,
+          "required_facts_checks": {
+            "specialization": true,
+            "research_areas": true,
+            "education": true,
+            "publications": true,
+            "research_projects": true,
+            "teaching_experience": true
+          }
+        },
+        "changed_fields": [
+          "required_facts_checks",
+          "required_facts_coverage"
+        ]
+      },
+      {
+        "run_id": "5fffc6c8-69ee-4bb9-92f9-eb215f87d36f",
+        "test_id": "test_02_summary",
+        "case_id": "candidate_c",
+        "run_number": 1,
+        "original_archive_member": "candidate_c_run_1_5fffc6c8-69ee-4bb9-92f9-eb215f87d36f.json",
+        "original_metrics": {
+          "word_count": 128,
+          "word_count_compliance": true,
+          "required_facts_coverage": 0.6666666666666666,
+          "required_facts_checks": {
+            "specialization": true,
+            "research_areas": true,
+            "education": true,
+            "publications": false,
+            "research_projects": false,
+            "teaching_experience": true
+          }
+        },
+        "rescored_metrics": {
+          "word_count": 128,
+          "word_count_compliance": true,
+          "required_facts_coverage": 1.0,
+          "required_facts_checks": {
+            "specialization": true,
+            "research_areas": true,
+            "education": true,
+            "publications": true,
+            "research_projects": true,
+            "teaching_experience": true
+          }
+        },
+        "changed_fields": [
+          "required_facts_checks",
+          "required_facts_coverage"
+        ]
+      },
+      {
+        "run_id": "7ebc02c4-83c9-4182-9349-b279e7e6c1a1",
+        "test_id": "test_02_summary",
+        "case_id": "candidate_c",
+        "run_number": 2,
+        "original_archive_member": "candidate_c_run_2_7ebc02c4-83c9-4182-9349-b279e7e6c1a1.json",
+        "original_metrics": {
+          "word_count": 124,
+          "word_count_compliance": true,
+          "required_facts_coverage": 0.6666666666666666,
+          "required_facts_checks": {
+            "specialization": true,
+            "research_areas": true,
+            "education": true,
+            "publications": false,
+            "research_projects": false,
+            "teaching_experience": true
+          }
+        },
+        "rescored_metrics": {
+          "word_count": 124,
+          "word_count_compliance": true,
+          "required_facts_coverage": 0.8333333333333334,
+          "required_facts_checks": {
+            "specialization": true,
+            "research_areas": true,
+            "education": true,
+            "publications": true,
+            "research_projects": false,
+            "teaching_experience": true
+          }
+        },
+        "changed_fields": [
+          "required_facts_checks",
+          "required_facts_coverage"
+        ]
+      },
+      {
+        "run_id": "9d0c7f2e-7c0c-49ec-a322-1966466d2acb",
+        "test_id": "test_02_summary",
+        "case_id": "candidate_c",
+        "run_number": 3,
+        "original_archive_member": "candidate_c_run_3_9d0c7f2e-7c0c-49ec-a322-1966466d2acb.json",
+        "original_metrics": {
+          "word_count": 124,
+          "word_count_compliance": true,
+          "required_facts_coverage": 0.6666666666666666,
+          "required_facts_checks": {
+            "specialization": true,
+            "research_areas": true,
+            "education": true,
+            "publications": false,
+            "research_projects": false,
+            "teaching_experience": true
+          }
+        },
+        "rescored_metrics": {
+          "word_count": 124,
+          "word_count_compliance": true,
+          "required_facts_coverage": 0.8333333333333334,
+          "required_facts_checks": {
+            "specialization": true,
+            "research_areas": true,
+            "education": true,
+            "publications": true,
+            "research_projects": false,
+            "teaching_experience": true
+          }
+        },
+        "changed_fields": [
+          "required_facts_checks",
+          "required_facts_coverage"
+        ]
+      },
+      {
+        "run_id": "35d1ac4b-aa49-4323-903c-d413b7d64d74",
+        "test_id": "test_05_grounded_qa",
+        "case_id": "candidate_a",
+        "run_number": 1,
+        "original_archive_member": "candidate_a_run_1_35d1ac4b-aa49-4323-903c-d413b7d64d74.json",
+        "original_metrics": {
+          "course_precision": 1.0,
+          "course_recall": 1.0,
+          "course_f1": 1.0,
+          "course_detail_accuracy": 0.2,
+          "course_detail_checks": {
+            "Machine Learning": {
+              "course_title": true,
+              "institution_name": false,
+              "academic_year": false,
+              "course_level": false,
+              "teaching_role": false
+            },
+            "Computer Vision": {
+              "course_title": true,
+              "institution_name": false,
+              "academic_year": false,
+              "course_level": false,
+              "teaching_role": false
+            },
+            "Introduction to Artificial Intelligence": {
+              "course_title": true,
+              "institution_name": false,
+              "academic_year": false,
+              "course_level": false,
+              "teaching_role": false
+            }
+          },
+          "found_courses": [
+            "computer vision",
+            "introduction to artificial intelligence",
+            "machine learning"
+          ],
+          "missing_courses": [],
+          "unexpected_topics": [],
+          "unexpected_course_lines": [],
+          "unexpected_courses": [],
+          "course_contradictions": [],
+          "has_course_contradictions": false
+        },
+        "rescored_metrics": {
+          "course_precision": 1.0,
+          "course_recall": 1.0,
+          "course_f1": 1.0,
+          "course_detail_accuracy": 1.0,
+          "course_detail_checks": {
+            "Machine Learning": {
+              "course_title": true,
+              "institution_name": true,
+              "academic_year": true,
+              "course_level": true,
+              "teaching_role": true
+            },
+            "Computer Vision": {
+              "course_title": true,
+              "institution_name": true,
+              "academic_year": true,
+              "course_level": true,
+              "teaching_role": true
+            },
+            "Introduction to Artificial Intelligence": {
+              "course_title": true,
+              "institution_name": true,
+              "academic_year": true,
+              "course_level": true,
+              "teaching_role": true
+            }
+          },
+          "found_courses": [
+            "computer vision",
+            "introduction to artificial intelligence",
+            "machine learning"
+          ],
+          "missing_courses": [],
+          "unexpected_topics": [],
+          "unexpected_course_lines": [],
+          "unexpected_courses": [],
+          "course_contradictions": [],
+          "has_course_contradictions": false,
+          "duplicate_course_records": [],
+          "invalid_course_record_count": 0,
+          "course_detail_evaluation_mode": "json_records"
+        },
+        "changed_fields": [
+          "course_detail_accuracy",
+          "course_detail_checks",
+          "course_detail_evaluation_mode",
+          "duplicate_course_records",
+          "invalid_course_record_count"
+        ]
+      },
+      {
+        "run_id": "9e9c577d-2a6d-4cca-b34b-35451770f781",
+        "test_id": "test_05_grounded_qa",
+        "case_id": "candidate_a",
+        "run_number": 2,
+        "original_archive_member": "candidate_a_run_2_9e9c577d-2a6d-4cca-b34b-35451770f781.json",
+        "original_metrics": {
+          "course_precision": 1.0,
+          "course_recall": 1.0,
+          "course_f1": 1.0,
+          "course_detail_accuracy": 0.2,
+          "course_detail_checks": {
+            "Machine Learning": {
+              "course_title": true,
+              "institution_name": false,
+              "academic_year": false,
+              "course_level": false,
+              "teaching_role": false
+            },
+            "Computer Vision": {
+              "course_title": true,
+              "institution_name": false,
+              "academic_year": false,
+              "course_level": false,
+              "teaching_role": false
+            },
+            "Introduction to Artificial Intelligence": {
+              "course_title": true,
+              "institution_name": false,
+              "academic_year": false,
+              "course_level": false,
+              "teaching_role": false
+            }
+          },
+          "found_courses": [
+            "computer vision",
+            "introduction to artificial intelligence",
+            "machine learning"
+          ],
+          "missing_courses": [],
+          "unexpected_topics": [],
+          "unexpected_course_lines": [],
+          "unexpected_courses": [],
+          "course_contradictions": [],
+          "has_course_contradictions": false
+        },
+        "rescored_metrics": {
+          "course_precision": 1.0,
+          "course_recall": 1.0,
+          "course_f1": 1.0,
+          "course_detail_accuracy": 1.0,
+          "course_detail_checks": {
+            "Machine Learning": {
+              "course_title": true,
+              "institution_name": true,
+              "academic_year": true,
+              "course_level": true,
+              "teaching_role": true
+            },
+            "Computer Vision": {
+              "course_title": true,
+              "institution_name": true,
+              "academic_year": true,
+              "course_level": true,
+              "teaching_role": true
+            },
+            "Introduction to Artificial Intelligence": {
+              "course_title": true,
+              "institution_name": true,
+              "academic_year": true,
+              "course_level": true,
+              "teaching_role": true
+            }
+          },
+          "found_courses": [
+            "computer vision",
+            "introduction to artificial intelligence",
+            "machine learning"
+          ],
+          "missing_courses": [],
+          "unexpected_topics": [],
+          "unexpected_course_lines": [],
+          "unexpected_courses": [],
+          "course_contradictions": [],
+          "has_course_contradictions": false,
+          "duplicate_course_records": [],
+          "invalid_course_record_count": 0,
+          "course_detail_evaluation_mode": "json_records"
+        },
+        "changed_fields": [
+          "course_detail_accuracy",
+          "course_detail_checks",
+          "course_detail_evaluation_mode",
+          "duplicate_course_records",
+          "invalid_course_record_count"
+        ]
+      },
+      {
+        "run_id": "bc03939f-d474-4297-96a9-3258664bc827",
+        "test_id": "test_05_grounded_qa",
+        "case_id": "candidate_a",
+        "run_number": 3,
+        "original_archive_member": "candidate_a_run_3_bc03939f-d474-4297-96a9-3258664bc827.json",
+        "original_metrics": {
+          "course_precision": 1.0,
+          "course_recall": 1.0,
+          "course_f1": 1.0,
+          "course_detail_accuracy": 0.2,
+          "course_detail_checks": {
+            "Machine Learning": {
+              "course_title": true,
+              "institution_name": false,
+              "academic_year": false,
+              "course_level": false,
+              "teaching_role": false
+            },
+            "Computer Vision": {
+              "course_title": true,
+              "institution_name": false,
+              "academic_year": false,
+              "course_level": false,
+              "teaching_role": false
+            },
+            "Introduction to Artificial Intelligence": {
+              "course_title": true,
+              "institution_name": false,
+              "academic_year": false,
+              "course_level": false,
+              "teaching_role": false
+            }
+          },
+          "found_courses": [
+            "computer vision",
+            "introduction to artificial intelligence",
+            "machine learning"
+          ],
+          "missing_courses": [],
+          "unexpected_topics": [],
+          "unexpected_course_lines": [],
+          "unexpected_courses": [],
+          "course_contradictions": [],
+          "has_course_contradictions": false
+        },
+        "rescored_metrics": {
+          "course_precision": 1.0,
+          "course_recall": 1.0,
+          "course_f1": 1.0,
+          "course_detail_accuracy": 1.0,
+          "course_detail_checks": {
+            "Machine Learning": {
+              "course_title": true,
+              "institution_name": true,
+              "academic_year": true,
+              "course_level": true,
+              "teaching_role": true
+            },
+            "Computer Vision": {
+              "course_title": true,
+              "institution_name": true,
+              "academic_year": true,
+              "course_level": true,
+              "teaching_role": true
+            },
+            "Introduction to Artificial Intelligence": {
+              "course_title": true,
+              "institution_name": true,
+              "academic_year": true,
+              "course_level": true,
+              "teaching_role": true
+            }
+          },
+          "found_courses": [
+            "computer vision",
+            "introduction to artificial intelligence",
+            "machine learning"
+          ],
+          "missing_courses": [],
+          "unexpected_topics": [],
+          "unexpected_course_lines": [],
+          "unexpected_courses": [],
+          "course_contradictions": [],
+          "has_course_contradictions": false,
+          "duplicate_course_records": [],
+          "invalid_course_record_count": 0,
+          "course_detail_evaluation_mode": "json_records"
+        },
+        "changed_fields": [
+          "course_detail_accuracy",
+          "course_detail_checks",
+          "course_detail_evaluation_mode",
+          "duplicate_course_records",
+          "invalid_course_record_count"
+        ]
+      },
+      {
+        "run_id": "09b86188-5c13-481a-ac1f-c09699db81cd",
+        "test_id": "test_12_adversarial_grounding",
+        "case_id": "candidate_a",
+        "run_number": 1,
+        "original_archive_member": "candidate_a_run_1_09b86188-5c13-481a-ac1f-c09699db81cd.json",
+        "original_metrics": {
+          "json_validity": true,
+          "schema_compliance": true,
+          "claim_count": 4,
+          "claim_classification_accuracy": 0.0,
+          "supported_unsupported_distinction": false,
+          "unsupported_contradicted_distinction": false,
+          "evidence_accuracy": 0.0
+        },
+        "rescored_metrics": {
+          "json_validity": true,
+          "schema_compliance": true,
+          "claim_count": 4,
+          "claim_classification_accuracy": 1.0,
+          "supported_unsupported_distinction": true,
+          "unsupported_contradicted_distinction": null,
+          "evidence_accuracy": 1.0,
+          "unsupported_claim_classification": true,
+          "matched_claim_count": 4,
+          "unmatched_or_duplicate_claim_count": 0,
+          "missing_claim_count": 0,
+          "evidence_review_required": true
+        },
+        "changed_fields": [
+          "claim_classification_accuracy",
+          "evidence_accuracy",
+          "evidence_review_required",
+          "matched_claim_count",
+          "missing_claim_count",
+          "supported_unsupported_distinction",
+          "unmatched_or_duplicate_claim_count",
+          "unsupported_claim_classification",
+          "unsupported_contradicted_distinction"
+        ]
+      },
+      {
+        "run_id": "45b79a75-82a6-4275-a912-bb00aa200396",
+        "test_id": "test_12_adversarial_grounding",
+        "case_id": "candidate_a",
+        "run_number": 2,
+        "original_archive_member": "candidate_a_run_2_45b79a75-82a6-4275-a912-bb00aa200396.json",
+        "original_metrics": {
+          "json_validity": true,
+          "schema_compliance": true,
+          "claim_count": 4,
+          "claim_classification_accuracy": 0.0,
+          "supported_unsupported_distinction": false,
+          "unsupported_contradicted_distinction": false,
+          "evidence_accuracy": 0.0
+        },
+        "rescored_metrics": {
+          "json_validity": true,
+          "schema_compliance": true,
+          "claim_count": 4,
+          "claim_classification_accuracy": 1.0,
+          "supported_unsupported_distinction": true,
+          "unsupported_contradicted_distinction": null,
+          "evidence_accuracy": 1.0,
+          "unsupported_claim_classification": true,
+          "matched_claim_count": 4,
+          "unmatched_or_duplicate_claim_count": 0,
+          "missing_claim_count": 0,
+          "evidence_review_required": true
+        },
+        "changed_fields": [
+          "claim_classification_accuracy",
+          "evidence_accuracy",
+          "evidence_review_required",
+          "matched_claim_count",
+          "missing_claim_count",
+          "supported_unsupported_distinction",
+          "unmatched_or_duplicate_claim_count",
+          "unsupported_claim_classification",
+          "unsupported_contradicted_distinction"
+        ]
+      },
+      {
+        "run_id": "ae041e67-df2b-4d05-8694-1fc7b6a5a38c",
+        "test_id": "test_12_adversarial_grounding",
+        "case_id": "candidate_a",
+        "run_number": 3,
+        "original_archive_member": "candidate_a_run_3_ae041e67-df2b-4d05-8694-1fc7b6a5a38c.json",
+        "original_metrics": {
+          "json_validity": true,
+          "schema_compliance": true,
+          "claim_count": 4,
+          "claim_classification_accuracy": 0.0,
+          "supported_unsupported_distinction": false,
+          "unsupported_contradicted_distinction": false,
+          "evidence_accuracy": 0.0
+        },
+        "rescored_metrics": {
+          "json_validity": true,
+          "schema_compliance": true,
+          "claim_count": 4,
+          "claim_classification_accuracy": 1.0,
+          "supported_unsupported_distinction": true,
+          "unsupported_contradicted_distinction": null,
+          "evidence_accuracy": 1.0,
+          "unsupported_claim_classification": true,
+          "matched_claim_count": 4,
+          "unmatched_or_duplicate_claim_count": 0,
+          "missing_claim_count": 0,
+          "evidence_review_required": true
+        },
+        "changed_fields": [
+          "claim_classification_accuracy",
+          "evidence_accuracy",
+          "evidence_review_required",
+          "matched_claim_count",
+          "missing_claim_count",
+          "supported_unsupported_distinction",
+          "unmatched_or_duplicate_claim_count",
+          "unsupported_claim_classification",
+          "unsupported_contradicted_distinction"
+        ]
+      }
+    ],
+    "validation_environment": "Isolated local replay: standard precision/recall/F1 arithmetic supplied; original word counts preserved. Run this script in the project to use its shared automatic.py."
+  },
+  "interpretation": "Original per_run metrics are preserved verbatim. Corrected metrics for 15 runs appear only in scoring_audit_v1.entries. Quality interpretation should use that audit where applicable."
+}

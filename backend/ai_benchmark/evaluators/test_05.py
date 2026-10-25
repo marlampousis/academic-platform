@@ -1,5 +1,5 @@
-
 import re
+import json
 from typing import Any
 
 from .automatic import (
@@ -38,9 +38,14 @@ def evaluate_course_details(
     """
     Evaluate the five required fields for each course.
 
-    Conservative baseline: course details must appear
-    on the same line as the corresponding course title.
+    JSON fields are associated by course record. For other formats,
+    the conservative baseline requires details on the course-title line.
     """
+
+    records = _json_course_records(raw_response)
+    if records is not None:
+        metrics = _evaluate_json_courses(records, {"expected_courses": expected_courses})
+        return metrics["course_detail_accuracy"], metrics["course_detail_checks"]
 
     lines = [
         line.strip()
@@ -248,11 +253,100 @@ def detect_course_contradictions(
 
     return sorted(contradictions)
 
+COURSE_DETAIL_FIELDS = (
+    "course_title", "institution_name", "academic_year",
+    "course_level", "teaching_role",
+)
+
+
+def _json_course_records(raw_response: str) -> list[Any] | None:
+    """Recognize JSON course lists without pooling fields across records."""
+    try:
+        value = json.loads(raw_response)
+    except (json.JSONDecodeError, TypeError):
+        return None
+    if isinstance(value, list):
+        return value
+    if isinstance(value, dict):
+        for key in ("courses", "teaching_experience"):
+            if isinstance(value.get(key), list):
+                return value[key]
+    return None
+
+
+def _evaluate_json_courses(
+    records: list[Any], expected_data: dict[str, Any],
+) -> dict[str, Any]:
+    expected = expected_data["expected_courses"]
+    expected_by_title = {
+        normalize_course(course["course_title"]): course
+        for course in expected
+    }
+    actual = {}
+    invalid_count = 0
+    for record in records:
+        if (not isinstance(record, dict)
+                or not isinstance(record.get("course_title"), str)
+                or not record["course_title"].strip()):
+            invalid_count += 1
+            continue
+        actual.setdefault(normalize_course(record["course_title"]), []).append(record)
+    found = set(actual) & set(expected_by_title)
+    unknown = set(actual) - set(expected_by_title)
+    # Duplicate course records cannot inflate recall; extra records lower precision.
+    tp = len(found)
+    precision = calculate_precision(tp, len(records) - tp)
+    recall = calculate_recall(tp, len(expected) - tp)
+    checks = {}
+    conflicts = []
+    for title, course in expected_by_title.items():
+        matching = actual.get(title, [])
+        checks[course["course_title"]] = {
+            field: bool(matching) and all(
+                isinstance(record.get(field), str)
+                and normalize_course(record[field]) == normalize_course(course[field])
+                for record in matching
+            )
+            for field in COURSE_DETAIL_FIELDS
+        }
+        if len(matching) > 1 and any(
+            len({json.dumps(record.get(field), sort_keys=True) for record in matching}) > 1
+            for field in COURSE_DETAIL_FIELDS
+        ):
+            conflicts.append(course["course_title"])
+    total = len(expected) * len(COURSE_DETAIL_FIELDS)
+    detail_accuracy = sum(sum(x.values()) for x in checks.values()) / total if total else 0.0
+    non_teaching = {
+        normalize_course(x) for x in expected_data.get("known_non_teaching_topics", [])
+    }
+    return {
+        "course_precision": precision,
+        "course_recall": recall,
+        "course_f1": calculate_f1(precision, recall),
+        "course_detail_accuracy": detail_accuracy,
+        "course_detail_checks": checks,
+        "found_courses": sorted(found),
+        "missing_courses": sorted(set(expected_by_title) - found),
+        "unexpected_topics": sorted(unknown & non_teaching),
+        "unexpected_course_lines": sorted(unknown),
+        "unexpected_courses": sorted(unknown),
+        "course_contradictions": sorted(conflicts),
+        "has_course_contradictions": bool(conflicts),
+        "duplicate_course_records": sorted(k for k, v in actual.items() if len(v) > 1),
+        "invalid_course_record_count": invalid_count,
+        "course_detail_evaluation_mode": "json_records",
+    }
+
+
 def evaluate_test_05(
     raw_response: str,
     expected_data: dict[str, Any],
 ) -> dict[str, Any]:
-    """Evaluate course coverage in a natural-language response."""
+    """Evaluate JSON course records, or use the conservative text baseline."""
+
+    records = _json_course_records(raw_response)
+    if records is not None:
+        return _evaluate_json_courses(records, expected_data)
 
     expected_courses = expected_data["expected_courses"]
 
