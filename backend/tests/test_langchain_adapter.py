@@ -104,12 +104,9 @@ class TestLangChainProvider(unittest.TestCase):
 
 
     def test_invalid_json_response(self):
-        model = RunnableLambda(
-            lambda prompt: AIMessage(
-                content='{"name": "Incomplete"'
-            )
-        )
+        invalid_json = '{"name": "Mario"'
 
+        model = RunnableLambda(lambda prompt: AIMessage(content=invalid_json))
         provider = LangChainProvider(
             provider_name="test",
             model_name="fake-model",
@@ -118,18 +115,12 @@ class TestLangChainProvider(unittest.TestCase):
 
         response = provider.generate(
             "Return JSON",
-            options=GenerationOptions(
-                temperature=0.0,
-                max_output_tokens=100,
-                response_format="json",
-            ),
+            options=GenerationOptions(response_format="json"),
         )
 
-        self.assertTrue(response.error)
-        self.assertIn(
-            "invalid JSON",
-            response.error_message,
-        )
+        self.assertFalse(response.error)
+        self.assertEqual(response.text, invalid_json)
+        self.assertIsNone(response.error_message)
 
     def test_model_invoked_once(self):
         calls = []
@@ -177,6 +168,33 @@ class TestLangChainProvider(unittest.TestCase):
         self.assertEqual(len(received_options), 1)
         self.assertEqual(received_options[0], settings)
         self.assertEqual(response.text, '{"status": "ok"}')
+
+    def test_structured_ai_message_extracts_text(self):
+        from langchain_core.messages import AIMessage
+        from langchain_core.runnables import RunnableLambda
+
+        fake_model = RunnableLambda(
+            lambda prompt: AIMessage(
+                content=[
+                    {
+                        "type": "text",
+                        "text": "READY",
+                        "extras": {"signature": "example"},
+                    }
+                ]
+            )
+        )
+
+        provider = LangChainProvider(
+            provider_name="langchain",
+            model_name="gemini-test",
+            model=fake_model,
+        )
+
+        result = provider.generate("Reply READY")
+
+        self.assertFalse(result.error)
+        self.assertEqual(result.text, "READY")
 
 class TestProviderRegistry(unittest.TestCase):
 

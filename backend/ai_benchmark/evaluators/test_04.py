@@ -11,6 +11,35 @@ from .automatic import (
 def normalize_area(value: str) -> str:
     return " ".join(value.casefold().split())
 
+def expand_position_area(
+    value: str,
+    known_areas: set[str],
+) -> set[str]:
+    """
+    Recognize exact area names and explicitly grouped areas.
+
+    Does not infer areas from general descriptive language.
+    """
+
+    text = normalize_area(value)
+
+    if text in known_areas:
+        return {text}
+
+    # Accept explicit conjunctions such as:
+    # "Artificial Intelligence and Machine Learning".
+    parts = [
+        part.strip()
+        for part in text.split(" and ")
+    ]
+
+    if (
+        len(parts) > 1
+        and all(part in known_areas for part in parts)
+    ):
+        return set(parts)
+
+    return set()
 
 import re
 
@@ -158,45 +187,96 @@ def evaluate_test_04(
         for area in expected_data["expected_not_demonstrated_areas"]
     }
 
-    actual_aligned = {
-        normalize_area(item["position_area"]): item
-        for item in parsed_response["aligned_areas"]
-    }
+    known_areas = set(expected_aligned) | expected_missing
 
-    actual_missing = {
-        normalize_area(item["position_area"])
-        for item in parsed_response["areas_not_demonstrated"]
-    }
-    
-    
-    aligned_area_names = [
+    actual_aligned = {}
+    actual_missing = set()
+
+    for item in parsed_response["aligned_areas"]:
+        areas = expand_position_area(
+            item["position_area"],
+            known_areas,
+        )
+
+        for area in areas:
+            actual_aligned.setdefault(area, item)
+
+    for item in parsed_response["areas_not_demonstrated"]:
+        areas = expand_position_area(
+            item["position_area"],
+            known_areas,
+        )
+
+        actual_missing.update(areas)
+
+    unrecognized_aligned = [
         normalize_area(item["position_area"])
         for item in parsed_response["aligned_areas"]
+        if not expand_position_area(
+            item["position_area"],
+            known_areas,
+        )
     ]
 
-    missing_area_names = [
+    unrecognized_missing = [
         normalize_area(item["position_area"])
         for item in parsed_response["areas_not_demonstrated"]
+        if not expand_position_area(
+            item["position_area"],
+            known_areas,
+        )
     ]
 
-    duplicate_aligned_areas = sorted({
-        area
-        for area in aligned_area_names
-        if aligned_area_names.count(area) > 1
-    })
+    # Count occurrences AFTER expanding grouped areas.
+    aligned_counts = {}
+    missing_counts = {}
 
-    duplicate_missing_areas = sorted({
+    for item in parsed_response["aligned_areas"]:
+        areas = expand_position_area(
+            item["position_area"],
+            known_areas,
+        )
+
+        for area in areas:
+            aligned_counts[area] = aligned_counts.get(area, 0) + 1
+
+    for item in parsed_response["areas_not_demonstrated"]:
+        areas = expand_position_area(
+            item["position_area"],
+            known_areas,
+        )
+
+        for area in areas:
+            missing_counts[area] = missing_counts.get(area, 0) + 1
+
+    duplicate_aligned_areas = sorted(
         area
-        for area in missing_area_names
-        if missing_area_names.count(area) > 1
-    })
+        for area, count in aligned_counts.items()
+        if count > 1
+    )
+
+    duplicate_missing_areas = sorted(
+        area
+        for area, count in missing_counts.items()
+        if count > 1
+    )
+
+    # Each repeated area beyond the first is an extra prediction.
+    extra_aligned_predictions = sum(
+        count - 1
+        for count in aligned_counts.values()
+        if count > 1
+    )
+
 
     true_positives = len(
         set(actual_aligned) & set(expected_aligned)
     )
 
-    false_positives = len(
-        set(actual_aligned) - set(expected_aligned)
+    false_positives = (
+        len(set(actual_aligned) - set(expected_aligned))
+        + len(unrecognized_aligned)
+        + extra_aligned_predictions
     )
 
     false_negatives = len(
@@ -216,7 +296,11 @@ def evaluate_test_04(
     f1 = calculate_f1(precision, recall)
 
     
-    missing_union = actual_missing | expected_missing
+    missing_union = (
+        actual_missing
+        | expected_missing
+        | set(unrecognized_missing)
+    )
 
     if not missing_union:
         missing_accuracy = 1.0
@@ -261,10 +345,12 @@ def evaluate_test_04(
         "evidence_checks": evidence_checks,
         "missing_evidence_checks": missing_checks,
         "unexpected_aligned_areas": sorted(
-            set(actual_aligned) - set(expected_aligned)
+            (set(actual_aligned) - set(expected_aligned))
+            | set(unrecognized_aligned)
         ),
         "unexpected_missing_areas": sorted(
-            actual_missing - expected_missing
+            (actual_missing - expected_missing)
+            | set(unrecognized_missing)
         ),
         "contradictory_areas": sorted(
             set(actual_aligned) & actual_missing

@@ -6,6 +6,7 @@ from langchain_core.runnables import Runnable
 from .base import BaseModelProvider, GenerationOptions
 from .langchain_adapter import LangChainProvider
 from .mock import MockProvider
+from .gemini import create_gemini_provider
 
 
 ModelFactory = Callable[[GenerationOptions], Runnable]
@@ -35,6 +36,14 @@ def create_provider(
             model=model,
             model_factory=model_factory,
         )
+
+    if provider_name == "gemini":
+        if model is not None or model_factory is not None:
+            raise ValueError(
+                "Gemini uses its configured model factory"
+            )
+
+        return create_gemini_provider(model_name=model_name)
 
     raise ValueError(
         f"Provider is not implemented: {provider_name}"

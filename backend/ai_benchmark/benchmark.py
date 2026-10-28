@@ -1,4 +1,6 @@
+import os
 import json
+import time
 from pathlib import Path
 from typing import Any
 import hashlib
@@ -31,6 +33,11 @@ from evaluators.test_12 import evaluate_test_12
 
 from datetime import datetime, timezone
 from uuid import uuid4
+
+from dotenv import load_dotenv
+
+BACKEND_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BACKEND_DIR / ".env")
 
 # ============================================================
 # PATHS
@@ -686,7 +693,7 @@ def execute_run(
 
     options = GenerationOptions(
         temperature=0.0,
-        max_output_tokens=2048,
+        max_output_tokens=8192,
         response_format=(
             "json"
             if expects_json_response(run_specification["test_id"])
@@ -1334,9 +1341,9 @@ def parse_arguments() -> argparse.Namespace:
 
     parser.add_argument(
         "--provider",
-        choices=["mock"],
+        choices=["mock", "gemini"],
         default="mock",
-        help="Provider to execute. Currently only mock is implemented.",
+        help="Provider to execute (mock or gemini).",
     )
 
     parser.add_argument(
@@ -1353,10 +1360,20 @@ def parse_arguments() -> argparse.Namespace:
         help="Repetitions per case. Defaults to test_config.json.",
     )
 
+    parser.add_argument(
+        "--gemini-delay",
+        type=float,
+        default=8.0,
+        help="Minimum delay between Gemini benchmark requests in seconds.",
+    )
+
     arguments = parser.parse_args()
 
     if arguments.runs is not None and arguments.runs < 1:
         parser.error("--runs must be a positive integer")
+
+    if arguments.gemini_delay < 0:
+        parser.error("--gemini-delay cannot be negative")
 
     return arguments
 
@@ -1448,7 +1465,20 @@ def main() -> None:
     print()
     print(f"Executing {len(run_specifications)} benchmark runs...")
 
+    last_request_started = None
+
     for index, run in enumerate(run_specifications, start=1):
+        if arguments.provider == "gemini":
+            if last_request_started is not None:
+                elapsed = time.monotonic() - last_request_started
+                remaining = arguments.gemini_delay - elapsed
+
+                if remaining > 0:
+                    print(f"Gemini pacing: waiting {remaining:.1f}s")
+                    time.sleep(remaining)
+
+            last_request_started = time.monotonic()
+
         result = execute_run(
             run_specification=run,
             provider=provider,

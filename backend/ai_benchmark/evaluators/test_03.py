@@ -99,6 +99,85 @@ def detect_negative_qualification_claims(
 
     return detected
 
+
+def contains_supported_area(
+    evidence_text: str,
+    area: str,
+) -> bool:
+    """
+    Detect explicitly supported academic areas.
+
+    Uses only supporting-evidence lines and a small,
+    documented set of evidence-category aliases.
+    """
+
+    normalized_area = normalize_text(area)
+
+    lines = [
+        normalize_text(line)
+        for line in evidence_text.splitlines()
+        if line.strip()
+    ]
+
+    # Avoid treating explicit negative statements as evidence.
+    negative_patterns = (
+        r"\bdoes not demonstrate\b",
+        r"\bnot demonstrated\b",
+        r"\bno evidence of\b",
+        r"\blacks?\b",
+        r"\bwithout\b",
+        r"\bhas no\b",
+    )
+
+    positive_lines = [
+        line
+        for line in lines
+        if not any(
+            re.search(pattern, line)
+            for pattern in negative_patterns
+        )
+    ]
+
+    # A literal area name inside positive evidence.
+    if any(
+        contains_area(line, area)
+        for line in positive_lines
+    ):
+        return True
+
+    # Explicit proxies for general research experience.
+    if normalized_area == "research experience":
+        research_indicators = (
+            "research project",
+            "research projects",
+            "publications",
+            "published journal articles",
+            "published conference papers",
+            "peer reviewed publications",
+        )
+        return any(
+            contains_area(line, indicator)
+            for line in positive_lines
+            for indicator in research_indicators
+        )
+
+    # Explicit proxies for the position's broad
+    # related-computational-methods requirement.
+    if normalized_area == "related intelligent computational methods":
+        related_indicators = (
+            "data science",
+            "natural language processing",
+            "predictive analytics",
+            "statistical learning",
+        )
+        return any(
+            contains_area(line, indicator)
+            for line in positive_lines
+            for indicator in related_indicators
+        )
+
+    return False
+
 def evaluate_test_03(
     raw_response: str,
     expected_data: dict[str, Any],
@@ -113,11 +192,8 @@ def evaluate_test_03(
 
     sections = extract_sections(raw_response)
 
-    alignment_text = (
-        sections["Alignment Summary:"]
-        + "\n"
-        + sections["Supporting Evidence:"]
-    )
+    evidence_text = sections["Supporting Evidence:"]
+    missing_text = sections["Areas Not Demonstrated:"]
 
     missing_text = sections["Areas Not Demonstrated:"]
 
@@ -135,7 +211,7 @@ def evaluate_test_03(
     found_alignment = [
         area
         for area in expected_alignment
-        if contains_area(alignment_text, area)
+        if contains_supported_area(evidence_text, area)
     ]
 
     found_missing = [
@@ -148,7 +224,7 @@ def evaluate_test_03(
     unsupported_alignment = [
         area
         for area in expected_missing
-        if contains_area(alignment_text, area)
+        if contains_supported_area(evidence_text, area)
     ]
 
     unsupported_alignment_checks = {

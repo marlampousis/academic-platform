@@ -36,7 +36,10 @@ def validate_test_08_schema(
         if set(publication) != required_fields:
             return False
 
-        if not isinstance(publication["title"], str):
+        if (
+            not isinstance(publication["title"], str)
+            or not publication["title"].strip()
+        ):
             return False
 
         if type(publication["publication_year"]) is not int:
@@ -47,7 +50,13 @@ def validate_test_08_schema(
         if not isinstance(areas, list):
             return False
 
-        if not all(isinstance(area, str) for area in areas):
+        if not areas:
+            return False
+
+        if not all(
+            isinstance(area, str) and area.strip()
+            for area in areas
+        ):
             return False
 
         if (
@@ -76,6 +85,9 @@ def evaluate_test_08(
         "publication_year_accuracy": None,
         "position_area_accuracy": None,
         "maximum_item_compliance": None,
+        "minimum_item_compliance": None,
+        "duplicate_publication_titles": [],
+        "duplicate_position_areas": {},
     }
 
     if not schema_compliance:
@@ -89,6 +101,12 @@ def evaluate_test_08(
 
     results["maximum_item_compliance"] = (
         len(publications) <= maximum
+    )
+
+    minimum = expected_data["constraints"]["minimum_publications"]
+
+    results["minimum_item_compliance"] = (
+        len(publications) >= minimum
     )
 
     valid_publications = {
@@ -109,9 +127,26 @@ def evaluate_test_08(
     checked_areas = 0
 
     seen_titles = set()
+    duplicate_titles = set()
+    duplicate_areas = {}
 
     for publication in publications:
         title = publication["title"]
+
+        if title in seen_titles:
+            duplicate_titles.add(title)
+
+        area_names = publication["relevant_position_areas"]
+        seen_areas = set()
+        repeated_areas = set()
+
+        for area in area_names:
+            if area in seen_areas:
+                repeated_areas.add(area)
+            seen_areas.add(area)
+
+        if repeated_areas:
+            duplicate_areas[title] = sorted(repeated_areas)
 
         # Repeated publications do not count as new
         # correct retrievals.
@@ -143,8 +178,15 @@ def evaluate_test_08(
             ]
         )
 
+        counted_areas = set()
+
         for area in publication["relevant_position_areas"]:
             checked_areas += 1
+
+            if area in counted_areas:
+                continue
+
+            counted_areas.add(area)
 
             if area in acceptable_areas:
                 correct_areas += 1
@@ -164,5 +206,11 @@ def evaluate_test_08(
         if checked_areas
         else 0.0
     )
+
+    results["duplicate_publication_titles"] = sorted(
+        duplicate_titles
+    )
+
+    results["duplicate_position_areas"] = duplicate_areas
 
     return results

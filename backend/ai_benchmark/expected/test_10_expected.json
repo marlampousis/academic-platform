@@ -13,21 +13,21 @@
   "valid_research_evidence": [
     {
       "type": "publication",
-      "title": "Machine Learning Methods for Clinical Decision Support",
+      "title": "Μέθοδοι Μηχανικής Μάθησης για την Υποστήριξη Κλινικών Αποφάσεων",
       "supports": [
         "Μηχανική Μάθηση"
       ]
     },
     {
       "type": "publication",
-      "title": "Explainable Artificial Intelligence in Healthcare",
+      "title": "Εξηγήσιμη Τεχνητή Νοημοσύνη στην Υγειονομική Περίθαλψη",
       "supports": [
         "Τεχνητή Νοημοσύνη"
       ]
     },
     {
       "type": "publication",
-      "title": "Deep Neural Networks for Medical Image Classification",
+      "title": "Βαθιά Νευρωνικά Δίκτυα για την Ταξινόμηση Ιατρικών Εικόνων",
       "supports": [
         "Βαθιά Μάθηση",
         "Υπολογιστική Όραση"
@@ -35,7 +35,7 @@
     },
     {
       "type": "publication",
-      "title": "Transfer Learning for Visual Recognition",
+      "title": "Μεταφορά Μάθησης για Οπτική Αναγνώριση",
       "supports": [
         "Μηχανική Μάθηση",
         "Βαθιά Μάθηση",
@@ -44,7 +44,7 @@
     },
     {
       "type": "publication",
-      "title": "Efficient CNN Architectures for Image Analysis",
+      "title": "Αποδοτικές Αρχιτεκτονικές CNN για Ανάλυση Εικόνων",
       "supports": [
         "Βαθιά Μάθηση",
         "Υπολογιστική Όραση"
@@ -52,7 +52,7 @@
     },
     {
       "type": "research_project",
-      "title": "Artificial Intelligence for Medical Imaging",
+      "title": "Τεχνητή Νοημοσύνη για Ιατρική Απεικόνιση",
       "supports": [
         "Τεχνητή Νοημοσύνη",
         "Βαθιά Μάθηση",

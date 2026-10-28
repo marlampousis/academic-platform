@@ -31,22 +31,22 @@ def contains_course_title(text: str, title: str) -> bool:
         )
     )
 
+
 def evaluate_course_details(
     raw_response: str,
     expected_courses: list[dict[str, Any]],
 ) -> tuple[float, dict[str, Any]]:
     """
-    Evaluate the five required fields for each course.
+    Evaluate five fields per course.
 
-    Conservative baseline: course details must appear
-    on the same line as the corresponding course title.
+    Supports:
+    - Single-line course records
+    - Multiline records headed by "Course Title:"
+    - Blank lines between course records
+
+    Details from one course must not be used to
+    give credit to another course.
     """
-
-    lines = [
-        line.strip()
-        for line in raw_response.splitlines()
-        if line.strip()
-    ]
 
     fields = (
         "course_title",
@@ -56,6 +56,30 @@ def evaluate_course_details(
         "teaching_role",
     )
 
+    # Split the response into individual course records.
+    # Each "Course Title:" heading begins a new record.
+    records = []
+    current = []
+
+    for line in raw_response.splitlines():
+        line = line.strip()
+
+        if not line:
+            continue
+
+        if re.match(r"^course\s+title\s*:", line, re.IGNORECASE):
+            if current:
+                records.append("\n".join(current))
+            current = [line]
+        elif current:
+            current.append(line)
+        else:
+            # Preserve older single-line response formats.
+            records.append(line)
+
+    if current:
+        records.append("\n".join(current))
+
     total_correct = 0
     total_fields = len(expected_courses) * len(fields)
     detail_checks = {}
@@ -63,12 +87,14 @@ def evaluate_course_details(
     for course in expected_courses:
         title = course["course_title"]
 
-        matching_lines = [
-            line
-            for line in lines
+        matching_records = [
+            record
+            for record in records
             if (
-                contains_course_title(line, title)
-                and not is_negated_course_mention(line, title)
+                contains_course_title(record.splitlines()[0], title)
+                and not is_negated_course_mention(
+                    record.splitlines()[0], title
+                )
             )
         ]
 
@@ -78,8 +104,8 @@ def evaluate_course_details(
             expected_value = course[field]
 
             checks[field] = any(
-                contains_course_title(line, expected_value)
-                for line in matching_lines
+                contains_course_title(record, expected_value)
+                for record in matching_records
             )
 
             if checks[field]:
@@ -156,15 +182,27 @@ def detect_unexpected_course_lines(
         if not line:
             continue
 
-        match = re.match(
+        # Recognize labeled course headings.
+        labeled_match = re.match(
+            r"^course\s+title\s*:\s*(.+)$",
+            line,
+            re.IGNORECASE,
+        )
+
+        list_match = re.match(
             r"^(?:\d+[.)]\s+|[-*]\s+)(.+)$",
             line,
         )
 
-        if match:
-            content = match.group(1).strip()
+        if labeled_match:
+            content = labeled_match.group(1).strip()
+
+        elif list_match:
+            content = list_match.group(1).strip()
+
         elif "|" in line:
             content = line
+
         else:
             continue
 

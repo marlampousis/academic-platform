@@ -100,6 +100,65 @@ def calculate_required_facts_coverage(
     }
 
 
+def calculate_category_presence(
+    raw_response: str,
+    required_facts: dict[str, Any],
+) -> dict[str, Any]:
+    """
+    Approximate required-category coverage.
+
+    This is a rule-based mention check, not semantic
+    factual verification.
+    """
+    text = normalize_for_coverage(raw_response)
+
+    # Positive research-output indicators.
+    publication_pattern = (
+        r"\b(?:publications?|journal articles?|"
+        r"conference papers?)\b"
+    )
+
+    # Reject simple negative statements.
+    publication_negative = (
+        r"\b(?:no|without|never)\s+"
+        r"(?:\w+\s+){0,3}"
+        r"(?:publications?|journal articles?|conference papers?)\b"
+    )
+
+    project_pattern = r"\b(?:research\s+)?projects?\b"
+    project_negative = (
+        r"\b(?:no|without|never)\s+"
+        r"(?:\w+\s+){0,3}(?:research\s+)?projects?\b"
+    )
+
+    has_publication = (
+        bool(re.search(publication_pattern, text))
+        and not bool(re.search(publication_negative, text))
+    )
+
+    has_project = (
+        bool(re.search(project_pattern, text))
+        and not bool(re.search(project_negative, text))
+    )
+
+    # Reuse the existing conservative reference checks.
+    existing = calculate_required_facts_coverage(
+        raw_response,
+        required_facts,
+    )["required_facts_checks"]
+
+    checks = {
+        **existing,
+        "publications": has_publication,
+        "research_projects": has_project,
+    }
+
+    return {
+        "category_presence_coverage":
+            sum(checks.values()) / len(checks),
+        "category_presence_checks": checks,
+    }
+
 def evaluate_test_02(
     raw_response: str,
     expected_data: dict[str, Any],
@@ -129,8 +188,14 @@ def evaluate_test_02(
         expected_data["required_facts"],
     )
 
+    category_presence = calculate_category_presence(
+        raw_response,
+        expected_data["required_facts"],
+    )
+
     return {
         "word_count": word_count,
         "word_count_compliance": word_count_compliance,
         **coverage,
+        **category_presence,
     }

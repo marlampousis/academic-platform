@@ -1,4 +1,4 @@
-
+import re
 from typing import Any
 
 
@@ -80,7 +80,6 @@ def evaluate_test_09(
     expected_data: dict[str, Any],
     expected_schema: dict[str, Any],
 ) -> dict[str, Any]:
-    """Evaluate potential-gap detection."""
 
     schema_valid = validate_test_09_schema(
         parsed_response,
@@ -100,41 +99,51 @@ def evaluate_test_09(
     expected_gaps = expected_data["expected_potential_gaps"]
     actual_gaps = parsed_response["potential_gaps"]
 
-    expected_requirements = {
+    expected_areas = {
         normalize_requirement(gap["position_requirement"])
         for gap in expected_gaps
     }
 
-    actual_requirements = [
-        normalize_requirement(gap["position_requirement"])
-        for gap in actual_gaps
-    ]
+    ordered_areas = sorted(
+        expected_areas,
+        key=len,
+        reverse=True,
+    )
 
-    # Duplicates count as additional predictions.
-    true_positives = len(
-        expected_requirements.intersection(
-            actual_requirements
+    covered_areas = set()
+    false_positives = 0
+
+    for gap in actual_gaps:
+        text = normalize_requirement(
+            gap["position_requirement"]
         )
-    )
 
-    false_positives = (
-        len(actual_requirements) - true_positives
-    )
+        matched_areas = set()
 
-    false_negatives = (
-        len(expected_requirements) - true_positives
-    )
+        for area in ordered_areas:
+            pattern = r"(?<!\w)" + re.escape(area) + r"(?!\w)"
 
-    # Correct empty prediction for empty ground truth.
-    if not expected_requirements and not actual_requirements:
+            if re.search(pattern, text):
+                matched_areas.add(area)
+                text = re.sub(pattern, " ", text)
+
+        new_areas = matched_areas - covered_areas
+
+        if new_areas:
+            covered_areas.update(new_areas)
+        else:
+            false_positives += 1
+
+    true_positives = len(covered_areas)
+    false_negatives = len(expected_areas - covered_areas)
+
+    if not expected_areas and not actual_gaps:
         precision = 1.0
         recall = 1.0
-
     else:
         precision_denominator = (
             true_positives + false_positives
         )
-
         recall_denominator = (
             true_positives + false_negatives
         )

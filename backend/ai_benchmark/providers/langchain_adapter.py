@@ -1,5 +1,4 @@
 
-import json
 import time
 from typing import Any, Callable
 
@@ -53,7 +52,7 @@ class LangChainProvider(BaseModelProvider):
             response: Any = runnable.invoke(prompt)
 
             if isinstance(response, AIMessage):
-                content = response.content
+                content = response.text
             elif isinstance(response, str):
                 content = response
             else:
@@ -65,13 +64,8 @@ class LangChainProvider(BaseModelProvider):
             if not isinstance(content, str):
                 raise TypeError("Expected a text response from the model.")
 
-            if settings.response_format == "json":
-                try:
-                    json.loads(content)
-                except json.JSONDecodeError as exc:
-                    raise ValueError(
-                        f"Model returned invalid JSON: {exc}"
-                    ) from exc
+            # Preserve raw model output, including malformed JSON.
+            # JSON validity is evaluated by the benchmark, not the provider.
 
             return ModelResponse(
                 text=content,

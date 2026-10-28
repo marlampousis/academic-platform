@@ -39,6 +39,26 @@ Rules:
 11. Keep the analysis professional, neutral, concise, and evidence-based.
 12. Do not add fields that are not defined in the required JSON structure.
 13. All output must be valid JSON.
+14. Evaluate each academic requirement separately. Do not combine multiple
+position areas into a single aligned_areas or areas_not_demonstrated entry.
+15. Use the following canonical position_area names when applicable:
+- Artificial Intelligence
+- Machine Learning
+- Deep Learning
+- Computer Vision
+- Explainable Artificial Intelligence
+- Related intelligent computational methods
+- Research experience
+- University-level teaching experience
+16. Evaluate Research experience and University-level teaching experience
+independently of subject specialization. Evidence of research or teaching
+in another discipline may demonstrate general experience without
+demonstrating expertise in Artificial Intelligence.
+17. For each aligned area, provide evidence relevant to that specific
+area. Do not use evidence from an unrelated specialization.
+18. Do not classify a requirement as both aligned and not demonstrated.
+19. Distinguish between evidence of general academic experience and
+evidence of specialization in the position's subject area.
 
 CANDIDATE CONTEXT:
 {{candidate}}

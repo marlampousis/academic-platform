@@ -3,7 +3,20 @@ import re
 
 
 def normalize_text(value: str) -> str:
-    return " ".join(value.casefold().split())
+    value = value.casefold().strip()
+
+    # Normalize punctuation while preserving meaningful words.
+    value = re.sub(r"[^\w\s-]", " ", value)
+
+    # Remove an optional introductory phrase.
+    value = re.sub(
+        r"^the\s+candidate\s+",
+        "",
+        value,
+    )
+
+    # Normalize whitespace.
+    return " ".join(value.split())
 
 
 def evaluate_test_12(
@@ -105,30 +118,64 @@ def evaluate_test_12(
         if expected["expected_status"] == "not_supported"
     ]
 
+    expected_supported = sum(
+        item["expected_status"] == "supported"
+        for item in expected_claims
+    )
+
+    expected_not_supported = sum(
+        item["expected_status"] == "not_supported"
+        for item in expected_claims
+    )
+
+    expected_contradicted = sum(
+        item["expected_status"] == "contradicted"
+        for item in expected_claims
+    )
+
     supported_distinction = (
-        bool(supported)
+        expected_supported > 0
+        and expected_not_supported > 0
+        and len(supported) == expected_supported
+        and len(unsupported) == expected_not_supported
         and all(
-            actual["status"] == "supported"
-            for actual, _ in supported
-        )
-        and len(supported) == sum(
-            item["expected_status"] == "supported"
-            for item in expected_claims
+            actual["status"] == expected["expected_status"]
+            for actual, expected in supported + unsupported
         )
     )
 
-    unsupported_distinction = (
-        bool(unsupported)
-        and all(
-            actual["status"] == "not_supported"
-            for actual, _ in unsupported
-        )
-        and len(unsupported) == sum(
-            item["expected_status"] == "not_supported"
-            for item in expected_claims
-        )
+    contradicted = [
+        (actual, expected)
+        for actual, expected in matched
+        if expected["expected_status"] == "contradicted"
+    ]
+
+    # Count the expected claim classifications.
+    expected_not_supported = sum(
+        item["expected_status"] == "not_supported"
+        for item in expected_claims
     )
 
+    expected_contradicted = sum(
+        item["expected_status"] == "contradicted"
+        for item in expected_claims
+    )
+
+    # This distinction cannot be measured unless both
+    # not_supported and contradicted claims exist.
+    if expected_not_supported == 0 or expected_contradicted == 0:
+        unsupported_distinction = None
+    else:
+        unsupported_distinction = (
+            len(unsupported) == expected_not_supported
+            and len(contradicted) == expected_contradicted
+            and all(
+                actual["status"] == expected["expected_status"]
+                for actual, expected in unsupported + contradicted
+            )
+        )
+
+    # Evaluate the evidence associated with each matched claim.
     evidence_correct = 0
 
     for actual, expected in matched:

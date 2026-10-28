@@ -125,8 +125,22 @@ def _valid_structure(
             for item in actual
         )
 
-    return True
+    if expected is None:
+        return actual is None
 
+    if isinstance(expected, bool):
+        return type(actual) is bool
+
+    if isinstance(expected, int):
+        return type(actual) is int
+
+    if isinstance(expected, float):
+        return type(actual) in (int, float)
+
+    if isinstance(expected, str):
+        return type(actual) is str
+
+    return type(actual) is type(expected)
 
 def _greek_value_consistency(
     actual: Any,
