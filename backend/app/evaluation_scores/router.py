@@ -6,7 +6,8 @@ from fastapi import (
 )
 from sqlalchemy.orm import Session
 
-from app.auth.permissions import require_roles
+from app.auth.permissions import require_roles, require_committee_access
+
 from app.committee_applications.service import (
     get_committee_application_by_id,
 )
@@ -36,6 +37,7 @@ from app.evaluation_scores.service import (
 )
 from app.users.models import User
 
+from app.evaluation_reports.service import get_reviewer_report
 
 router = APIRouter(
     prefix="/evaluation-committees",
@@ -65,6 +67,28 @@ def validate_reviewer_access(
 
     return membership
 
+
+def validate_scores_not_submitted(
+    db: Session,
+    assignment_id: int,
+    reviewer_id: int,
+) -> None:
+    """Block score changes after report submission."""
+
+    report = get_reviewer_report(
+        db=db,
+        committee_application_id=assignment_id,
+        reviewer_id=reviewer_id,
+    )
+
+    if report is not None and report.status == "SUBMITTED":
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail=(
+                "Evaluation scores are locked because "
+                "the reviewer report has been submitted"
+            ),
+        )
 
 @router.post(
     "/{committee_id}/applications/"
@@ -132,6 +156,12 @@ def add_evaluation_score(
                 "the application is IN_EVALUATION"
             ),
         )
+
+    validate_scores_not_submitted(
+        db=db,
+        assignment_id=assignment.id,
+        reviewer_id=current_reviewer.id,
+    )
 
     criterion = get_evaluation_criterion_by_id(
         db,
@@ -248,7 +278,7 @@ def read_all_evaluation_scores(
     committee_id: int,
     assignment_id: int,
     db: Session = Depends(get_db),
-    current_admin: User = Depends(
+    current_user: User = Depends(
         require_roles(
             "SUPER_ADMIN",
             "INSTITUTION_ADMIN",
@@ -266,6 +296,12 @@ def read_all_evaluation_scores(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Evaluation committee not found",
         )
+
+    require_committee_access(
+        db=db,
+        committee_id=committee_id,
+        current_user=current_user,
+    )
 
     assignment = (
         get_committee_application_by_id(
@@ -309,6 +345,26 @@ def edit_evaluation_score(
         committee_id=committee_id,
         reviewer_id=current_reviewer.id,
     )
+
+    committee = get_evaluation_committee_by_id(
+        db,
+        committee_id,
+    )
+
+    if not committee:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Evaluation committee not found",
+        )
+
+    if committee.status != "ACTIVE":
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=(
+                "Scores can only be modified "
+                "while the committee is ACTIVE"
+            ),
+        )
 
     assignment = (
         get_committee_application_by_id(
@@ -362,6 +418,12 @@ def edit_evaluation_score(
             ),
         )
 
+    validate_scores_not_submitted(
+        db=db,
+        assignment_id=assignment.id,
+        reviewer_id=current_reviewer.id,
+    )
+
     if score_data.score is not None:
         criterion = evaluation_score.criterion
 
@@ -399,6 +461,26 @@ def remove_evaluation_score(
         committee_id=committee_id,
         reviewer_id=current_reviewer.id,
     )
+
+    committee = get_evaluation_committee_by_id(
+        db,
+        committee_id,
+    )
+
+    if not committee:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Evaluation committee not found",
+        )
+
+    if committee.status != "ACTIVE":
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=(
+                "Scores can only be deleted "
+                "while the committee is ACTIVE"
+            ),
+        )
 
     assignment = (
         get_committee_application_by_id(
@@ -451,6 +533,12 @@ def remove_evaluation_score(
                 "their own scores"
             ),
         )
+
+    validate_scores_not_submitted(
+        db=db,
+        assignment_id=assignment.id,
+        reviewer_id=current_reviewer.id,
+    )
 
     delete_evaluation_score(
         db=db,

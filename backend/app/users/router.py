@@ -56,6 +56,20 @@ def get_current_user(
 
     return user
 
+@router.get("/me")
+def read_my_profile(
+    current_user: User = Depends(get_current_user),
+):
+    return {
+        "id": current_user.id,
+        "email": current_user.email,
+        "first_name": current_user.first_name,
+        "last_name": current_user.last_name,
+        "role": {
+            "code": current_user.role.code
+        },
+    }
+
 @router.post("/", response_model=UserRead, status_code=status.HTTP_201_CREATED)
 def register_user(user_data: UserCreate, db: Session = Depends(get_db)):
     existing_user = get_user_by_email(db, user_data.email)

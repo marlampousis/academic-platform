@@ -42,6 +42,9 @@ def calculate_reviewer_weighted_score(
     for score_record in scores:
         criterion = score_record.criterion
 
+        if not criterion.is_active:
+            continue
+
         weighted_value = (
             Decimal(str(score_record.score))
             / Decimal(str(criterion.max_score))
@@ -142,40 +145,52 @@ def get_reports_for_assignment(
         )
         .all()
     )
-    
+
 def reviewer_scoring_is_complete(
     db: Session,
     committee_id: int,
     committee_application_id: int,
     reviewer_id: int,
 ) -> bool:
-    active_criteria_count = (
-        db.query(EvaluationCriterion)
+    # Retrieve the exact IDs of active committee criteria.
+    active_criteria = (
+        db.query(EvaluationCriterion.id)
         .filter(
-            EvaluationCriterion.committee_id
-            == committee_id,
+            EvaluationCriterion.committee_id == committee_id,
             EvaluationCriterion.is_active.is_(True),
         )
-        .count()
+        .all()
     )
 
-    reviewer_score_count = (
-        db.query(EvaluationScore)
+    active_criterion_ids = {
+        row[0] for row in active_criteria
+    }
+
+    if not active_criterion_ids:
+        return False
+
+    # Retrieve the IDs actually scored by this reviewer.
+    reviewer_scores = (
+        db.query(EvaluationScore.criterion_id)
         .filter(
             EvaluationScore.committee_application_id
             == committee_application_id,
-            EvaluationScore.reviewer_id
-            == reviewer_id,
+            EvaluationScore.reviewer_id == reviewer_id,
         )
-        .count()
+        .all()
     )
 
+    scored_criterion_ids = [
+        row[0] for row in reviewer_scores
+    ]
+
+    # Every active criterion must have exactly one score.
+    # Stale or duplicate criteria must not be accepted.
     return (
-        active_criteria_count > 0
-        and reviewer_score_count
-        == active_criteria_count
-    )  
-    
+        len(scored_criterion_ids) == len(active_criterion_ids)
+        and set(scored_criterion_ids) == active_criterion_ids
+    )
+
 def update_evaluation_report(
     db: Session,
     report: EvaluationReport,
@@ -190,7 +205,6 @@ def update_evaluation_report(
         db,
         report.id,
     )
-
 
 def submit_evaluation_report(
     db: Session,

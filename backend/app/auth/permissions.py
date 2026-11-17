@@ -32,3 +32,47 @@ def require_roles(
         return current_user
 
     return role_checker
+
+from sqlalchemy.orm import Session
+from app.committee_members.models import CommitteeMember
+
+
+def require_committee_access(
+    db: Session,
+    committee_id: int,
+    current_user: User,
+) -> None:
+
+    role_code = (
+        current_user.role.code
+        if current_user.role
+        else None
+    )
+
+    # Global administrators have access.
+    # Institution admins are restricted until
+    # institution-level authorization exists.
+    if role_code == "SUPER_ADMIN":
+        return
+
+    if role_code != "REVIEWER":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Insufficient permissions",
+        )
+
+    membership = (
+        db.query(CommitteeMember)
+        .filter(
+            CommitteeMember.committee_id == committee_id,
+            CommitteeMember.user_id == current_user.id,
+            CommitteeMember.is_active.is_(True),
+        )
+        .first()
+    )
+
+    if membership is None:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Not an active member of this committee",
+        )

@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-
+from app.auth.permissions import require_roles
 from app.core.database import get_db
 
 from app.users.models import User
@@ -39,7 +39,7 @@ router = APIRouter(
 )
 def create_new_position(
     position_data: AcademicPositionCreate,
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(require_roles("SUPER_ADMIN")),
     db: Session = Depends(get_db),
 ):
     institution = (
@@ -167,12 +167,15 @@ def edit_position(
     position_id: int,
     position_data: AcademicPositionUpdate,
     db: Session = Depends(get_db),
+    current_admin: User = Depends(
+        require_roles("SUPER_ADMIN")
+    ),
 ):
     position = get_position_by_id(db, position_id)
 
     if not position:
         raise HTTPException(
-            status_code=404,
+            status_code=status.HTTP_404_NOT_FOUND,
             detail="Position not found",
         )
 
@@ -190,6 +193,9 @@ def edit_position(
 def remove_position(
     position_id: int,
     db: Session = Depends(get_db),
+    current_admin: User = Depends(
+        require_roles("SUPER_ADMIN")
+    ),
 ):
     position = get_position_by_id(db, position_id)
 

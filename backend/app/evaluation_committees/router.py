@@ -9,7 +9,11 @@ from sqlalchemy.orm import Session
 from app.academic_positions.service import (
     get_position_by_id,
 )
-from app.auth.permissions import require_roles
+from app.auth.permissions import (
+    require_roles,
+    require_committee_access,
+)
+
 from app.core.database import get_db
 from app.evaluation_committees.schemas import (
     EvaluationCommitteeCreate,
@@ -43,8 +47,7 @@ def create_new_evaluation_committee(
     db: Session = Depends(get_db),
     current_admin: User = Depends(
         require_roles(
-            "SUPER_ADMIN",
-            "INSTITUTION_ADMIN",
+            "SUPER_ADMIN"
         )
     ),
 ):
@@ -81,7 +84,6 @@ def create_new_evaluation_committee(
         created_by=current_admin.id,
     )
 
-
 @router.get(
     "/",
     response_model=list[EvaluationCommitteeRead],
@@ -89,15 +91,10 @@ def create_new_evaluation_committee(
 def read_evaluation_committees(
     db: Session = Depends(get_db),
     current_admin: User = Depends(
-        require_roles(
-            "SUPER_ADMIN",
-            "INSTITUTION_ADMIN",
-            "REVIEWER",
-        )
+        require_roles("SUPER_ADMIN")
     ),
 ):
     return get_evaluation_committees(db)
-
 
 @router.get(
     "/position/{position_id}",
@@ -106,19 +103,13 @@ def read_evaluation_committees(
 def read_evaluation_committee_by_position(
     position_id: int,
     db: Session = Depends(get_db),
-    current_admin: User = Depends(
-        require_roles(
-            "SUPER_ADMIN",
-            "INSTITUTION_ADMIN",
-            "REVIEWER",
-        )
+    current_user: User = Depends(
+        require_roles("SUPER_ADMIN", "REVIEWER")
     ),
 ):
-    committee = (
-        get_evaluation_committee_by_position(
-            db,
-            position_id,
-        )
+    committee = get_evaluation_committee_by_position(
+        db,
+        position_id,
     )
 
     if not committee:
@@ -126,6 +117,12 @@ def read_evaluation_committee_by_position(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Evaluation committee not found",
         )
+
+    require_committee_access(
+        db=db,
+        committee_id=committee.id,
+        current_user=current_user,
+    )
 
     return committee
 
@@ -137,12 +134,8 @@ def read_evaluation_committee_by_position(
 def read_evaluation_committee(
     committee_id: int,
     db: Session = Depends(get_db),
-    current_admin: User = Depends(
-        require_roles(
-            "SUPER_ADMIN",
-            "INSTITUTION_ADMIN",
-            "REVIEWER",
-        )
+    current_user: User = Depends(
+        require_roles("SUPER_ADMIN", "REVIEWER")
     ),
 ):
     committee = get_evaluation_committee_by_id(
@@ -155,6 +148,12 @@ def read_evaluation_committee(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Evaluation committee not found",
         )
+
+    require_committee_access(
+        db=db,
+        committee_id=committee_id,
+        current_user=current_user,
+    )
 
     return committee
 
@@ -169,8 +168,7 @@ def edit_evaluation_committee(
     db: Session = Depends(get_db),
     current_admin: User = Depends(
         require_roles(
-            "SUPER_ADMIN",
-            "INSTITUTION_ADMIN",
+            "SUPER_ADMIN"
         )
     ),
 ):
@@ -201,8 +199,7 @@ def remove_evaluation_committee(
     db: Session = Depends(get_db),
     current_admin: User = Depends(
         require_roles(
-            "SUPER_ADMIN",
-            "INSTITUTION_ADMIN",
+            "SUPER_ADMIN"
         )
     ),
 ):

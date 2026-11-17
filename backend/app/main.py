@@ -114,12 +114,3 @@ def db_test():
         "database_connected": True,
         "result": value
     }
-    
-from app.core.config import settings
-
-
-@app.get("/debug-db-url")
-def debug_db_url():
-    return {
-        "database_url": settings.DATABASE_URL
-    }    

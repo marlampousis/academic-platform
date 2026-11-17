@@ -44,6 +44,8 @@ from app.users.models import User
 
 from app.email.templates import evaluation_started_email
 
+from app.auth.permissions import require_committee_access
+
 router = APIRouter(
     prefix="/evaluation-committees",
     tags=["Committee Applications"],
@@ -61,8 +63,7 @@ def assign_application_to_committee(
     db: Session = Depends(get_db),
     current_admin: User = Depends(
         require_roles(
-            "SUPER_ADMIN",
-            "INSTITUTION_ADMIN",
+            "SUPER_ADMIN"
         )
     ),
 ):
@@ -200,6 +201,13 @@ def read_committee_applications(
             detail="Evaluation committee not found",
         )
 
+    # Verify access to this specific committee
+    require_committee_access(
+        db=db,
+        committee_id=committee_id,
+        current_user=current_user,
+    )
+
     return get_committee_applications(
         db=db,
         committee_id=committee_id,
@@ -233,6 +241,12 @@ def read_committee_application(
             detail="Evaluation committee not found",
         )
 
+    require_committee_access(
+        db=db,
+        committee_id=committee_id,
+        current_user=current_user,
+    )
+
     assignment = get_committee_application_by_id(
         db,
         assignment_id,
@@ -261,8 +275,7 @@ def edit_committee_application(
     db: Session = Depends(get_db),
     current_admin: User = Depends(
         require_roles(
-            "SUPER_ADMIN",
-            "INSTITUTION_ADMIN",
+            "SUPER_ADMIN"
         )
     ),
 ):
@@ -277,16 +290,12 @@ def edit_committee_application(
             detail="Evaluation committee not found",
         )
 
-    if committee.status not in {
-        "ACTIVE",
-        "COMPLETED",
-    }:
+    if committee.status != "ACTIVE":
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
+            status_code=status.HTTP_409_CONFLICT,
             detail=(
                 "Committee application assignments "
-                "cannot be modified in this "
-                "committee status"
+                "can only be modified while the committee is ACTIVE"
             ),
         )
 
@@ -358,8 +367,7 @@ def remove_committee_application(
     db: Session = Depends(get_db),
     current_admin: User = Depends(
         require_roles(
-            "SUPER_ADMIN",
-            "INSTITUTION_ADMIN",
+            "SUPER_ADMIN"
         )
     ),
 ):

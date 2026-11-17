@@ -6,7 +6,8 @@ from fastapi import (
 )
 from sqlalchemy.orm import Session
 
-from app.auth.permissions import require_roles
+from app.auth.permissions import require_roles, require_committee_access
+
 from app.committee_members.schemas import (
     CommitteeMemberCreate,
     CommitteeMemberRead,
@@ -63,8 +64,7 @@ def add_committee_member(
     db: Session = Depends(get_db),
     current_admin: User = Depends(
         require_roles(
-            "SUPER_ADMIN",
-            "INSTITUTION_ADMIN",
+            "SUPER_ADMIN"
         )
     ),
 ):
@@ -162,7 +162,6 @@ def read_committee_members(
     current_user: User = Depends(
         require_roles(
             "SUPER_ADMIN",
-            "INSTITUTION_ADMIN",
             "REVIEWER",
         )
     ),
@@ -177,6 +176,12 @@ def read_committee_members(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Evaluation committee not found",
         )
+
+    require_committee_access(
+        db=db,
+        committee_id=committee_id,
+        current_user=current_user,
+    )
 
     return get_committee_members(
         db=db,
@@ -195,7 +200,6 @@ def read_committee_member(
     current_user: User = Depends(
         require_roles(
             "SUPER_ADMIN",
-            "INSTITUTION_ADMIN",
             "REVIEWER",
         )
     ),
@@ -210,6 +214,12 @@ def read_committee_member(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Evaluation committee not found",
         )
+
+    require_committee_access(
+        db=db,
+        committee_id=committee_id,
+        current_user=current_user,
+    )
 
     committee_member = (
         get_committee_member_by_id(
@@ -242,8 +252,7 @@ def edit_committee_member(
     db: Session = Depends(get_db),
     current_admin: User = Depends(
         require_roles(
-            "SUPER_ADMIN",
-            "INSTITUTION_ADMIN",
+            "SUPER_ADMIN"
         )
     ),
 ):
@@ -335,8 +344,7 @@ def remove_committee_member(
     db: Session = Depends(get_db),
     current_admin: User = Depends(
         require_roles(
-            "SUPER_ADMIN",
-            "INSTITUTION_ADMIN",
+            "SUPER_ADMIN"
         )
     ),
 ):

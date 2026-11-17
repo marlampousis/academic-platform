@@ -21,6 +21,7 @@ from app.evaluation_results.schemas import (
 )
 from app.evaluation_results.service import (
     generate_committee_ranking,
+    get_committee_ranking,
     get_evaluation_result_by_assignment,
     set_final_decision,
 )
@@ -50,8 +51,7 @@ def generate_ranking(
     db: Session = Depends(get_db),
     current_admin: User = Depends(
         require_roles(
-            "SUPER_ADMIN",
-            "INSTITUTION_ADMIN",
+            "SUPER_ADMIN"
         )
     ),
 ):
@@ -113,17 +113,26 @@ def generate_ranking(
     "/{committee_id}/ranking",
     response_model=list[RankingItemRead],
 )
+
 def read_ranking(
     committee_id: int,
     db: Session = Depends(get_db),
     current_admin: User = Depends(
-        require_roles(
-            "SUPER_ADMIN",
-            "INSTITUTION_ADMIN",
-        )
+        require_roles("SUPER_ADMIN")
     ),
 ):
-    ranked_results = generate_committee_ranking(
+    committee = get_evaluation_committee_by_id(
+        db,
+        committee_id,
+    )
+
+    if not committee:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Evaluation committee not found",
+        )
+
+    ranked_results = get_committee_ranking(
         db=db,
         committee_id=committee_id,
     )
@@ -138,6 +147,7 @@ def read_ranking(
         )
         for assignment, result in ranked_results
     ]
+
         
 @router.get(
     "/{committee_id}/applications/"
@@ -150,8 +160,7 @@ def read_application_result(
     db: Session = Depends(get_db),
     current_admin: User = Depends(
         require_roles(
-            "SUPER_ADMIN",
-            "INSTITUTION_ADMIN",
+            "SUPER_ADMIN"
         )
     ),
 ):
@@ -194,8 +203,7 @@ def update_final_decision(
     db: Session = Depends(get_db),
     current_admin: User = Depends(
         require_roles(
-            "SUPER_ADMIN",
-            "INSTITUTION_ADMIN",
+            "SUPER_ADMIN"
         )
     ),
 ):

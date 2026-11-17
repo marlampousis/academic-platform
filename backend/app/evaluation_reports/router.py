@@ -250,6 +250,26 @@ def edit_my_evaluation_report(
         reviewer_id=current_reviewer.id,
     )
 
+    committee = get_evaluation_committee_by_id(
+        db,
+        committee_id,
+    )
+
+    if not committee:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Evaluation committee not found",
+        )
+
+    if committee.status != "ACTIVE":
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=(
+                "Evaluation reports can only be modified "
+                "or submitted while the committee is ACTIVE"
+            ),
+        )
+
     assignment = get_committee_application_by_id(
         db,
         assignment_id,
@@ -322,6 +342,26 @@ def submit_my_evaluation_report(
         reviewer_id=current_reviewer.id,
     )
 
+    committee = get_evaluation_committee_by_id(
+        db,
+        committee_id,
+    )
+
+    if not committee:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Evaluation committee not found",
+        )
+
+    if committee.status != "ACTIVE":
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=(
+                "Evaluation reports can only be modified "
+                "or submitted while the committee is ACTIVE"
+            ),
+        )
+
     assignment = get_committee_application_by_id(
         db,
         assignment_id,
@@ -365,6 +405,32 @@ def submit_my_evaluation_report(
             detail="Evaluation report is already submitted",
         )
 
+    # Assignment must still be under evaluation.
+    if assignment.status != "IN_EVALUATION":
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="Application is no longer in evaluation",
+        )
+
+    # All required scores must still be present.
+    if not reviewer_scoring_is_complete(
+        db=db,
+        committee_id=committee_id,
+        committee_application_id=assignment.id,
+        reviewer_id=current_reviewer.id,
+    ):
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="All active criteria must be scored before submission",
+        )
+
+    # Refresh the score before final submission.
+    report.weighted_score = calculate_reviewer_weighted_score(
+        db=db,
+        committee_application_id=assignment.id,
+        reviewer_id=current_reviewer.id,
+    )
+
     return submit_evaluation_report(
         db=db,
         report=report,
@@ -381,8 +447,7 @@ def read_all_evaluation_reports(
     db: Session = Depends(get_db),
     current_admin: User = Depends(
         require_roles(
-            "SUPER_ADMIN",
-            "INSTITUTION_ADMIN",
+            "SUPER_ADMIN"
         )
     ),
 ):

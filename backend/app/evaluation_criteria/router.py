@@ -8,7 +8,7 @@ from fastapi import (
 )
 from sqlalchemy.orm import Session
 
-from app.auth.permissions import require_roles
+from app.auth.permissions import require_roles, require_committee_access
 from app.core.database import get_db
 from app.evaluation_committees.service import (
     get_evaluation_committee_by_id,
@@ -61,8 +61,7 @@ def add_evaluation_criterion(
     db: Session = Depends(get_db),
     current_admin: User = Depends(
         require_roles(
-            "SUPER_ADMIN",
-            "INSTITUTION_ADMIN",
+            "SUPER_ADMIN"
         )
     ),
 ):
@@ -151,6 +150,12 @@ def read_evaluation_criteria(
             detail="Evaluation committee not found",
         )
 
+    require_committee_access(
+        db=db,
+        committee_id=committee_id,
+        current_user=current_user,
+    )
+
     return get_evaluation_criteria(
         db=db,
         committee_id=committee_id,
@@ -167,8 +172,7 @@ def read_evaluation_criteria_summary(
     current_user: User = Depends(
         require_roles(
             "SUPER_ADMIN",
-            "INSTITUTION_ADMIN",
-            "REVIEWER",
+            "REVIEWER"
         )
     ),
 ):
@@ -182,6 +186,12 @@ def read_evaluation_criteria_summary(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Evaluation committee not found",
         )
+
+    require_committee_access(
+        db=db,
+        committee_id=committee_id,
+        current_user=current_user,
+    )
 
     criteria = get_evaluation_criteria(
         db=db,
@@ -241,6 +251,12 @@ def read_evaluation_criterion(
             detail="Evaluation committee not found",
         )
 
+    require_committee_access(
+        db=db,
+        committee_id=committee_id,
+        current_user=current_user,
+    )
+
     criterion = get_evaluation_criterion_by_id(
         db,
         criterion_id,
@@ -269,8 +285,7 @@ def edit_evaluation_criterion(
     db: Session = Depends(get_db),
     current_admin: User = Depends(
         require_roles(
-            "SUPER_ADMIN",
-            "INSTITUTION_ADMIN",
+            "SUPER_ADMIN"
         )
     ),
 ):
@@ -373,8 +388,7 @@ def remove_evaluation_criterion(
     db: Session = Depends(get_db),
     current_admin: User = Depends(
         require_roles(
-            "SUPER_ADMIN",
-            "INSTITUTION_ADMIN",
+            "SUPER_ADMIN"
         )
     ),
 ):
