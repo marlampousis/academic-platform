@@ -134,7 +134,7 @@ def create_extraction(
             cv_text=cv_text,
             source_id=source_id,
         )
-        
+
         # Independently validate all evidence before persistence.
         validate_extraction_evidence(
             extraction,

@@ -208,8 +208,6 @@ class TestAIExtractionAPI(unittest.TestCase):
 
             self.assertEqual(response.status_code, 422)
 
-    
-    
     def test_gemini_failure_returns_502(self):
         with isolated_api_client() as (client, db):
             user = create_candidate(db)
@@ -342,7 +340,6 @@ class TestAIExtractionAPI(unittest.TestCase):
 
             self.assertEqual(response.status_code, 401)
 
-    
     def test_reviewer_cannot_access_candidate_extractions(self):
         with isolated_api_client() as (client, db):
             reviewer = create_candidate(db)
