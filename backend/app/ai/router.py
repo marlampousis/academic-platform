@@ -29,6 +29,14 @@ from app.ai.services.evidence_validation import (
     validate_extraction_evidence,
 )
 
+from app.ai.schemas.review import ExtractionReviewRequest
+from app.ai.services.review_service import (
+    apply_extraction_review,
+    ReviewNotFound,
+    ReviewConflict,
+    InvalidReview,
+)
+
 from time import perf_counter
 
 from app.core.config import settings
@@ -275,3 +283,60 @@ def read_extraction(
         "version": artifact.version,
         "extraction": artifact.payload_json,
     }
+
+
+@router.patch("/extractions/{artifact_id}/review")
+def review_extraction(
+    artifact_id: int,
+    request: ExtractionReviewRequest,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(candidate_access),
+):
+    try:
+        artifact = apply_extraction_review(
+            db,
+            artifact_id=artifact_id,
+            candidate_user_id=current_user.id,
+            request=request,
+        )
+
+        result = {
+            "artifact_id": artifact.id,
+            "status": artifact.status,
+            "version": artifact.version,
+            "reviews": artifact.payload_json.get(
+                "_candidate_reviews", {}
+            ),
+        }
+
+        db.commit()
+        return result
+
+    except ReviewNotFound as exc:
+        db.rollback()
+        raise HTTPException(
+            status_code=404,
+            detail="Extraction not found",
+        ) from exc
+
+    except ReviewConflict as exc:
+        db.rollback()
+        raise HTTPException(
+            status_code=409,
+            detail=str(exc),
+        ) from exc
+
+    except InvalidReview as exc:
+        db.rollback()
+        raise HTTPException(
+            status_code=422,
+            detail=str(exc),
+        ) from exc
+
+    except Exception:
+        db.rollback()
+        logger.exception("Failed to save candidate review")
+        raise HTTPException(
+            status_code=500,
+            detail="Could not save candidate review",
+        )
