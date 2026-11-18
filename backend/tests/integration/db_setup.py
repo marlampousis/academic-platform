@@ -50,10 +50,10 @@ def verify_test_database():
             text("SELECT version_num FROM alembic_version")
         ).scalar_one()
 
-        if revision != "dea6b094f78b":
+        if revision != "404545d3e09d":
             raise RuntimeError(
-                f"Unexpected Alembic revision: {revision}"
-            )
+            f"Unexpected Alembic revision: {revision}"
+        )
 
     return actual_database
 

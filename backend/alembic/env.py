@@ -34,6 +34,13 @@ from app.evaluation_reports.models import EvaluationReport
 from app.evaluation_results.models import EvaluationResult
 from app.notifications.models import Notification
 
+from app.ai.models import (
+    AIRun,
+    AIArtifact,
+    AIEvidence,
+    AIReviewEvent,
+)
+
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config

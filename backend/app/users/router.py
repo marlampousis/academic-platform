@@ -81,7 +81,3 @@ def register_user(user_data: UserCreate, db: Session = Depends(get_db)):
         )
 
     return create_user(db, user_data)
-
-@router.get("/me", response_model=UserRead)
-def read_me(current_user: User = Depends(get_current_user)):
-    return current_user
