@@ -25,6 +25,92 @@ def candidate_ai_review_page(api_request, display_api_error):
         "academic credentials."
     )
 
+    # PDF/DOCX upload workflow
+    st.markdown("### Upload an Academic CV")
+
+    uploaded_cv = st.file_uploader(
+        "Select a PDF or DOCX academic CV",
+        type=["pdf", "docx"],
+        key="ai_cv_document_upload",
+        help="Maximum file size: 5 MB",
+    )
+
+    if st.button(
+        "Extract Credentials from Document",
+        type="primary",
+        disabled=uploaded_cv is None,
+        key="ai_upload_extract_button",
+    ):
+        if uploaded_cv is not None:
+            if uploaded_cv.size > 5 * 1024 * 1024:
+                st.error("The file exceeds the 5 MB limit.")
+            else:
+                try:
+                    with st.spinner(
+                        "Reading document and extracting credentials..."
+                    ):
+                        response = api_request(
+                            "POST",
+                            "/ai/extractions/upload",
+                            files={
+                                "file": (
+                                    uploaded_cv.name,
+                                    uploaded_cv.getvalue(),
+                                    uploaded_cv.type
+                                    or "application/octet-stream",
+                                )
+                            },
+                            timeout=120,
+                        )
+
+                    if response.status_code == 201:
+                        result = response.json()
+                        new_id = result["artifact_id"]
+
+                        st.session_state[
+                            "ai_review_selected_id"
+                        ] = new_id
+
+                        st.session_state[
+                            "ai_review_artifact_number_input"
+                        ] = int(new_id)
+
+                        loaded = api_request(
+                            "GET",
+                            f"/ai/extractions/{new_id}",
+                        )
+
+                        if loaded.status_code == 200:
+                            st.session_state[
+                                "ai_review_artifact"
+                            ] = loaded.json()
+
+                            st.session_state[
+                                "ai_review_upload_message"
+                            ] = (
+                                f"Document uploaded successfully. "
+                                f"Artifact #{new_id} is ready for review."
+                            )
+
+                            st.rerun()
+                        else:
+                            display_api_error(loaded)
+                    else:
+                        display_api_error(response)
+
+                except requests.RequestException as exc:
+                    st.error(
+                        f"Document upload failed: {exc}"
+                    )
+
+    upload_message = st.session_state.pop(
+        "ai_review_upload_message",
+        None,
+    )
+
+    if upload_message:
+        st.success(upload_message)
+
     # SECTION 1: Create a new AI extraction
     st.markdown("### Create a new AI extraction")
 
@@ -68,6 +154,10 @@ def candidate_ai_review_page(api_request, display_api_error):
                         "ai_review_selected_id"
                     ] = new_id
 
+                    st.session_state[
+                        "ai_review_artifact_number_input"
+                    ] = int(new_id)
+
                     loaded = api_request(
                         "GET",
                         f"/ai/extractions/{new_id}",
@@ -93,13 +183,18 @@ def candidate_ai_review_page(api_request, display_api_error):
 
     st.markdown("### Load an existing extraction")
 
+    # Initialize the artifact ID input once.
+    if "ai_review_artifact_number_input" not in st.session_state:
+        st.session_state[
+            "ai_review_artifact_number_input"
+        ] = int(
+            st.session_state.get("ai_review_selected_id", 1)
+        )
+
     artifact_id = st.number_input(
         "Extraction artifact ID",
         min_value=1,
         step=1,
-        value=int(
-            st.session_state.get("ai_review_selected_id", 1)
-        ),
         key="ai_review_artifact_number_input",
     )
 
@@ -241,7 +336,6 @@ def candidate_ai_review_page(api_request, display_api_error):
         return
 
     saved_reviews = payload.get("_candidate_reviews", {})
-
 
     with st.form(f"ai_review_form_{loaded_id}_{version}"):
         selected_reviews = []

@@ -4,7 +4,7 @@ import logging
 import os
 from uuid import uuid4
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, File, UploadFile
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
@@ -50,6 +50,12 @@ from app.ai.services.approval_service import (
     ApprovalNotFound,
     ApprovalConflict,
     ApprovalValidationError,
+)
+
+from app.ai.services.document_extraction_service import (
+    extract_document_text,
+    DocumentExtractionError,
+    MAX_FILE_BYTES,
 )
 
 logger = logging.getLogger(__name__)
@@ -185,10 +191,18 @@ def create_extraction(
                 detail="Could not record AI extraction failure",
             )
 
+        root_cause = exc.__cause__
+
         logger.warning(
-            "AI run %s failed: %s",
+            "AI run %s failed: code=%s, error=%s, "
+            "cause=%s, cause_detail=%s",
             run_id,
             error_code,
+            type(exc).__name__,
+            type(root_cause).__name__
+            if root_cause is not None else "None",
+            str(root_cause)[:200]
+            if root_cause is not None else str(exc)[:200],
         )
 
         if type(exc) is ValueError:
@@ -262,6 +276,46 @@ def create_extraction(
         status=artifact_status,
         source_id=source_id,
         extraction=extraction,
+    )
+
+@router.post(
+    "/extractions/upload",
+    response_model=ExtractionResponse,
+    status_code=status.HTTP_201_CREATED,
+)
+async def upload_cv_extraction(
+    file: UploadFile = File(...),
+    db: Session = Depends(get_db),
+    current_user: User = Depends(candidate_access),
+):
+    # Read at most 5 MB + 1 byte to detect oversized uploads.
+    try:
+        content = await file.read(MAX_FILE_BYTES + 1)
+    except Exception as exc:
+        raise HTTPException(
+            status_code=422,
+            detail="Could not read the uploaded file",
+        ) from exc
+    finally:
+        await file.close()
+
+    try:
+        cv_text = extract_document_text(
+            filename=file.filename or "",
+            content=content,
+        )
+    except DocumentExtractionError as exc:
+        raise HTTPException(
+            status_code=422,
+            detail=str(exc),
+        ) from exc
+
+    # Reuse the existing S03 extraction workflow:
+    # Gemini, evidence validation, AI run, artifact persistence.
+    return create_extraction(
+        request=ExtractionRequest(cv_text=cv_text),
+        db=db,
+        current_user=current_user,
     )
 
 @router.get(
