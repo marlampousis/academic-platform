@@ -76,6 +76,7 @@ def apply_extraction_review(
     payload = deepcopy(artifact.payload_json)
 
     reviews = payload.get("_candidate_reviews", {})
+    changes_made = False
 
     for decision in request.reviews:
         collection = decision.collection.value
@@ -137,7 +138,13 @@ def apply_extraction_review(
             "corrected_data": corrected_data,
         }
 
+        # Do not repeat an unchanged decision.
+        # A new comment still counts as a review event.
+        if previous_review == new_review and not decision.comment:
+            continue
+
         reviews[record_key] = new_review
+        changes_made = True
 
         db.add(
             AIReviewEvent(
@@ -149,6 +156,9 @@ def apply_extraction_review(
                 after_json=deepcopy(new_review),
             )
         )
+
+    if not changes_made:
+        return artifact
 
     payload["_candidate_reviews"] = reviews
 

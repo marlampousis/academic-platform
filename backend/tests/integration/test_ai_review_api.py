@@ -150,5 +150,115 @@ class TestAIReviewAPI(unittest.TestCase):
             )
 
 
+    def test_candidate_can_change_review_decision(self):
+        with isolated_api_client() as (client, db):
+            user = create_candidate(db)
+            artifact_id = self.create_draft(client, user)
+
+            url = f"/ai/extractions/{artifact_id}/review"
+
+            first = client.patch(
+                url,
+                headers=auth_headers(user),
+                json={
+                    "expected_version": 1,
+                    "reviews": [
+                        {
+                            "collection": "degrees",
+                            "record_index": 0,
+                            "decision": "ACCEPT",
+                        }
+                    ],
+                },
+            )
+
+            self.assertEqual(first.status_code, 200, first.text)
+            self.assertEqual(first.json()["version"], 2)
+
+            second = client.patch(
+                url,
+                headers=auth_headers(user),
+                json={
+                    "expected_version": 2,
+                    "reviews": [
+                        {
+                            "collection": "degrees",
+                            "record_index": 0,
+                            "decision": "REJECT",
+                        }
+                    ],
+                },
+            )
+
+            self.assertEqual(second.status_code, 200, second.text)
+            self.assertEqual(second.json()["version"], 3)
+            self.assertEqual(
+                second.json()["reviews"]["degrees:0"]["decision"],
+                "REJECT",
+            )
+
+            events = db.execute(
+                select(AIReviewEvent)
+                .where(AIReviewEvent.artifact_id == artifact_id)
+                .order_by(AIReviewEvent.id)
+            ).scalars().all()
+
+            self.assertEqual(len(events), 2)
+            self.assertEqual(
+                [event.action for event in events],
+                ["RECORD_ACCEPT", "RECORD_REJECT"],
+            )
+
+            self.assertEqual(
+                events[1].before_json["decision"],
+                "ACCEPT",
+            )
+
+    def test_invalid_batch_rolls_back_all_decisions(self):
+        with isolated_api_client() as (client, db):
+            user = create_candidate(db)
+            artifact_id = self.create_draft(client, user)
+
+            response = client.patch(
+                f"/ai/extractions/{artifact_id}/review",
+                headers=auth_headers(user),
+                json={
+                    "expected_version": 1,
+                    "reviews": [
+                        {
+                            "collection": "degrees",
+                            "record_index": 0,
+                            "decision": "ACCEPT",
+                        },
+                        {
+                            "collection": "degrees",
+                            "record_index": 999,
+                            "decision": "REJECT",
+                        },
+                    ],
+                },
+            )
+
+            self.assertEqual(response.status_code, 422, response.text)
+
+            db.expire_all()
+            artifact = db.get(AIArtifact, artifact_id)
+
+            self.assertEqual(artifact.version, 1)
+            self.assertEqual(artifact.status, "REVIEW_REQUIRED")
+            self.assertNotIn(
+                "_candidate_reviews",
+                artifact.payload_json,
+            )
+
+            events = db.execute(
+                select(AIReviewEvent).where(
+                    AIReviewEvent.artifact_id == artifact_id
+                )
+            ).scalars().all()
+
+            self.assertEqual(len(events), 0)
+
+
 if __name__ == "__main__":
     unittest.main()

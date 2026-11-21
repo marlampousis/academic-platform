@@ -295,6 +295,47 @@ class TestAIReview(unittest.TestCase):
                     ),
                 )
 
+    def test_unchanged_review_does_not_create_new_event(self):
+        with isolated_test_session() as db:
+            user = create_test_user(db)
+            artifact = create_test_artifact(db, user.id)
+
+            first = apply_extraction_review(
+                db,
+                artifact_id=artifact.id,
+                candidate_user_id=user.id,
+                request=make_request(
+                    "degrees",
+                    0,
+                    "ACCEPT",
+                    expected_version=1,
+                ),
+            )
+
+            self.assertEqual(first.version, 2)
+
+            second = apply_extraction_review(
+                db,
+                artifact_id=artifact.id,
+                candidate_user_id=user.id,
+                request=make_request(
+                    "degrees",
+                    0,
+                    "ACCEPT",
+                    expected_version=2,
+                ),
+            )
+
+            self.assertEqual(second.version, 2)
+
+            events = db.execute(
+                select(AIReviewEvent).where(
+                    AIReviewEvent.artifact_id == artifact.id
+                )
+            ).scalars().all()
+
+            self.assertEqual(len(events), 1)
+            self.assertEqual(events[0].action, "RECORD_ACCEPT")
 
 if __name__ == "__main__":
     unittest.main()

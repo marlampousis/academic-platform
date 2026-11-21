@@ -43,6 +43,15 @@ from app.core.config import settings
 from app.ai.models import AIRun
 from app.ai.models import utc_now
 
+from app.ai.schemas.approval import ExtractionApprovalRequest
+
+from app.ai.services.approval_service import (
+    approve_extraction,
+    ApprovalNotFound,
+    ApprovalConflict,
+    ApprovalValidationError,
+)
+
 logger = logging.getLogger(__name__)
 
 router = APIRouter(
@@ -339,4 +348,61 @@ def review_extraction(
         raise HTTPException(
             status_code=500,
             detail="Could not save candidate review",
+        )
+
+@router.post("/extractions/{artifact_id}/approve")
+def approve_extraction_endpoint(
+    artifact_id: int,
+    request: ExtractionApprovalRequest,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(candidate_access),
+):
+    try:
+        artifact, counts = approve_extraction(
+            db,
+            artifact_id=artifact_id,
+            candidate_user_id=current_user.id,
+            request=request,
+        )
+
+        result = {
+            "artifact_id": artifact.id,
+            "status": artifact.status,
+            "version": artifact.version,
+            "created_records": counts,
+        }
+
+        # Official records, approval status and audit event
+        # must be committed in one transaction.
+        db.commit()
+
+        return result
+
+    except ApprovalNotFound as exc:
+        db.rollback()
+        raise HTTPException(
+            status_code=404,
+            detail="Extraction not found",
+        ) from exc
+
+    except ApprovalConflict as exc:
+        db.rollback()
+        raise HTTPException(
+            status_code=409,
+            detail=str(exc),
+        ) from exc
+
+    except ApprovalValidationError as exc:
+        db.rollback()
+        raise HTTPException(
+            status_code=422,
+            detail=str(exc),
+        ) from exc
+
+    except Exception:
+        db.rollback()
+        logger.exception("Failed to approve AI extraction")
+        raise HTTPException(
+            status_code=500,
+            detail="Could not approve AI extraction",
         )

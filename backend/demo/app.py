@@ -2,6 +2,8 @@
 import requests
 import streamlit as st
 
+from ai_review import candidate_ai_review_page
+
 API_URL = "http://127.0.0.1:8000"
 
 st.set_page_config(
@@ -9,7 +11,6 @@ st.set_page_config(
     page_icon="🎓",
     layout="wide",
 )
-
 
 def api_request(method, endpoint, **kwargs):
     headers = {}
@@ -19,14 +20,15 @@ def api_request(method, endpoint, **kwargs):
             f"Bearer {st.session_state.token}"
         )
 
+    timeout = kwargs.pop("timeout", 15)
+
     return requests.request(
         method,
         f"{API_URL}{endpoint}",
         headers=headers,
-        timeout=15,
+        timeout=timeout,
         **kwargs,
     )
-
 
 def display_api_error(response):
     if response.status_code == 401:
@@ -100,9 +102,10 @@ def login_page():
 def candidate_dashboard():
     st.header("Candidate Dashboard")
 
-    tab1, tab2 = st.tabs([
+    tab1, tab2, tab3 = st.tabs([
         "My Applications",
         "Create Application",
+        "AI CV Review",
     ])
 
     with tab1:
@@ -300,6 +303,12 @@ def candidate_dashboard():
 
         except requests.RequestException:
             st.error("Cannot load academic positions.")
+
+    with tab3:
+        candidate_ai_review_page(
+            api_request=api_request,
+            display_api_error=display_api_error,
+        )
 
 
 def committee_management():
