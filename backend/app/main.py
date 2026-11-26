@@ -50,6 +50,8 @@ from app.email.router import router as email_router
 import app.core.model_registry
 
 from app.ai.router import router as ai_router
+from app.ai.matching_router import router as matching_router
+from app.ai.matching_router import artifact_router
 
 app = FastAPI(
     title="Academic Platform API",
@@ -104,6 +106,8 @@ app.include_router(notifications_router)
 app.include_router(email_router)
 
 app.include_router(ai_router)
+app.include_router(matching_router)
+app.include_router(artifact_router)
 
 @app.get("/")
 def root():

@@ -3,6 +3,7 @@ import requests
 import streamlit as st
 
 from ai_review import candidate_ai_review_page
+from academic_matching import candidate_academic_matching_page
 
 API_URL = "http://127.0.0.1:8000"
 
@@ -102,10 +103,11 @@ def login_page():
 def candidate_dashboard():
     st.header("Candidate Dashboard")
 
-    tab1, tab2, tab3 = st.tabs([
+    tab1, tab2, tab3, tab4 = st.tabs([
         "My Applications",
         "Create Application",
         "AI CV Review",
+        "AI Academic Matching",
     ])
 
     with tab1:
@@ -310,6 +312,11 @@ def candidate_dashboard():
             display_api_error=display_api_error,
         )
 
+    with tab4:
+        candidate_academic_matching_page(
+            api_request=api_request,
+            display_api_error=display_api_error,
+        )
 
 def committee_management():
     st.divider()
