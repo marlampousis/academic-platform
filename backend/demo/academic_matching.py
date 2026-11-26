@@ -257,7 +257,7 @@ def candidate_academic_matching_page(api_request, display_api_error):
         if st.button(
             "Open Saved Report",
             key=f"open_saved_matching_{application_id}",
-        ):  
+        ):
             try:
                 with st.spinner("Loading saved report..."):
                     saved = api_request(
@@ -278,7 +278,7 @@ def candidate_academic_matching_page(api_request, display_api_error):
                         st.session_state["matching_requirements"] = payload[
                             "position_requirements"
                         ]
-                        
+
                         # Fetch current PostgreSQL evidence.
                         # This endpoint does not invoke Gemini.
                         st.session_state.pop(

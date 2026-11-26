@@ -86,7 +86,7 @@ def validate_matching_draft(
                 "Supported findings require "
                 "academic evidence references"
             )
-    
+
         if match.finding in (
             MatchFinding.SUPPORTED,
             MatchFinding.PARTIALLY_SUPPORTED,

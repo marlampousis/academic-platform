@@ -188,7 +188,7 @@ class TestAcademicMatchingService(unittest.TestCase):
 
         with self.assertRaises(AcademicMatchingError):
             self.run_match(result)
-    
+
     def test_unsupported_requires_uncertainty_explanation(self):
         result = self.valid_result()
 
